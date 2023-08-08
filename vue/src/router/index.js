@@ -8,7 +8,6 @@ import store from '../store/index'
 import Profile from '../views/Profile.vue'
 import EditProfile from '../views/EditProfile.vue'
 Vue.use(Router)
-
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
  * inside of App.vue depending on the URL.
@@ -17,7 +16,6 @@ Vue.use(Router)
  * If the user has not yet authenticated (and needs to) they are redirected to /login
  * If they have (or don't need to) they're allowed to go about their way.
  */
-
 const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
@@ -59,11 +57,7 @@ const router = new Router({
       name: "profile",
       component: Profile,
       meta:{
-<<<<<<< HEAD
         requiresAuth: true
-=======
-        requiresAuth: false
->>>>>>> bc703dec4be8e6a615ebc6131bb31ba933fab6af
       }
     },
     {
@@ -71,20 +65,14 @@ const router = new Router({
       name: "editprofile",
       component: EditProfile,
       meta:{
-<<<<<<< HEAD
-        requiresAuth: true
-=======
-        requiresAuth: false
->>>>>>> bc703dec4be8e6a615ebc6131bb31ba933fab6af
+        requiresAuth: true,
       }
     },
   ]
 })
-
 router.beforeEach((to, from, next) => {
   // Determine if the route requires Authentication
   const requiresAuth = to.matched.some(x => x.meta.requiresAuth);
-
   // If it does and they are not logged in, send the user to "/login"
   if (requiresAuth && store.state.token === '') {
     next("/login");
@@ -93,5 +81,4 @@ router.beforeEach((to, from, next) => {
     next();
   }
 });
-
 export default router;
