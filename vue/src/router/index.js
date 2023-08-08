@@ -5,7 +5,8 @@ import Login from '../views/Login.vue'
 import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
 import store from '../store/index'
-
+import Profile from '../views/Profile.vue'
+import EditProfile from '../views/EditProfile.vue'
 Vue.use(Router)
 
 /**
@@ -52,7 +53,23 @@ const router = new Router({
       meta: {
         requiresAuth: false
       }
-    }
+    },
+    {
+      path: "/profile",
+      name: "profile",
+      component: Profile,
+      meta:{
+        requiresAuth: false
+      }
+    },
+    {
+      path: '/edit',
+      name: "editprofile",
+      component: EditProfile,
+      meta:{
+        requiresAuth: false
+      }
+    },
   ]
 })
 
