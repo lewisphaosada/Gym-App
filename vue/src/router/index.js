@@ -59,7 +59,11 @@ const router = new Router({
       name: "profile",
       component: Profile,
       meta:{
+<<<<<<< HEAD
         requiresAuth: true
+=======
+        requiresAuth: false
+>>>>>>> bc703dec4be8e6a615ebc6131bb31ba933fab6af
       }
     },
     {
@@ -67,7 +71,11 @@ const router = new Router({
       name: "editprofile",
       component: EditProfile,
       meta:{
+<<<<<<< HEAD
         requiresAuth: true
+=======
+        requiresAuth: false
+>>>>>>> bc703dec4be8e6a615ebc6131bb31ba933fab6af
       }
     },
   ]

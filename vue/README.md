@@ -1,4 +1,4 @@
-# Final Vue Capstone Project Seed
+https://git.techelevator.com/campuses/nlr/may-2023/java-purple/student-pairs/final-capstone-ws/final-capstone-team-2.git# Final Vue Capstone Project Seed
 ​
 This is the Vue starter project for the final capstone. This document walks you through how to set up and run the project. It also explains the project's features, such as Vue Router, Vuex, and authentication.
 ​
