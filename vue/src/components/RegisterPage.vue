@@ -61,6 +61,8 @@
               this.registrationErrors = true;
               if (response.status === 400) {
                 this.registrationErrorMsg = 'Bad Request: Validation Errors';
+              } else if(response.status === 507) {
+                this.registrationErrorMsg = 'fofo'
               }
             });
         }
