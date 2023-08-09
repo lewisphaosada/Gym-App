@@ -69,18 +69,23 @@ methods:{
                 }
             })
             .catch(error =>{
-         if (error.response) {
-            console.error("Error updating profile. Response received was '", error.response.statusText, "'.");
-          } else if (error.request) {
-            console.error("Error updating profile. Server could not be reached.");
-          } else {
-            console.error("Error updating profile. Profile could not be updated.");
-          }
-        });
-    },
+            if (error.response) {
+              this.errorMsg =
+                "Error updating profile. Response received was '" +
+                error.response.statusText +
+                "'.";
+            } else if (error.request) {
+              this.errorMsg =
+                "Error updating profile. Server could not be reached.";
+            } else {
+              this.errorMsg =
+                "Error updating profile. Profile could not be updated.";
+            }
+          });
+        },
 
         cancelEdit(){
-        this.$router.push({ name: 'profile', params: { id: this.$store.state.user.id} });
+        this.$router.push({ name: 'profile', params: { id: this.user.id} });
         },
     
     },
