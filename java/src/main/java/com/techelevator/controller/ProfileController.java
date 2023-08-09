@@ -2,10 +2,12 @@ package com.techelevator.controller;
 
 import com.techelevator.dao.ProfileDao;
 import com.techelevator.model.Profile;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 @RestController
 @RequestMapping("/profile")
+@PreAuthorize("isAuthenticated()")
 public class ProfileController {
 
     private ProfileDao profileDao;

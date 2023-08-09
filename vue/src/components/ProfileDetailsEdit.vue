@@ -4,39 +4,39 @@
   <form v-on:submit.prevent="saveProfile">
 
     <div>
-        <label>Photo:</label><input v-model="editUser.photo"/>
+        <label>Photo:</label><input v-model="user.photo"/>
     </div>
 
     <div>
-        <label>Name:</label><input v-model="editUser.name"/>
+        <label>Name:</label><input v-model="user.name"/>
     </div>
 
      <div>
-        <label>Email:</label><input v-model="editUser.email"/>
+        <label>Email:</label><input v-model="user.email"/>
     </div>
 
      <div>
-        <label>Username:</label><input v-model="editUser.username"/>
+        <label>Username:</label><input v-model="user.username"/>
     </div>
 
     <div>
-        <label>Password:</label><input v-model="editUser.password"/>
+        <label>Password:</label><input v-model="user.password"/>
     </div>
 
      <div>
-        <label>Sex:</label><input v-model="editUser.sex"/>
+        <label>Sex:</label><input v-model="user.sex"/>
     </div>
 
     <div>
-        <label>Weight:</label><input v-model="editUser.weight"/>
+        <label>Weight:</label><input v-model="user.weight"/>
     </div>
 
     <div>
-        <label>Height:</label><input v-model="editUser.height"/>
+        <label>Height:</label><input v-model="user.height"/>
     </div>
 
     <div>
-        <label>BMI:</label><input v-model="editUser.bmi"/>
+        <label>BMI:</label><input v-model="user.bmi"/>
     </div>
 
     <button type="submit">Save</button>
@@ -55,26 +55,17 @@ export default{
     name: 'editprofile',
     data(){
         return{
-    editUser:{
-      photo: '',
-      name: '',
-      email: '',
-      username: this.$store.state.user.username,
-      password: '',
-      sex:'',
-      weight: '',
-      height: '',
-      bmi: ''
-    }
+    user: this.$store.state.user,
     };
+    
     },
 methods:{
 
         saveProfile(){
-            ProfileService.updateProfile(this.$store.state.user.id, this.editUser).then(response => {
+            ProfileService.updateProfile(this.user.id, this.user).then(response => {
             if(response.status === 200){
-            this.$store.commit('SET_USER', this.editUser);
-            this.$router.push({ name: 'profile', params: { id: this.$store.state.user.id} });
+            this.$store.commit('SET_USER', this.user);
+            this.$router.push({ name: 'profile', params: { id: this.user.id} });
                 }
             })
             .catch(error =>{
@@ -98,18 +89,7 @@ methods:{
         },
     
     },
-// created(){
-//     const user = this.$store.state.user;
 
-//     this.editUser.photo = user.photo;
-//     this.editUser.name = user.name;
-//     this.editUser.email = user.email;
-//     this.editUser.username = user.username;
-//     this.editUser.weight = user.weight;
-//     this.editUser.height = user.height;
-//     this.editUser.bmi = user.bmi;
-    
-//     }
 };
 
 </script>

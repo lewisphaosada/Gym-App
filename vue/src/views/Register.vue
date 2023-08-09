@@ -6,7 +6,7 @@
 
 <script>
 import RegisterPage from '../components/RegisterPage.vue';
-// import authService from '../services/AuthService';
+// import AuthService from '../services/AuthService';
 
 export default {
   name: 'Register',

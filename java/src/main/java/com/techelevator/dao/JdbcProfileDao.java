@@ -38,11 +38,9 @@ public class JdbcProfileDao implements ProfileDao {
     @Override
     public void deleteProfileByUserID(int id) {
 
-        String deleteProfileSql = "DELETE FROM profile WHERE userID = ?";
         String deleteUserSql = "DELETE FROM user WHERE userID = ?";
 
         try {
-            jdbcTemplate.update(deleteProfileSql, id);
             jdbcTemplate.update(deleteUserSql, id);
 
 
@@ -52,7 +50,7 @@ public class JdbcProfileDao implements ProfileDao {
     }
     @Override
     public Profile updateProfileByUserID(int id, Profile updatedProfile) {
-        String sql = "UPDATE user SET name = ?, password = ?, username = ?, sex = ?, email = ?, photo = ?" +
+        String sql = "UPDATE user SET name = ?, password = ?, username = ?, sex = ?, email = ?, photo = ?, " +
                 "weight = ?, height = ?, bmi = ? WHERE user_id = ?";
         try {
             jdbcTemplate.update(sql,

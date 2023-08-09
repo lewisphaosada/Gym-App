@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import authService from '../services/AuthService';
+import AuthService from '../services/AuthService';
 
 export default {
   name: 'RegisterPage',
@@ -48,7 +48,7 @@ export default {
         this.registrationErrors = true;
         this.registrationErrorMsg = 'Password & Confirm Password do not match.';
       } else {
-        authService
+        AuthService
           .register(this.user)
           .then((response) => {
             if (response.status == 201) {

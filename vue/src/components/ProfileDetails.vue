@@ -48,7 +48,7 @@ export default {
     };
   },
    created() {
-    this.retrieveProfile(this.$route.params.user.id);
+    this.retrieveProfile(this.$store.state.user.id);
   },
   methods:{
     retrieveProfile(id){
