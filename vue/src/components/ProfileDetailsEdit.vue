@@ -33,7 +33,7 @@
 
 <script>
 
-import service from '../services/service.js'
+import service from '../services/ProfileService.js'
 
 export default{
     name: 'editprofile',

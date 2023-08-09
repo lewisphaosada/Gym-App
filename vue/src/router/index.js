@@ -7,6 +7,7 @@ import Register from '../views/Register.vue'
 import store from '../store/index'
 import Profile from '../views/Profile.vue'
 import EditProfile from '../views/EditProfile.vue'
+import EmployeeLogin from '../views/EmployeeLogin.vue'
 Vue.use(Router)
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
@@ -68,6 +69,14 @@ const router = new Router({
         requiresAuth: true,
       }
     },
+    {
+      path: '/employee',
+      name: 'employeelogin',
+      component: EmployeeLogin,
+      meta: {
+        requiresAuth: false
+      }
+    }
   ]
 })
 router.beforeEach((to, from, next) => {

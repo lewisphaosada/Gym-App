@@ -20,7 +20,8 @@ export default new Vuex.Store({
   state: {
     token: currentToken || '',
     user: currentUser || {},
-  isEditing: false,
+    isEditing: false,
+    employeePortalPassword: "gainz",
 },
   mutations: {
     EDIT_PROFILE_STATE(state){
