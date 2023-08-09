@@ -34,21 +34,11 @@ export default {
   name: 'profile',
   data() {
     return {
-      user: {
-        photo: '',
-        name: '',
-        email: '',
-        username: this.$store.state.user.username,
-        password: '',
-        sex:'',
-        weight: '',
-        height: '',
-        bmi: ''
-      }
+      user: this.$store.state.user,
     };
   },
    created() {
-    this.retrieveProfile(this.$store.state.user.id);
+    this.retrieveProfile(this.user.id);
   },
   methods:{
     retrieveProfile(id){
