@@ -1,18 +1,11 @@
-<!-- EditProfile.vue -->
-<template>
-  <div>
-    <h1>Edit User Profile</h1>
-    <!-- Add your edit profile form or content here -->
-  </div>
+editProfile vue: <template>
+    <profile-details-edit/>
 </template>
-
 <script>
-export default {
-  name: "EditProfile",
-  // Add component logic here
+import ProfileDetailsEdit from '../components/ProfileDetailsEdit.vue';
+export default{
+    components: {ProfileDetailsEdit}
 };
 </script>
-
 <style scoped>
-/* Add component styles here */
 </style>

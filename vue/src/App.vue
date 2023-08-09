@@ -2,9 +2,9 @@
   <div id="app">
     <nav id="nav">
       <router-link v-bind:to="{ name: 'home' }" class="nav-link">Home</router-link>
-      <span class="divider">|</span>
-      <router-link v-bind:to="{ name: 'register' }" class="nav-link">Register</router-link>
-      <span class="divider">|</span>
+      <span v-if="!isAuthenticated" class="divider">|</span>
+      <router-link v-if="!isAuthenticated" v-bind:to="{ name: 'register' }" class="nav-link">Register</router-link>
+      <span v-if="isAuthenticated || !isAuthenticated" class="divider">|</span>
       <router-link v-if="isAuthenticated" v-bind:to="{ name: 'profile' }" class="nav-link">Profile</router-link>
       <span class="divider" v-if="isAuthenticated">|</span>
       <router-link v-if="isAuthenticated" v-bind:to="{ name: 'logout' }" class="nav-link">Logout</router-link>
@@ -12,6 +12,7 @@
     <router-view />
   </div>
 </template>
+
 
 <script>
 export default {
@@ -35,7 +36,7 @@ export default {
 
 #nav {
   padding: 15px;
-  background-color: #f3f3f3; /* Grey background color */
+  background-color: #f3f3f3; 
   border-bottom: 1px solid #ddd;
   display: flex;
   justify-content: center;
@@ -45,7 +46,7 @@ export default {
 .nav-link {
   margin: 0 10px;
   text-decoration: none;
-  color: #000; /* Black navigation link color for Home, Register, Profile, and Logout */
+  color: #000; 
 }
 
 .divider {

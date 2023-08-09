@@ -1,18 +1,11 @@
-<!-- Profile.vue -->
-<template>
-  <div>
-    <h1>User Profile</h1>
-   
-  </div>
+profile vue:<template>
+    <profile-details/>
 </template>
-
 <script>
-export default {
-  name: "Profile",
-  // logic
+import ProfileDetails from '../components/ProfileDetails.vue';
+export default{
+    components: {ProfileDetails}
 };
 </script>
-
 <style scoped>
-
 </style>
