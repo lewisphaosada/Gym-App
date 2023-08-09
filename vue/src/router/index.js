@@ -55,27 +55,19 @@ const router = new Router({
       }
     },
     {
-      path: "/profile",
+      path: "/profile/:id",
       name: "profile",
       component: Profile,
       meta:{
-<<<<<<< HEAD
         requiresAuth: true
-=======
-        requiresAuth: false
->>>>>>> bc703dec4be8e6a615ebc6131bb31ba933fab6af
       }
     },
     {
-      path: '/edit',
+      path: '/profile/:id/edit',
       name: "editprofile",
       component: EditProfile,
       meta:{
-<<<<<<< HEAD
         requiresAuth: true
-=======
-        requiresAuth: false
->>>>>>> bc703dec4be8e6a615ebc6131bb31ba933fab6af
       }
     },
   ]

@@ -3,16 +3,15 @@
     <nav id="nav">
       <router-link v-bind:to="{ name: 'home' }" class="nav-link">Home</router-link>
       <span class="divider">|</span>
-      <router-link v-bind:to="{ name: 'register' }" class="nav-link">Register</router-link>
-      <span class="divider">|</span>
-      <router-link v-if="isAuthenticated" v-bind:to="{ name: 'profile' }" class="nav-link">Profile</router-link>
+      <router-link v-if="!isAuthenticated" v-bind:to="{ name: 'register' }" class="nav-link">Register</router-link>
+      <span class="divider" v-if="!isAuthenticated">|</span>
+      <router-link v-if="isAuthenticated" :to="{ name: 'profile', params: { id: $store.state.user.id } }" class="nav-link">Profile</router-link>
       <span class="divider" v-if="isAuthenticated">|</span>
       <router-link v-if="isAuthenticated" v-bind:to="{ name: 'logout' }" class="nav-link">Logout</router-link>
     </nav>
     <router-view />
   </div>
 </template>
-
 <script>
 export default {
   name: "App",
@@ -23,39 +22,29 @@ export default {
   }
 };
 </script>
-
 <style>
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #2C3E50;
 }
-
 #nav {
   padding: 15px;
-  background-color: #f3f3f3; /* Grey background color */
+  background-color: #F3F3F3;
   border-bottom: 1px solid #ddd;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
 .nav-link {
   margin: 0 10px;
   text-decoration: none;
-  color: #000; /* Black navigation link color for Home, Register, Profile, and Logout */
+  color: #000;
 }
-
 .divider {
   margin: 0 5px;
   color: #999;
 }
-
 </style>
-
-
-
-
-

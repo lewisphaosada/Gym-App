@@ -4,6 +4,10 @@
   <form v-on:submit.prevent="saveProfile">
 
     <div>
+        <label>Photo:</label><input v-model="editUser.photo"/>
+    </div>
+
+    <div>
         <label>Name:</label><input v-model="editUser.name"/>
     </div>
 
@@ -19,8 +23,20 @@
         <label>Password:</label><input v-model="editUser.password"/>
     </div>
 
+     <div>
+        <label>Sex:</label><input v-model="editUser.sex"/>
+    </div>
+
     <div>
-        <label>Photo:</label><input v-model="editUser.photo"/>
+        <label>Weight:</label><input v-model="editUser.weight"/>
+    </div>
+
+    <div>
+        <label>Height:</label><input v-model="editUser.height"/>
+    </div>
+
+    <div>
+        <label>BMI:</label><input v-model="editUser.bmi"/>
     </div>
 
     <button type="submit">Save</button>
@@ -33,30 +49,32 @@
 
 <script>
 
-import service from '../services/service.js'
+import ProfileService from '../services/ProfileService.js'
 
 export default{
     name: 'editprofile',
     data(){
         return{
-            editUser:{
+    editUser:{
+      photo: '',
       name: '',
       email: '',
-      username: '',
+      username: this.$store.state.user.username,
       password: '',
-      photo: ''
+      sex:'',
+      weight: '',
+      height: '',
+      bmi: ''
     }
     };
     },
 methods:{
 
         saveProfile(){
-            const userID = this.$store.state.user.userID;
-            service.updateProfile(userID, this.editUser).then(response => {
+            ProfileService.updateProfile(this.$store.state.user.id, this.editUser).then(response => {
             if(response.status === 200){
-            this.$store.commit('EDIT_PROFILE_STATE');
-            this.resetUser();
-            this.$router.push('/profile');
+            this.$store.commit('SET_USER', this.editUser);
+            this.$router.push({ name: 'profile', params: { id: this.$store.state.user.id} });
                 }
             })
             .catch(error =>{
@@ -76,30 +94,22 @@ methods:{
         },
 
         cancelEdit(){
-        this.$store.commit('EDIT_PROFILE_STATE');
-        this.resetUser();
-        this.$router.push('/profile');
+        this.$router.push({ name: 'profile', params: { id: this.$store.state.user.id} });
         },
-
-        resetUser() {
-        this.editUser = {
-        name: '',
-        email: '',
-        username: '',
-        password: '',
-        photo: '',
-      };
-    },
     
     },
-created(){
-    const user = this.$store.state.user;
+// created(){
+//     const user = this.$store.state.user;
 
-    this.editedUser.name = user.name;
-    this.editedUser.email = user.email;
-    this.editedUser.username = user.username;
-    this.editedUser.photo = user.photo;
-    }
+//     this.editUser.photo = user.photo;
+//     this.editUser.name = user.name;
+//     this.editUser.email = user.email;
+//     this.editUser.username = user.username;
+//     this.editUser.weight = user.weight;
+//     this.editUser.height = user.height;
+//     this.editUser.bmi = user.bmi;
+    
+//     }
 };
 
 </script>
