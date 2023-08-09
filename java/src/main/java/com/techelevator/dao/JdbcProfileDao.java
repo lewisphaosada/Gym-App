@@ -73,18 +73,18 @@ public class JdbcProfileDao implements ProfileDao {
     }
 
     private Profile mapRowToProfile(SqlRowSet rowSet) {
-        Profile profile = new Profile(
-                rowSet.getString("name"),
-                rowSet.getString("password"),
-                rowSet.getString("username"),
-                rowSet.getString("sex"),
-                rowSet.getString("email"),
-                rowSet.getString("photo"),
-                rowSet.getInt("id"),
-                rowSet.getInt("weight"),
-                rowSet.getInt("height"),
-                rowSet.getInt("bmi")
-        );
+        Profile profile = new Profile();
+        profile.setName(rowSet.getString("name"));
+        profile.setPassword(rowSet.getString("password"));
+        profile.setUsername(rowSet.getString("username"));
+        profile.setSex(rowSet.getString("sex"));
+        profile.setEmail(rowSet.getString("email"));
+        profile.setPhoto(rowSet.getString("photo"));
+        profile.setId(rowSet.getInt("id"));
+        profile.setWeight(rowSet.getInt("weight"));
+        profile.setHeight(rowSet.getInt("height"));
+        profile.setBmi(rowSet.getInt("bmi"));
         return profile;
     }
+
 }

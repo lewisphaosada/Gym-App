@@ -13,18 +13,7 @@ public class Profile {
     private int height;
     private int bmi;
 
-    public Profile(String name, String password, String username, String sex, String email, String photo, int id, int weight, int height, int bmi){
-        this.name = name;
-        this.password = password;
-        this.username = username;
-        this.sex = sex;
-        this.email = email;
-        this.photo = photo;
-        this.id = id;
-        this.weight = weight;
-        this.height= height;
-        this.bmi = bmi;
-    }
+
     public String getPhoto() {
         return photo;
     }
