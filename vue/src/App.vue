@@ -4,9 +4,9 @@
       <router-link v-bind:to="{ name: 'home' }" class="nav-link">Home</router-link>
       <span class="divider">|</span>
       <router-link v-bind:to="{ name: 'register' }" class="nav-link">Register</router-link>
-      <span class="divider">|</span>
-      <router-link v-bind:to="{ name: 'employeelogin'}" class="nav-link">Employee Portal</router-link>
-      <span class="divider">|</span>
+
+      <span class="divider" >|</span> <!-- should this vertical line also have v-if="isAuthenticated"? -->
+      
       <router-link v-if="isAuthenticated" v-bind:to="{ name: 'profile' }" class="nav-link">Profile</router-link>
       <span class="divider" v-if="isAuthenticated">|</span>
       <router-link v-if="isAuthenticated" v-bind:to="{ name: 'logout' }" class="nav-link">Logout</router-link>

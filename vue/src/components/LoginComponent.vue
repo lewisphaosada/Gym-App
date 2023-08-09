@@ -19,6 +19,7 @@
       <button type="submit" class="submit-button">Sign in</button>
       <p class="register-link">
         <router-link :to="{ name: 'register' }">Need an account? Sign up.</router-link>
+        <router-link :to="{name: 'employeelogin'}">Employee Login</router-link>
       </p>
     </form>
   </div>
