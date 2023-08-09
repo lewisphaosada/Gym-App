@@ -25,8 +25,8 @@ export default {
   data() {
     return {
       employee: {
-        password: "",
         username: "",
+        password: "",
       },
       invalidCredentials: false,
     };
@@ -53,6 +53,9 @@ export default {
           }
         });
     },
+    isEmployeeRole() {
+      if($store.state.user.role === "ROLE_EMPLOYEE")
+    }
   },
 };
 </script>
