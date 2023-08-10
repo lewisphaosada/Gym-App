@@ -31,19 +31,19 @@
 
     <div>
         <label>Weight:</label><input v-model="user.weight"/>
-        <span v-if="weightValidationError" class="error-message">Must input numbers</span>
+        <span v-if="hasValidationError" class="error-message">Must input numbers</span>
 
     </div>
 
     <div>
         <label>Height:</label><input v-model="user.height"/>
-        <span v-if="heightValidationError" class="error-message">Must input numbers</span>
+        <span v-if="hasValidationError" class="error-message">Must input numbers</span>
 
     </div>
 
     <div>
       <label>BMI:</label><input v-model="user.bmi"/>
-      <span v-if="bmiValidationError" class="error-message">Must input numbers</span>
+      <span v-if="hasValidationError" class="error-message">Must input numbers</span>
 
     </div>
 
@@ -64,32 +64,20 @@ export default{
     data(){
         return{
     user: this.$store.state.user,
-    newPassword: '',
-    hasValidationError: false
+    hasValidationError: false,
+     sexValidationError: false,
+      weightValidationError: false,
+      heightValidationError: false,
+      bmiValidationError: false,
     };
     
     },
-     computed: {
-    weightValidationError() {
-      return isNaN(this.user.weight);
-    },
 
-    heightValidationError() {
-      return isNaN(this.user.height);
-    },
-
-    bmiValidationError() {
-      return isNaN(this.user.bmi);
-    },
-    
-  },
-methods:{ 
-  
-     submitForm() {
+methods:{
+   submitForm() {
+      this.validateForm();
       if (!this.hasValidationError) {
         this.saveProfile();
-      } else {
-        this.$router.push({ name: 'profile', params: { id: this.user.id } });
       }
     },
 
@@ -116,16 +104,38 @@ methods:{
           });
         },
 
-     validateForm() {
-      if (this.weightValidationError ||this.heightValidationError || this.bmiValidationError ||
+       validateForm() {
+      this.hasValidationError = false;
+
+      if (
         (this.user.sex.length !== 1 && this.user.sex.length !== 0) ||
         (this.user.sex.length === 1 && !['M', 'F', 'O'].includes(this.user.sex.toUpperCase()))
       ) {
+        this.sexValidationError = true;
         this.hasValidationError = true;
-        return false;
       } else {
-        this.hasValidationError = false;
-        return true;
+        this.sexValidationError = false;
+      }
+
+      if (isNaN(this.user.weight)) {
+        this.weightValidationError = true;
+        this.hasValidationError = true;
+      } else {
+        this.weightValidationError = false;
+      }
+
+      if (isNaN(this.user.height)) {
+        this.heightValidationError = true;
+        this.hasValidationError = true;
+      } else {
+        this.heightValidationError = false;
+      }
+
+      if (isNaN(this.user.bmi)) {
+        this.bmiValidationError = true;
+        this.hasValidationError = true;
+      } else {
+        this.bmiValidationError = false;
       }
     },
 
