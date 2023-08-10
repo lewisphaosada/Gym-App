@@ -131,12 +131,9 @@ export default {
 .form-input-group {
   margin-bottom: 1rem;
 }
+
 label {
   margin-right: 0.5rem;
 }
-<<<<<<< HEAD
-</style>
-=======
 </style>
   
->>>>>>> 6bca092b776bf60f8134826885288bdee9806325
