@@ -75,7 +75,7 @@ export default {
           this.registrationErrors = true;
           this.registrationErrorMsg = 'Password & Confirm Password do not match.';
         } else {
-          authService
+          AuthService
             .register(this.user)
             .then((response) => {
               if (response.status == 201) {
@@ -99,7 +99,8 @@ export default {
         this.registrationErrorMsg = 'There were problems registering this user.';
       },
     },
-  };
+  },
+};
   </script>
   
   <style scoped>
@@ -109,5 +110,4 @@ export default {
   label {
     margin-right: 0.5rem;
   }
-  </style>
-  
+</style>

@@ -25,25 +25,25 @@
 
      <div>
         <label>Sex:</label><input v-model="user.sex"/>
-        <span v-if="hasValidationError" class="error-message">Sex must be one character: M, F or O</span>
+        <span v-if="sexValidationError" class="error-message">Sex must be one character: M, F or O</span>
 
     </div>
 
     <div>
         <label>Weight:</label><input v-model="user.weight"/>
-        <span v-if="hasValidationError" class="error-message">Must input numbers</span>
+        <span v-if="weightValidationError" class="error-message">Must input numbers</span>
 
     </div>
 
     <div>
         <label>Height:</label><input v-model="user.height"/>
-        <span v-if="hasValidationError" class="error-message">Must input numbers</span>
+        <span v-if="heightValidationError" class="error-message">Must input numbers</span>
 
     </div>
 
     <div>
       <label>BMI:</label><input v-model="user.bmi"/>
-      <span v-if="hasValidationError" class="error-message">Must input numbers</span>
+      <span v-if="bmiValidationError" class="error-message">Must input numbers</span>
 
     </div>
 
@@ -63,20 +63,25 @@ export default{
     name: 'editprofile',
     data(){
         return{
-    user: this.$store.state.user,
-    hasValidationError: false,
-     sexValidationError: false,
+      originalUser: { ...this.$store.state.user },
+      hasValidationError: false,
+      sexValidationError: false,
       weightValidationError: false,
       heightValidationError: false,
       bmiValidationError: false,
     };
     
+    },  
+    computed: {
+    user() {
+      return { ...this.originalUser};
     },
+  },
 
 methods:{
    submitForm() {
       this.validateForm();
-      if (!this.hasValidationError) {
+      if (!(this.sexValidationError || this.weightValidationError || this.heightValidationError || this.bmiValidationError)) {
         this.saveProfile();
       }
     },
@@ -105,40 +110,40 @@ methods:{
         },
 
        validateForm() {
-      this.hasValidationError = false;
 
-      if (
-        (this.user.sex.length !== 1 && this.user.sex.length !== 0) ||
-        (this.user.sex.length === 1 && !['M', 'F', 'O'].includes(this.user.sex.toUpperCase()))
-      ) {
+      if (this.user.sex && (this.user.sex.length !== 1 || !['M', 'F', 'O'].includes(this.user.sex.toUpperCase()))) {
         this.sexValidationError = true;
-        this.hasValidationError = true;
-      } else {
-        this.sexValidationError = false;
       }
 
       if (isNaN(this.user.weight)) {
         this.weightValidationError = true;
-        this.hasValidationError = true;
-      } else {
-        this.weightValidationError = false;
       }
 
       if (isNaN(this.user.height)) {
         this.heightValidationError = true;
-        this.hasValidationError = true;
-      } else {
-        this.heightValidationError = false;
       }
 
       if (isNaN(this.user.bmi)) {
         this.bmiValidationError = true;
-        this.hasValidationError = true;
-      } else {
-        this.bmiValidationError = false;
       }
     },
-
+    //   openImageUpload() {
+    //   this.$refs.imageInput.click();
+    // },
+    // handleFileUpload(event) {
+    //   const file = event.target.files[0];
+    //   if (file) {
+    //     const formData = new FormData();
+    //     formData.append('photo', file);
+    //     ProfileService.uploadImage(formData)
+    //       .then(response => {
+    //         this.editUser.photo = response.data.photoUrl;
+    //       })
+    //       .catch(error => {
+    //         console.error('Error uploading image:', error);
+    //       });
+    //   }
+    // },
         cancelEdit(){
         this.$router.push({ name: 'profile', params: { id: this.user.id} });
         },
@@ -152,5 +157,30 @@ methods:{
 
 
 <style scoped>
+.profile-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f6f6f6;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.profile-heading {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+.profile-details {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.profile-details label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
 
 </style>
