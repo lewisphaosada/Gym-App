@@ -20,7 +20,7 @@ export default new Vuex.Store({
   state: {
     token: currentToken || '',
     user: currentUser || {},
-    isEditing: false
+    isEditing: false,
     isCheckedIn: false
 },
   mutations: {
