@@ -56,12 +56,7 @@
 </template>
 
 <script>
-
-<<<<<<< HEAD
-import service from '../services/ProfileService.js'
-=======
-import ProfileService from '../services/ProfileService.js'
->>>>>>> f401c3aa63827ace69e6852833eb98c0d52ed89d
+import UserService from '../services/UserService.js'
 
 export default{
     name: 'editprofile',
@@ -84,9 +79,8 @@ methods:{
         this.saveProfile();
       }
     },
-
         saveProfile(){
-            ProfileService.updateProfile(this.user.id, this.user).then(response => {
+            UserService.updateProfile(this.user.id, this.user).then(response => {
             if(response.status === 200){
             this.$store.commit('SET_USER', this.user);
             this.$router.push({ name: 'profile', params: { id: this.user.id} });

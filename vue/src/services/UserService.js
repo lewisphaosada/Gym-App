@@ -10,8 +10,7 @@ const http = axios.create({
         return http.get(`/profile/${userID}`);
     },
 
-    updateProfile(userID, profile){
-        return http.put(`/profile/${userID}`, profile);
-    },
-
+    updateProfile(id, profile){
+        return axios.put(`/profile/${id}/edit`, profile);
+    }
   }

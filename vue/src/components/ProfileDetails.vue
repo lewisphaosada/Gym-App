@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import ProfileService from '../services/ProfileService.js'
+import UserService from '../services/UserService.js'
 
 export default {
   name: 'profile',
@@ -54,7 +54,7 @@ export default {
   },
   methods:{
     retrieveProfile(id){
-      ProfileService.getProfile(id).then(response =>{
+      UserService.getProfile(id).then(response =>{
         const userInfo = response.data;
 
           this.user.photo = userInfo.photo;
