@@ -1,5 +1,7 @@
 package com.techelevator.model;
 
+import java.math.BigDecimal;
+
 public class Profile {
 
     private String name;
@@ -9,9 +11,9 @@ public class Profile {
     private String email;
     private String photo;
     private int id;
-    private int weight;
-    private int height;
-    private int bmi;
+    private BigDecimal weight;
+    private BigDecimal height;
+    private BigDecimal bmi;
 
 
     public String getPhoto() {
@@ -45,14 +47,14 @@ public class Profile {
         return id;
     }
 
-    public int getWeight(){
+    public BigDecimal getWeight(){
         return weight;
     }
 
-    public int getHeight(){
+    public BigDecimal getHeight(){
         return height;
     }
-    public int getBmi(){
+    public BigDecimal getBmi(){
         return bmi;
     }
 
@@ -77,13 +79,13 @@ public class Profile {
     public void setId(int id){
         this.id = id;
     }
-    public void setWeight(int weight){
+    public void setWeight(BigDecimal weight){
         this.weight = weight;
     }
-    public void setHeight(int height){
+    public void setHeight(BigDecimal height){
         this.height = height;
     }
-    public void setBmi(int bmi){
+    public void setBmi(BigDecimal bmi){
         this.bmi = bmi;
     }
 }

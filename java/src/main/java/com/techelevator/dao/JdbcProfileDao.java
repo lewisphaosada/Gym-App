@@ -23,7 +23,7 @@ public class JdbcProfileDao implements ProfileDao {
     @Override
     public Profile getProfileByUserID(int id) {
         Profile profile = null;
-        String sql = "SELECT name, password, username, sex, email, photo, weight, height, bmi FROM users WHERE user_id = ?";
+        String sql = "SELECT name, password_hash, username, sex, email, photo, weight, height, bmi FROM users WHERE user_id = ?";
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
             if (results.next()) {
@@ -50,7 +50,7 @@ public class JdbcProfileDao implements ProfileDao {
     }
     @Override
     public Profile updateProfileByUserID(int id, Profile updatedProfile) {
-        String sql = "UPDATE users SET name = ?, password = ?, username = ?, sex = ?, email = ?, photo = ?, " +
+        String sql = "UPDATE users SET name = ?, password_hash = ?, username = ?, sex = ?, email = ?, photo = ?, " +
                 "weight = ?, height = ?, bmi = ? WHERE user_id = ?";
         try {
             jdbcTemplate.update(sql,
@@ -75,15 +75,15 @@ public class JdbcProfileDao implements ProfileDao {
     private Profile mapRowToProfile(SqlRowSet rowSet) {
         Profile profile = new Profile();
         profile.setName(rowSet.getString("name"));
-        profile.setPassword(rowSet.getString("password"));
+        profile.setPassword(rowSet.getString("password_hash"));
         profile.setUsername(rowSet.getString("username"));
         profile.setSex(rowSet.getString("sex"));
         profile.setEmail(rowSet.getString("email"));
         profile.setPhoto(rowSet.getString("photo"));
         profile.setId(rowSet.getInt("id"));
-        profile.setWeight(rowSet.getInt("weight"));
-        profile.setHeight(rowSet.getInt("height"));
-        profile.setBmi(rowSet.getInt("bmi"));
+        profile.setWeight(rowSet.getBigDecimal("weight"));
+        profile.setHeight(rowSet.getBigDecimal("height"));
+        profile.setBmi(rowSet.getBigDecimal("bmi"));
         return profile;
     }
 

@@ -25,6 +25,8 @@
 
      <div>
         <label>Sex:</label><input v-model="user.sex"/>
+        <span v-if="hasValidationError" class="error-message">Sex must be one character</span>
+
     </div>
 
     <div>
@@ -56,6 +58,7 @@ export default{
     data(){
         return{
     user: this.$store.state.user,
+    hasValidationError: false
     };
     
     },
@@ -83,6 +86,15 @@ methods:{
             }
           });
         },
+
+        validateForm() {
+    if (this.user.sex.length !== 1) {
+      this.hasValidationError = true;
+    } else {
+      this.hasValidationError = false;
+      this.saveProfile();
+    }
+  },
 
         cancelEdit(){
         this.$router.push({ name: 'profile', params: { id: this.user.id} });
