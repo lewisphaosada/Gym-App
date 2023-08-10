@@ -8,5 +8,4 @@ public interface ProfileDao {
     void deleteProfileByUserID(int id);
     Profile updateProfileByUserID(int id, Profile updatedProfile);
 
-
-}
+    }
