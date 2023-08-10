@@ -64,6 +64,7 @@ export default{
     data(){
         return{
     user: this.$store.state.user,
+    newPassword: '',
     hasValidationError: false
     };
     
@@ -79,13 +80,16 @@ export default{
 
     bmiValidationError() {
       return isNaN(this.user.bmi);
-    }
+    },
+    
   },
 methods:{ 
   
-  submitForm() {
-      if (this.validateForm()) {
+     submitForm() {
+      if (!this.hasValidationError) {
         this.saveProfile();
+      } else {
+        this.$router.push({ name: 'profile', params: { id: this.user.id } });
       }
     },
 
