@@ -1,7 +1,7 @@
 <template>
 <div>
 <h2>Edit Profile</h2>
-  <form v-on:submit.prevent="saveProfile">
+  <form v-on:submit.prevent="submitForm">
 
     <div>
         <label>Photo:</label><input v-model="user.photo"/>
@@ -25,20 +25,26 @@
 
      <div>
         <label>Sex:</label><input v-model="user.sex"/>
-        <span v-if="hasValidationError" class="error-message">Sex must be one character</span>
+        <span v-if="hasValidationError" class="error-message">Sex must be one character: M, F or O</span>
 
     </div>
 
     <div>
         <label>Weight:</label><input v-model="user.weight"/>
+        <span v-if="weightValidationError" class="error-message">Must input numbers</span>
+
     </div>
 
     <div>
         <label>Height:</label><input v-model="user.height"/>
+        <span v-if="heightValidationError" class="error-message">Must input numbers</span>
+
     </div>
 
     <div>
-        <label>BMI:</label><input v-model="user.bmi"/>
+      <label>BMI:</label><input v-model="user.bmi"/>
+      <span v-if="bmiValidationError" class="error-message">Must input numbers</span>
+
     </div>
 
     <button type="submit">Save</button>
@@ -62,7 +68,26 @@ export default{
     };
     
     },
-methods:{
+     computed: {
+    weightValidationError() {
+      return isNaN(this.user.weight);
+    },
+
+    heightValidationError() {
+      return isNaN(this.user.height);
+    },
+
+    bmiValidationError() {
+      return isNaN(this.user.bmi);
+    }
+  },
+methods:{ 
+  
+  submitForm() {
+      if (this.validateForm()) {
+        this.saveProfile();
+      }
+    },
 
         saveProfile(){
             ProfileService.updateProfile(this.user.id, this.user).then(response => {
@@ -87,14 +112,18 @@ methods:{
           });
         },
 
-        validateForm() {
-    if (this.user.sex.length !== 1) {
-      this.hasValidationError = true;
-    } else {
-      this.hasValidationError = false;
-      this.saveProfile();
-    }
-  },
+     validateForm() {
+      if (this.weightValidationError ||this.heightValidationError || this.bmiValidationError ||
+        (this.user.sex.length !== 1 && this.user.sex.length !== 0) ||
+        (this.user.sex.length === 1 && !['M', 'F', 'O'].includes(this.user.sex.toUpperCase()))
+      ) {
+        this.hasValidationError = true;
+        return false;
+      } else {
+        this.hasValidationError = false;
+        return true;
+      }
+    },
 
         cancelEdit(){
         this.$router.push({ name: 'profile', params: { id: this.user.id} });

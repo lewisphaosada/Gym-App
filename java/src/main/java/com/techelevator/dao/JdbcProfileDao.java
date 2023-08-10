@@ -80,7 +80,6 @@ public class JdbcProfileDao implements ProfileDao {
         profile.setSex(rowSet.getString("sex"));
         profile.setEmail(rowSet.getString("email"));
         profile.setPhoto(rowSet.getString("photo"));
-        profile.setId(rowSet.getInt("id"));
         profile.setWeight(rowSet.getBigDecimal("weight"));
         profile.setHeight(rowSet.getBigDecimal("height"));
         profile.setBmi(rowSet.getBigDecimal("bmi"));
