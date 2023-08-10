@@ -6,6 +6,7 @@
 import ProfileDetails from '../components/ProfileDetails.vue';
 
 export default{
+    name: "Profile",
     components: {ProfileDetails}
 
 };

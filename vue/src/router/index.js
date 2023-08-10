@@ -8,6 +8,7 @@ import store from '../store/index'
 import Profile from '../views/Profile.vue'
 import EditProfile from '../views/EditProfile.vue'
 import ViewSessions from '../views/ViewSessions.vue'
+import Schedule from '../views/Schedule.vue'
 Vue.use(Router)
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
@@ -76,7 +77,15 @@ const router = new Router({
       meta: {
         requiresAuth: true
       }
+    },
+  {
+    path: '/schedule',
+    name: 'schedule',
+    component: Schedule,
+    meta:{
+      requiresAuth: true
     }
+  },
   ]
 })
 router.beforeEach((to, from, next) => {

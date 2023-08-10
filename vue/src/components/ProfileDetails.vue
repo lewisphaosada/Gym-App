@@ -16,7 +16,7 @@
         <div class="profile-details"><label>Sex:</label> {{user.sex}} </div>
         <div class="profile-details"><label>Weight:</label> {{user.weight}} </div>
         <div class="profile-details"><label>Height:</label> {{user.height}} </div>
-        <div class="profile-details"><label>BMI:</label> {{user.bmi}} </div>
+        <div class="profile-details"><label>BMI:</label> {{calculatedBMI}} </div>
         <router-link class="profile-edit-button" :to="'/profile/' + $store.state.user.id + '/edit'">Edit Profile</router-link>
 </div>
 </div>
@@ -33,6 +33,16 @@ export default {
     return {
       user: this.$store.state.user,
     };
+  },
+   computed: {
+        calculatedBMI() {
+      if (!isNaN(this.user.weight) && !isNaN(this.user.height)) {
+        const weight = parseFloat(this.user.weight);
+        const height = parseFloat(this.user.height) / 100; 
+        return (weight / (height * height)).toFixed(2);
+      }
+      return '';
+    },
   },
    created() {
     this.retrieveProfile(this.user.id);

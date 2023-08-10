@@ -7,6 +7,7 @@ import ProfileDetailsEdit from '../components/ProfileDetailsEdit.vue';
 
 
 export default{
+    name: "editProfile",
     components: {ProfileDetailsEdit}
 
 };

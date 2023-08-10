@@ -42,7 +42,7 @@
     </div>
 
     <div>
-      <label>BMI:</label><input v-model="user.bmi"/>
+      <label>BMI:</label><input v-model="calculatedBMI"/>
       <span v-if="bmiValidationError" class="error-message">Must input numbers</span>
 
     </div>
@@ -76,14 +76,23 @@ export default{
     user() {
       return { ...this.originalUser};
     },
+        calculatedBMI() {
+      if (!isNaN(this.user.weight) && !isNaN(this.user.height)) {
+        const weight = parseFloat(this.user.weight);
+        const height = parseFloat(this.user.height) / 100; 
+        return (weight / (height * height)).toFixed(2);
+      }
+      return '';
+    },
   },
 
 methods:{
-   submitForm() {
+    submitForm() {
       this.validateForm();
-      if (!(this.sexValidationError || this.weightValidationError || this.heightValidationError || this.bmiValidationError)) {
-        this.saveProfile();
+      if (this.hasValidationError) {
+        return;
       }
+      this.saveProfile();
     },
 
         saveProfile(){
@@ -109,24 +118,15 @@ methods:{
           });
         },
 
-       validateForm() {
+validateForm() {
+    this.sexValidationError = this.user.sex && (this.user.sex.length !== 1 || !['M', 'F', 'O'].includes(this.user.sex.toUpperCase()));
+    this.weightValidationError = isNaN(this.user.weight);
+    this.heightValidationError = isNaN(this.user.height);
+    this.bmiValidationError = isNaN(this.user.bmi);
 
-      if (this.user.sex && (this.user.sex.length !== 1 || !['M', 'F', 'O'].includes(this.user.sex.toUpperCase()))) {
-        this.sexValidationError = true;
-      }
-
-      if (isNaN(this.user.weight)) {
-        this.weightValidationError = true;
-      }
-
-      if (isNaN(this.user.height)) {
-        this.heightValidationError = true;
-      }
-
-      if (isNaN(this.user.bmi)) {
-        this.bmiValidationError = true;
-      }
-    },
+    // Check if any validation error exists
+    this.hasValidationError = this.sexValidationError || this.weightValidationError || this.heightValidationError || this.bmiValidationError;
+  },
     //   openImageUpload() {
     //   this.$refs.imageInput.click();
     // },
