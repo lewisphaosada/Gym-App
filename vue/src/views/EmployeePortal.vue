@@ -1,10 +1,14 @@
 <template>
-    <h1>Employee Portal</h1>
+    <employee-portal></employee-portal>
 </template>
 
 <script>
+import EmployeePortal from '@/components/EmployeePortal.vue'
+
 export default {
-    
+    components: {
+        EmployeePortal
+    }
 }
 </script>
 

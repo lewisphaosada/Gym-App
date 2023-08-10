@@ -7,11 +7,24 @@
       </div>
       <div class="form-input-group">
         <label for="username" class="input-label">Username: </label>
-        <input type="text" id="username" v-model="employee.username" class="input-field" required autofocus />
+        <input
+          type="text"
+          id="username"
+          v-model="employee.username"
+          class="input-field"
+          required
+          autofocus
+        />
       </div>
       <div class="form-input-group">
         <label for="password" class="input-label">Password: </label>
-        <input type="password" id="password" v-model="employee.password" class="input-field" required/>
+        <input
+          type="password"
+          id="password"
+          v-model="employee.password"
+          class="input-field"
+          required
+        />
       </div>
       <button type="submit" class="submit-button">Sign in</button>
     </form>
@@ -32,17 +45,21 @@ export default {
     };
   },
   methods: {
-    login() {
+    EmployeeLogin() {
       authService
         .login(this.user)
         .then((response) => {
           if (response.status == 200) {
-            this.$store.commit("SET_AUTH_TOKEN", response.data.token);
-            this.$store.commit("SET_USER", response.data.user);
-            this.$router.push({
-              path: "/",
-              query: { registration: "success" },
-            });
+            if (response.data.user.role != "ROLE_USER") {
+              this.$store.commit("SET_AUTH_TOKEN", response.data.token);
+              this.$store.commit("SET_USER", response.data.user);
+              this.$router.push({
+                path: "/",
+                query: { registration: "success" },
+              });
+            } else {
+              this.invalidCredentials = true;
+            }
           }
         })
         .catch((error) => {
@@ -53,11 +70,6 @@ export default {
           }
         });
     },
-    isEmployeeRole() {
-      if(this.$store.state.user.role === "ROLE_EMPLOYEE") {
-        return true
-      } else return false
-    }
   },
 };
 </script>

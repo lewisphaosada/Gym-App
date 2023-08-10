@@ -8,6 +8,7 @@ import store from '../store/index'
 import Profile from '../views/Profile.vue'
 import EditProfile from '../views/EditProfile.vue'
 import EmployeeLogin from '../views/EmployeeLogin.vue'
+import EmployeePortal from '../views/EmployeePortal.vue'
 Vue.use(Router)
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
@@ -75,6 +76,14 @@ const router = new Router({
       component: EmployeeLogin,
       meta: {
         requiresAuth: false
+      }
+    },
+    {
+      path: '/employee-portal',
+      name: 'employeeportal',
+      component: EmployeePortal,
+      meta: {
+        requiresAuth: true
       }
     }
   ]

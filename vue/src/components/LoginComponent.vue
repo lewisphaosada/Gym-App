@@ -19,6 +19,8 @@
       <button type="submit" class="submit-button">Sign in</button>
       <p class="register-link">
         <router-link :to="{ name: 'register' }">Need an account? Sign up.</router-link>
+      </p>
+      <p>
         <router-link :to="{name: 'employeelogin'}">Employee Login</router-link>
       </p>
     </form>
@@ -48,10 +50,7 @@ export default {
           if (response.status == 200) {
             this.$store.commit("SET_AUTH_TOKEN", response.data.token);
             this.$store.commit("SET_USER", response.data.user);
-             this.$router.push({
-                path: '/',
-                query: { registration: 'success' },
-              });
+             this.$router.push({path: '/employee-portal'});
           }
         })
         .catch(error => {
