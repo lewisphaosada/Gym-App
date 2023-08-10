@@ -45,21 +45,16 @@ export default {
     };
   },
   methods: {
-    EmployeeLogin() {
-      authService
-        .login(this.user)
+    employeeLogin() {
+      authService.login(this.employee)
         .then((response) => {
           if (response.status == 200) {
-            if (response.data.user.role != "ROLE_USER") {
-              this.$store.commit("SET_AUTH_TOKEN", response.data.token);
-              this.$store.commit("SET_USER", response.data.user);
-              this.$router.push({
-                path: "/",
-                query: { registration: "success" },
-              });
-            } else {
-              this.invalidCredentials = true;
-            }
+            this.$store.commit("SET_AUTH_TOKEN", response.data.token);
+            this.$store.commit("SET_USER", response.data.user);
+            this.$router.push({ 
+              path: "/employee-portal",
+              query: { registration: "success" }
+               });
           }
         })
         .catch((error) => {
