@@ -8,7 +8,6 @@
 </template>
 
 <script>
-import EmployeePortal from '@/components/EmployeePortal.vue'
 import axios from 'axios';
 
 export default {

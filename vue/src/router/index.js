@@ -37,6 +37,7 @@ const router = new Router({
       component: Login,
       meta: {
         requiresAuth: false,
+        redirectToEmployeePortal: true, // New meta property
       },
     },
     {
@@ -102,6 +103,8 @@ router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(x => x.meta.requiresAuth);
   if (requiresAuth && store.state.token === '') {
     next('/login');
+  } else if (to.matched.some(x => x.meta.redirectToEmployeePortal && store.state.token !== '')) {
+    next('/employee-portal');
   } else {
     next();
   }
