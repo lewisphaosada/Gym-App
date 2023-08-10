@@ -83,7 +83,7 @@ const router = new Router({
       name: 'employeeportal',
       component: EmployeePortal,
       meta: {
-        requiresAuth: true
+        requiresAuth: false
       }
     }
   ]
