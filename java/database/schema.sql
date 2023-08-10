@@ -15,7 +15,7 @@ CREATE TABLE users (
 	username varchar(50) NOT NULL UNIQUE,
 	password_hash varchar(200) NOT NULL,
 	role varchar(50) NOT NULL,
-	name varchar(50) NOT NULL,
+	name varchar(50),
 	email VARCHAR(100),
 	photo VARCHAR(500),
 	weight DECIMAL(5,2),

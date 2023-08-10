@@ -54,7 +54,9 @@ export default {
         });
     },
     isEmployeeRole() {
-      if($store.state.user.role === "ROLE_EMPLOYEE")
+      if(this.$store.state.user.role === "ROLE_EMPLOYEE") {
+        return true
+      } else return false
     }
   },
 };
