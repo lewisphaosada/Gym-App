@@ -8,6 +8,8 @@ import store from '../store/index'
 import Profile from '../views/Profile.vue'
 import EditProfile from '../views/EditProfile.vue'
 import ViewSessions from '../views/ViewSessions.vue'
+import MachineList from  '../components/MachineList.vue'
+import MachineDetails from '../components/MachineDetails.vue'
 Vue.use(Router)
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
@@ -26,48 +28,48 @@ const router = new Router({
       name: 'home',
       component: Home,
       meta: {
-        requiresAuth: true
-      }
+        requiresAuth: true,
+      },
     },
     {
-      path: "/login",
-      name: "login",
+      path: '/login',
+      name: 'login',
       component: Login,
       meta: {
-        requiresAuth: false
-      }
+        requiresAuth: false,
+      },
     },
     {
-      path: "/logout",
-      name: "logout",
+      path: '/logout',
+      name: 'logout',
       component: Logout,
       meta: {
-        requiresAuth: false
-      }
+        requiresAuth: false,
+      },
     },
     {
-      path: "/register",
-      name: "register",
+      path: '/register',
+      name: 'register',
       component: Register,
       meta: {
-        requiresAuth: false
-      }
+        requiresAuth: false,
+      },
     },
     {
       path: "/profile/:id",
       name: "profile",
       component: Profile,
-      meta:{
-        requiresAuth: true
-      }
+      meta: {
+        requiresAuth: true,
+      },
     },
     {
-      path: '/profile/:id/edit',
-      name: "editprofile",
+      path: '/edit',
+      name: 'editprofile',
       component: EditProfile,
-      meta:{
-        requiresAuth: true
-      }
+      meta: {
+        requiresAuth: true,
+      },
     },
     {
       path: '/sessions',
@@ -76,18 +78,33 @@ const router = new Router({
       meta: {
         requiresAuth: true
       }
-    }
-  ]
-})
+    },
+    {
+      path: '/machines',
+      name: 'MachineList', 
+      component: MachineList,
+      meta: {
+        requiresAuth: true,
+      },
+    },
+    {
+      path: '/machine/:id',
+      name: 'MachineDetails', 
+      component: MachineDetails,
+      meta: {
+        requiresAuth: true,
+      },
+    },
+  ],
+});
+
 router.beforeEach((to, from, next) => {
-  // Determine if the route requires Authentication
   const requiresAuth = to.matched.some(x => x.meta.requiresAuth);
-  // If it does and they are not logged in, send the user to "/login"
   if (requiresAuth && store.state.token === '') {
-    next("/login");
+    next('/login');
   } else {
-    // Else let them go to their next destination
     next();
   }
 });
+
 export default router;
