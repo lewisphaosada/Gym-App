@@ -1,25 +1,25 @@
 <template>
   <div>
-    <!-- <FullCalendar :events="events" /> -->
+    <FullCalendar :config="calendarConfig" />
   </div>
 </template>
 
 <script>
+//popular vue full calendar library used
+import { FullCalendar } from 'vue-full-calendar'
+import 'vue-full-calendar/node_modules/fullcalendar/dist/fullcalendar.css';
+
 
 export default {
   components: {
-    // FullCalendar,
+    FullCalendar
   },
   data() {
     return {
-      events: [
-        {
-          title: 'Event 1',
-          start: '2023-08-10T10:00:00',
-          end: '2023-08-10T12:00:00',
-        },
-      ],
-    };
-  },
-};
+      calendarConfig: {
+        // Configure your calendar here
+      }
+    }
+  }
+}
 </script>

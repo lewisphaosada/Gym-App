@@ -76,15 +76,15 @@ export default{
     user() {
       return { ...this.originalUser};
     },
-        calculatedBMI() {
-      if (!isNaN(this.user.weight) && !isNaN(this.user.height)) {
-        const weight = parseFloat(this.user.weight);
-        const height = parseFloat(this.user.height) / 100; 
-        return (weight / (height * height)).toFixed(2);
-      }
-      return '';
+    calculatedBMI() {
+  if (!isNaN(this.user.weight) && !isNaN(this.user.height)) {
+    const weightInPounds = parseFloat(this.user.weight);
+    const heightInInches = parseFloat(this.user.height);
+    return ((weightInPounds / (heightInInches * heightInInches)) * 703).toFixed(2);
+  }
+  return '';
+},
     },
-  },
 
 methods:{
     submitForm() {

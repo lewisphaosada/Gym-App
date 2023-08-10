@@ -8,6 +8,9 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@fullcalendar/daygrid": "^6.1.8",
+    "@fullcalendar/interaction": "^6.1.8",
+    "@fullcalendar/vue": "^6.1.8",
     "axios": "^0.21.1",
     "bootstrap": "^5.3.1",
     "core-js": "^3.9.1",
@@ -15,6 +18,7 @@
     "fullcalendar-scheduler": "^6.1.8",
     "vue": "^2.7.14",
     "vue-bootstrap-datetimepicker": "^5.0.1",
+    "vue-full-calendar": "^2.8.1-0",
     "vue-router": "^3.5.1",
     "vuex": "^3.6.2"
   },
