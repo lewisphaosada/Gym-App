@@ -20,7 +20,8 @@ export default new Vuex.Store({
   state: {
     token: currentToken || '',
     user: currentUser || {},
-  isEditing: false,
+    isEditing: false,
+    isCheckedIn: false
 },
   mutations: {
     EDIT_PROFILE_STATE(state){
@@ -41,6 +42,9 @@ export default new Vuex.Store({
       state.token = '';
       state.user = {};
       axios.defaults.headers.common = {};
+    },
+    TOGGLE_CHECK(state) {
+      state.isCheckedIn = !state.isCheckedIn;
     }
   }
 })
