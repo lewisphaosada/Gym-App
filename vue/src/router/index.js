@@ -7,6 +7,7 @@ import Register from '../views/Register.vue'
 import store from '../store/index'
 import Profile from '../views/Profile.vue'
 import EditProfile from '../views/EditProfile.vue'
+import ViewSessions from '../views/ViewSessions.vue'
 Vue.use(Router)
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
@@ -65,9 +66,17 @@ const router = new Router({
       name: "editprofile",
       component: EditProfile,
       meta:{
-        requiresAuth: true,
+        requiresAuth: true
       }
     },
+    {
+      path: '/sessions',
+      name: 'sessions',
+      component: ViewSessions,
+      meta: {
+        requiresAuth: true
+      }
+    }
   ]
 })
 router.beforeEach((to, from, next) => {
