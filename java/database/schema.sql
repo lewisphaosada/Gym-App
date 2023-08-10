@@ -62,7 +62,6 @@ CONSTRAINT FK_user_workout FOREIGN KEY (user_id) REFERENCES users,
 CONSTRAINT FK_workout_exercise FOREIGN KEY (exercise_id) REFERENCES exercise
 );
 
-
 --goal - Contains users' goals
 
 CREATE TABLE goal (
