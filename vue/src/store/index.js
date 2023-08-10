@@ -20,12 +20,17 @@ export default new Vuex.Store({
   state: {
     token: currentToken || '',
     user: currentUser || {},
+<<<<<<< HEAD
     isEditing: false
+=======
+<<<<<<< HEAD
+    isCheckedIn : false
+=======
+    isCheckedIn: false
+>>>>>>> 6bca092b776bf60f8134826885288bdee9806325
+>>>>>>> f401c3aa63827ace69e6852833eb98c0d52ed89d
 },
   mutations: {
-    EDIT_PROFILE_STATE(state){
-      state.isEditing = !state.isEditing;
-    },
     SET_AUTH_TOKEN(state, token) {
       state.token = token;
       localStorage.setItem('token', token);
@@ -41,6 +46,9 @@ export default new Vuex.Store({
       state.token = '';
       state.user = {};
       axios.defaults.headers.common = {};
+    },
+    TOGGLE_CHECK(state) {
+      state.isCheckedIn = !state.isCheckedIn;
     }
   }
 })

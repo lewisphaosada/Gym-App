@@ -1,6 +1,6 @@
 BEGIN TRANSACTION;
 
 INSERT INTO users (username,password_hash,role,name) VALUES ('user','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER','testUser');
-INSERT INTO users (username,password_hash,role,name) VALUES ('admin','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_ADMIN','Admin');
+INSERT INTO users (username,password_hash,role,name) VALUES ('admin','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_ADMIN','admin');
 
 COMMIT TRANSACTION;

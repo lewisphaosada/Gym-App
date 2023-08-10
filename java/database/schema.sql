@@ -4,8 +4,6 @@ DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS sessions;
 DROP TABLE IF EXISTS workout;
 DROP TABLE IF EXISTS goal;
-DROP TABLE IF EXISTS user_goal;
-DROP TABLE IF EXISTS session_workout;
 DROP TABLE IF EXISTS exercise;
 
 --users - Contains users' info
@@ -64,30 +62,15 @@ CONSTRAINT FK_user_workout FOREIGN KEY (user_id) REFERENCES users,
 CONSTRAINT FK_workout_exercise FOREIGN KEY (exercise_id) REFERENCES exercise
 );
 
--- session_workout Joint table joining Sessions & Workout
-
-CREATE TABLE session_workout (
-session_id INT,
-workout_id INT,
-CONSTRAINT FK_session_workout_session FOREIGN KEY (session_id) REFERENCES sessions,
-CONSTRAINT FK_session_workout_workout FOREIGN KEY (workout_id) REFERENCES workout
-);
-
-
 --goal - Contains users' goals
 
 CREATE TABLE goal (
  goal_id SERIAL,
+ user_id INT,
  description VARCHAR(300),
- CONSTRAINT PK_goal PRIMARY KEY (goal_id)
+ CONSTRAINT PK_goal PRIMARY KEY (goal_id),
+ CONSTRAINT FK_user_goal FOREIGN KEY (user_id) REFERENCES users
 );
 
---user_goal - Joint table joining Users & Goal
-CREATE TABLE user_goal (
-goal_id INT,
-user_id INT,
-CONSTRAINT FK_user_goal_goal FOREIGN KEY (goal_id) REFERENCES goal,
-CONSTRAINT FK_user_goal_user FOREIGN KEY (user_id) REFERENCES users
-);
 
 COMMIT TRANSACTION;
