@@ -20,7 +20,11 @@ export default new Vuex.Store({
   state: {
     token: currentToken || '',
     user: currentUser || {},
+<<<<<<< HEAD
+    isCheckedIn : false
+=======
     isCheckedIn: false
+>>>>>>> 6bca092b776bf60f8134826885288bdee9806325
 },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
