@@ -135,5 +135,9 @@ export default {
 label {
   margin-right: 0.5rem;
 }
+<<<<<<< HEAD
 </style>
   
+=======
+</style>  
+>>>>>>> 8556e213b5520e5d975b07a293f7d60700e6b6b7

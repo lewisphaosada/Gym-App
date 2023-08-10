@@ -9,7 +9,7 @@
 import Sessions from '../components/Sessions.vue';
 
 export default {
-  name: "home",
+  name: "sessions",
   components: {
     Sessions
   }
