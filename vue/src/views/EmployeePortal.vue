@@ -1,17 +1,36 @@
 <template>
   <div class="employee-portal">
-    <h2>Welcome to the Employee Portal</h2>
-    <p>This is where employees can access special features and functionalities.</p>
-    <!-- Add more content or components here -->
+    <h2>Employee Portal</h2>
+    <div class="member" v-for="member in gymMembers" :key="member.id">
+      <p>{{ member.name }}</p>
+    </div>
   </div>
 </template>
 
 <script>
 import EmployeePortal from '@/components/EmployeePortal.vue'
+import axios from 'axios';
 
 export default {
-    name: "EmployeePortal"
-    
+  data() {
+    return {
+      gymMembers: [],
+    };
+  },
+  created() {
+    this.loadGymMembers();
+  },
+  methods: {
+    loadGymMembers() {
+      axios.get('http://api.example.com/gym-members')
+        .then(response => {
+          this.gymMembers = response.data;
+        })
+        //.catch(error => {
+         // console.error('Error fetching gym members:', error);
+       // });
+    },
+  },
 };
 </script>
 
@@ -22,6 +41,16 @@ export default {
   border: 1px solid #ccc;
   border-radius: 5px;
   background-color: #f8f8f8;
-  text-align: center;
+}
+
+.member {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
 }
 </style>
