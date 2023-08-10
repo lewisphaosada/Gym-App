@@ -4,6 +4,10 @@
       <router-link v-bind:to="{ name: 'home' }" class="nav-link">Home</router-link>
       <span class="divider">|</span>
 
+      <router-link v-bind:to="{ name: 'register' }" class="nav-link">Register</router-link>
+
+      <span class="divider" >|</span> <!-- should this vertical line also have v-if="isAuthenticated"? -->
+      
       <router-link v-if="!isAuthenticated" v-bind:to="{ name: 'register' }" class="nav-link">Register</router-link>
       <span class="divider" v-if="!isAuthenticated">|</span>
 
@@ -40,7 +44,7 @@ export default {
 }
 #nav {
   padding: 15px;
-  background-color: #F3F3F3;
+  background-color: #f3f3f3; 
   border-bottom: 1px solid #ddd;
   display: flex;
   justify-content: center;
@@ -49,7 +53,7 @@ export default {
 .nav-link {
   margin: 0 10px;
   text-decoration: none;
-  color: #000;
+  color: #000; 
 }
 .divider {
   margin: 0 5px;

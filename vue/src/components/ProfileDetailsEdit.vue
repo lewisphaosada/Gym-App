@@ -56,8 +56,7 @@
 </template>
 
 <script>
-
-import ProfileService from '../services/ProfileService.js'
+import UserService from '../services/UserService.js'
 
 export default{
     name: 'editprofile',
@@ -94,9 +93,8 @@ methods:{
       }
       this.saveProfile();
     },
-
         saveProfile(){
-            ProfileService.updateProfile(this.user.id, this.user).then(response => {
+            UserService.updateProfile(this.user.id, this.user).then(response => {
             if(response.status === 200){
             this.$store.commit('SET_USER', this.user);
             this.$router.push({ name: 'profile', params: { id: this.user.id} });
@@ -124,7 +122,6 @@ validateForm() {
     this.heightValidationError = isNaN(this.user.height);
     this.bmiValidationError = isNaN(this.user.bmi);
 
-    // Check if any validation error exists
     this.hasValidationError = this.sexValidationError || this.weightValidationError || this.heightValidationError || this.bmiValidationError;
   },
     //   openImageUpload() {
@@ -151,7 +148,6 @@ validateForm() {
     },
 
 };
-
 </script>
 
 
@@ -182,5 +178,4 @@ validateForm() {
   font-weight: bold;
   margin-bottom: 5px;
 }
-
 </style>

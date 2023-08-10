@@ -1,67 +1,76 @@
 <template>
   <div id="login" class="login-container">
     <form @submit.prevent="login" class="login-form">
-      <h1 class="login-heading">Please Sign In</h1>
+      <h1 class="login-heading">Employee Login</h1>
       <div role="alert" v-if="invalidCredentials" class="alert">
         Invalid username and password!
       </div>
-      <div role="alert" v-if="this.$route.query.registration" class="alert">
-        Thank you for registering, please sign in.
+      <div class="form-input-group">
+        <label for="username" class="input-label">Username: </label>
+        <input
+          type="text"
+          id="username"
+          v-model="employee.username"
+          class="input-field"
+          required
+          autofocus
+        />
       </div>
       <div class="form-input-group">
-        <label for="username" class="input-label">Username</label>
-        <input type="text" id="username" v-model="user.username" class="input-field" required autofocus />
-      </div>
-      <div class="form-input-group">
-        <label for="password" class="input-label">Password</label>
-        <input type="password" id="password" v-model="user.password" class="input-field" required />
+        <label for="password" class="input-label">Password: </label>
+        <input
+          type="password"
+          id="password"
+          v-model="employee.password"
+          class="input-field"
+          required
+        />
       </div>
       <button type="submit" class="submit-button">Sign in</button>
-      <p class="register-link">
-        <router-link :to="{ name: 'register' }">Need an account? Sign up.</router-link>
-      </p>
-      <p>
-        <router-link :to="{name: 'employeelogin'}">Employee Login</router-link>
-      </p>
     </form>
   </div>
 </template>
 
 <script>
-import AuthService from "../services/AuthService";
+import authService from "../services/AuthService";
 
 export default {
-  name: "login",
-  components: {},
   data() {
     return {
-      user: {
+      employee: {
         username: "",
-        password: ""
+        password: "",
       },
-      invalidCredentials: false
+      invalidCredentials: false,
     };
   },
   methods: {
-    login() {
-      AuthService
+    EmployeeLogin() {
+      authService
         .login(this.user)
-        .then(response => {
+        .then((response) => {
           if (response.status == 200) {
-            this.$store.commit("SET_AUTH_TOKEN", response.data.token);
-            this.$store.commit("SET_USER", response.data.user);
-             this.$router.push({path: '/employee-portal'});
+            if (response.data.user.role != "ROLE_USER") {
+              this.$store.commit("SET_AUTH_TOKEN", response.data.token);
+              this.$store.commit("SET_USER", response.data.user);
+              this.$router.push({
+                path: "/",
+                query: { registration: "success" },
+              });
+            } else {
+              this.invalidCredentials = true;
+            }
           }
         })
-        .catch(error => {
+        .catch((error) => {
           const response = error.response;
 
           if (response.status === 401) {
             this.invalidCredentials = true;
           }
         });
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -128,4 +137,3 @@ export default {
   margin-top: 10px;
 }
 </style>
-
