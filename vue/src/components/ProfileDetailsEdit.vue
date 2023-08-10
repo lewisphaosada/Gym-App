@@ -1,26 +1,50 @@
 <template>
 <div>
 <h2>Edit Profile</h2>
-  <form v-on:submit.prevent="saveProfile">
+  <form v-on:submit.prevent="submitForm">
 
     <div>
-        <label>Name:</label><input v-model="editUser.name"/>
+        <label>Photo:</label><input v-model="user.photo"/>
+    </div>
+
+    <div>
+        <label>Name:</label><input v-model="user.name"/>
     </div>
 
      <div>
-        <label>Email:</label><input v-model="editUser.email"/>
+        <label>Email:</label><input v-model="user.email"/>
     </div>
 
      <div>
-        <label>Username:</label><input v-model="editUser.username"/>
+        <label>Username:</label><input v-model="user.username"/>
     </div>
 
     <div>
-        <label>Password:</label><input v-model="editUser.password"/>
+        <label>Password:</label><input v-model="user.password"/>
+    </div>
+
+     <div>
+        <label>Sex:</label><input v-model="user.sex"/>
+        <span v-if="hasValidationError" class="error-message">Sex must be one character: M, F or O</span>
+
     </div>
 
     <div>
-        <label>Photo:</label><input v-model="editUser.photo"/>
+        <label>Weight:</label><input v-model="user.weight"/>
+        <span v-if="hasValidationError" class="error-message">Must input numbers</span>
+
+    </div>
+
+    <div>
+        <label>Height:</label><input v-model="user.height"/>
+        <span v-if="hasValidationError" class="error-message">Must input numbers</span>
+
+    </div>
+
+    <div>
+      <label>BMI:</label><input v-model="user.bmi"/>
+      <span v-if="hasValidationError" class="error-message">Must input numbers</span>
+
     </div>
 
     <button type="submit">Save</button>
@@ -33,30 +57,35 @@
 
 <script>
 
-import service from '../services/service.js'
+import ProfileService from '../services/ProfileService.js'
 
 export default{
     name: 'editprofile',
     data(){
         return{
-            editUser:{
-      name: '',
-      email: '',
-      username: '',
-      password: '',
-      photo: ''
-    }
+    user: this.$store.state.user,
+    hasValidationError: false,
+     sexValidationError: false,
+      weightValidationError: false,
+      heightValidationError: false,
+      bmiValidationError: false,
     };
+    
     },
+
 methods:{
+   submitForm() {
+      this.validateForm();
+      if (!this.hasValidationError) {
+        this.saveProfile();
+      }
+    },
 
         saveProfile(){
-            const userID = this.$store.state.user.userID;
-            service.updateProfile(userID, this.editUser).then(response => {
+            ProfileService.updateProfile(this.user.id, this.user).then(response => {
             if(response.status === 200){
-            this.$store.commit('EDIT_PROFILE_STATE');
-            this.resetUser();
-            this.$router.push('/profile');
+            this.$store.commit('SET_USER', this.user);
+            this.$router.push({ name: 'profile', params: { id: this.user.id} });
                 }
             })
             .catch(error =>{
@@ -75,31 +104,47 @@ methods:{
           });
         },
 
-        cancelEdit(){
-        this.$store.commit('EDIT_PROFILE_STATE');
-        this.resetUser();
-        this.$router.push('/profile');
-        },
+       validateForm() {
+      this.hasValidationError = false;
 
-        resetUser() {
-        this.editUser = {
-        name: '',
-        email: '',
-        username: '',
-        password: '',
-        photo: '',
-      };
+      if (
+        (this.user.sex.length !== 1 && this.user.sex.length !== 0) ||
+        (this.user.sex.length === 1 && !['M', 'F', 'O'].includes(this.user.sex.toUpperCase()))
+      ) {
+        this.sexValidationError = true;
+        this.hasValidationError = true;
+      } else {
+        this.sexValidationError = false;
+      }
+
+      if (isNaN(this.user.weight)) {
+        this.weightValidationError = true;
+        this.hasValidationError = true;
+      } else {
+        this.weightValidationError = false;
+      }
+
+      if (isNaN(this.user.height)) {
+        this.heightValidationError = true;
+        this.hasValidationError = true;
+      } else {
+        this.heightValidationError = false;
+      }
+
+      if (isNaN(this.user.bmi)) {
+        this.bmiValidationError = true;
+        this.hasValidationError = true;
+      } else {
+        this.bmiValidationError = false;
+      }
     },
+
+        cancelEdit(){
+        this.$router.push({ name: 'profile', params: { id: this.user.id} });
+        },
     
     },
-created(){
-    const user = this.$store.state.user;
 
-    this.editedUser.name = user.name;
-    this.editedUser.email = user.email;
-    this.editedUser.username = user.username;
-    this.editedUser.photo = user.photo;
-    }
 };
 
 </script>

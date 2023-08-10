@@ -4,9 +4,13 @@
 
 <script>
 import ProfileDetailsEdit from '../components/ProfileDetailsEdit.vue';
+
+
 export default{
     components: {ProfileDetailsEdit}
+
 };
+
 </script>
 
 <style scoped>

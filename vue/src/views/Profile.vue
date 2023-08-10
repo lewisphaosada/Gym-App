@@ -1,14 +1,17 @@
 <template>
-  <profile-details />
+    <profile-details/>
 </template>
 
 <script>
-import ProfileDetails from "../components/ProfileDetails.vue";
+import ProfileDetails from '../components/ProfileDetails.vue';
 
-export default {
-  components: { ProfileDetails },
+export default{
+    components: {ProfileDetails}
+
 };
+
 </script>
+
 
 <style scoped>
 </style>

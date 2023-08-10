@@ -20,13 +20,8 @@ export default new Vuex.Store({
   state: {
     token: currentToken || '',
     user: currentUser || {},
-    isEditing: false,
-    isCheckedIn: false
 },
   mutations: {
-    EDIT_PROFILE_STATE(state){
-      state.isEditing = !state.isEditing;
-    },
     SET_AUTH_TOKEN(state, token) {
       state.token = token;
       localStorage.setItem('token', token);

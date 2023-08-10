@@ -54,7 +54,7 @@ const router = new Router({
       }
     },
     {
-      path: "/profile",
+      path: "/profile/:id",
       name: "profile",
       component: Profile,
       meta:{
@@ -62,7 +62,7 @@ const router = new Router({
       }
     },
     {
-      path: '/edit',
+      path: '/profile/:id/edit',
       name: "editprofile",
       component: EditProfile,
       meta:{
