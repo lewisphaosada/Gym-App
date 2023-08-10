@@ -32,7 +32,7 @@ export default {
 }
 #nav {
   padding: 15px;
-  background-color: #F3F3F3;
+  background-color: #f3f3f3; 
   border-bottom: 1px solid #ddd;
   display: flex;
   justify-content: center;
@@ -41,7 +41,7 @@ export default {
 .nav-link {
   margin: 0 10px;
   text-decoration: none;
-  color: #000;
+  color: #000; 
 }
 .divider {
   margin: 0 5px;
