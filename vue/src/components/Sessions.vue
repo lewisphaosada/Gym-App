@@ -8,7 +8,7 @@
 </template>
 
 <script>
-// import SessionService from '../services/SessionService'
+import SessionService from '../services/SessionService'
 
 export default {
   name: 'sessions',
@@ -30,11 +30,11 @@ export default {
       ]
     }
   },
-  // created() {
-  //   SessionService.list().then(response => {
-  //     this.sessions = response.data;
-  //   })
-  // }
+  created() {
+    SessionService.list().then(response => {
+      this.sessions = response.data;
+    })
+  }
 }
 </script>
 

@@ -84,7 +84,7 @@ const router = new Router({
       }
     },
     {
-      path: '/sessions',
+      path: '/sessions/{id}',
       name: 'sessions',
       component: ViewSessions,
       meta: {
