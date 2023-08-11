@@ -33,9 +33,9 @@ export default {
       sets: '',
       reps: '',
       timeSlot: '',
-      weightUsed: ''
+      weightUsed: '',
     };
-  }
+  },
 };
 </script>
 
