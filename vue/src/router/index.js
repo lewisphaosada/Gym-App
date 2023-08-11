@@ -10,10 +10,9 @@ import EditProfile from '../views/EditProfile.vue'
 import EmployeeLogin from '../views/EmployeeLogin.vue'
 import EmployeePortal from '../views/EmployeePortal.vue'
 import ViewSessions from '../views/ViewSessions.vue'
-import Schedule from '../views/Schedule.vue'
 import MachineList from  '../components/MachineList.vue'
 import MachineDetails from '../components/MachineDetails.vue'
-
+import Schedule from '../views/Schedule.vue'
 Vue.use(Router)
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
@@ -68,12 +67,20 @@ const router = new Router({
       },
     },
     {
-      path: '/edit',
+      path: '/profile/:id/edit',
       name: 'editprofile',
       component: EditProfile,
       meta: {
         requiresAuth: true,
-      },
+      }
+    },
+    {
+      path: '/schedule',
+      name: 'schedule',
+      component: Schedule,
+      meta:{
+        requiresAuth: true,
+      }
     },
     {
       path: '/sessions',
@@ -83,17 +90,7 @@ const router = new Router({
         requiresAuth: true
       }
     },
-
-  {
-    path: '/schedule',
-    name: 'schedule',
-    component: Schedule,
-    meta:{
-      requiresAuth: true
-    }
-  },
     {
-
       path: '/employee',
       name: 'employeelogin',
       component: EmployeeLogin,
@@ -108,9 +105,11 @@ const router = new Router({
       meta: {
         requiresAuth: false
       }
-  },{
+    },
+
+    {
       path: '/machines',
-      name: 'MachineList', 
+      name: 'MachineList',
       component: MachineList,
       meta: {
         requiresAuth: true,
@@ -118,7 +117,7 @@ const router = new Router({
     },
     {
       path: '/machine/:id',
-      name: 'MachineDetails', 
+      name: 'MachineDetails',
       component: MachineDetails,
       meta: {
         requiresAuth: true,
