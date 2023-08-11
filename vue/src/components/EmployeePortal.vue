@@ -20,6 +20,7 @@ export default {
   },
   created() {
     this.loadGymMembers();
+    this.employeeCheck();
   },
   methods: {
     loadGymMembers() {
@@ -32,7 +33,9 @@ export default {
        });
     },
     employeeCheck() {
-        if($store.state.user.authorities[0].name )
+        if(this.$store.state.user.authorities[0].name === "ROLE_USER") {
+            this.$router.push({path: '/'});
+        }
     }
   },
 };
