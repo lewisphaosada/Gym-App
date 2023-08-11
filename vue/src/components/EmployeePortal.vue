@@ -31,6 +31,9 @@ export default {
          console.error('Error fetching gym members:', error);
        });
     },
+    employeeCheck() {
+        if($store.state.user.authorities[0].name )
+    }
   },
 };
 </script>

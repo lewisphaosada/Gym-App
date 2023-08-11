@@ -58,6 +58,8 @@ export default {
               this.$router.push({
                 path: "/employee-portal",
               });
+            } else {
+              this.invalidCredentials = true;
             }
           }
         })
