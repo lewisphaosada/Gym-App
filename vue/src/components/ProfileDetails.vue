@@ -42,7 +42,7 @@ export default {
   }
   return '';
 },
-    },
+},
    created() {
     this.retrieveProfile(this.user.id);
   },
