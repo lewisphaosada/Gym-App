@@ -56,12 +56,9 @@
 </template>
 
 <script>
-<<<<<<< HEAD
 
-import ProfileService from '../services/ProfileService.js'
-=======
+
 import UserService from '../services/UserService.js'
->>>>>>> 8556e213b5520e5d975b07a293f7d60700e6b6b7
 
 export default{
     name: 'editprofile',
