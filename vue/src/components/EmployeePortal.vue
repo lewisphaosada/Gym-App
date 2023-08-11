@@ -7,6 +7,7 @@
     </div>
   </div>
 </template>
+
 <script>
 
 import axios from 'axios';
@@ -26,13 +27,14 @@ export default {
         .then(response => {
           this.gymMembers = response.data;
         })
-        //.catch(error => {
-         // console.error('Error fetching gym members:', error);
-       // });
+        .catch(error => {
+         console.error('Error fetching gym members:', error);
+       });
     },
   },
 };
 </script>
+
 <style scoped>
 .employee-portal {
   margin: 20px;
