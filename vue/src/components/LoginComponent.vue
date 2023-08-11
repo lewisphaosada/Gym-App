@@ -10,15 +10,35 @@
       </div>
       <div class="form-input-group">
         <label for="username" class="input-label">Username</label>
-        <input type="text" id="username" v-model="user.username" class="input-field" required autofocus />
+        <input
+          type="text"
+          id="username"
+          v-model="user.username"
+          class="input-field"
+          required
+          autofocus
+        />
       </div>
       <div class="form-input-group">
         <label for="password" class="input-label">Password</label>
-        <input type="password" id="password" v-model="user.password" class="input-field" required />
+        <input
+          type="password"
+          id="password"
+          v-model="user.password"
+          class="input-field"
+          required
+        />
       </div>
       <button type="submit" class="submit-button">Sign in</button>
       <p class="register-link">
-        <router-link :to="{ name: 'register' }">Need an account? Sign up.</router-link>
+        <router-link :to="{ name: 'register' }"
+          >Need an account? Sign up.</router-link
+        >
+      </p>
+      <p>
+        <router-link :to="{ name: 'employeelogin' }"
+          >Employee Login</router-link
+        >
       </p>
     </form>
   </div>
@@ -34,34 +54,34 @@ export default {
     return {
       user: {
         username: "",
-        password: ""
+        password: "",
       },
-      invalidCredentials: false
+      invalidCredentials: false,
     };
   },
   methods: {
     login() {
-      AuthService
-        .login(this.user)
-        .then(response => {
+      AuthService.login(this.user)
+        .then((response) => {
           if (response.status == 200) {
             this.$store.commit("SET_AUTH_TOKEN", response.data.token);
+            console.log(response.data)
             this.$store.commit("SET_USER", response.data.user);
-             this.$router.push({
-                path: '/',
-                query: { registration: 'success' },
-              });
+            this.$router.push({
+              path: "/",
+              query: { registration: "success" },
+            });
           }
         })
-        .catch(error => {
+        .catch((error) => {
           const response = error.response;
 
           if (response.status === 401) {
             this.invalidCredentials = true;
           }
         });
-    }
-  }
+    },
+  },
 };
 </script>
 

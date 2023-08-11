@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button class="check-button" v-on:click="toggleCheck">
+    <button class="check-button" v-on:click="onClick">
       <img
         v-bind:src="
           checkedStatus
@@ -10,6 +10,9 @@
         class="check-image"
       />
     </button>
+    <div>{{sessionStartTime}}</div>
+    <div>{{sessionEndTime}}</div>
+    <div>{{sessionElapsed}}</div>
   </div>
 </template>
 
@@ -18,13 +21,44 @@ export default {
   name: "check",
   computed: {
       checkedStatus() {
-          return this.$store.state.isCheckedIn;
+        return this.$store.state.isCheckedIn;
+      },
+      sessionStartTime() {
+        return this.$store.state.sessionTimerStart;
+      },
+      sessionEndTime() {
+        return this.$store.state.sessionTimerEnd;
+      },
+      sessionElapsed() {
+        return this.$store.state.sessionTimerEnd - this.$store.state.sessionTimerStart;
       }
   },
   methods: {
     toggleCheck() {
       this.$store.commit('TOGGLE_CHECK');
     },
+    onClick() {
+      if(this.checkedStatus) {
+        if(!confirm("Are you sure you're done?")) {
+          this.$store.state.isCheckedIn = true;
+          return;
+        }
+        this.$store.commit('STOP_TIMER');
+      } else {
+        this.$store.commit('START_TIMER');
+      }
+      this.toggleCheck();
+    },
+    startSession() {
+      this.$store.commit('START_TIMER');
+    },
+    endSession() {
+      if(confirm("Are you sure you're done?")) {
+        this.$store.commit('STOP_TIMER');
+      } else {
+        this.$store.state.isCheckedIn = true;
+      }
+    }
   },
 };
 </script>
