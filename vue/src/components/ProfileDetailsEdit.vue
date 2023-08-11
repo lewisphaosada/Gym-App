@@ -25,25 +25,25 @@
 
      <div>
         <label>Sex:</label><input v-model="user.sex"/>
-        <span v-if="hasValidationError" class="error-message">Sex must be one character: M, F or O</span>
+        <span v-if="sexValidationError" class="error-message">Sex must be one character: M, F or O</span>
 
     </div>
 
     <div>
         <label>Weight:</label><input v-model="user.weight"/>
-        <span v-if="hasValidationError" class="error-message">Must input numbers</span>
+        <span v-if="weightValidationError" class="error-message">Must input numbers</span>
 
     </div>
 
     <div>
         <label>Height:</label><input v-model="user.height"/>
-        <span v-if="hasValidationError" class="error-message">Must input numbers</span>
+        <span v-if="heightValidationError" class="error-message">Must input numbers</span>
 
     </div>
 
     <div>
-      <label>BMI:</label><input v-model="user.bmi"/>
-      <span v-if="hasValidationError" class="error-message">Must input numbers</span>
+      <label>BMI:</label><input v-model="calculatedBMI"/>
+      <span v-if="bmiValidationError" class="error-message">Must input numbers</span>
 
     </div>
 
@@ -67,22 +67,36 @@ export default{
     name: 'editprofile',
     data(){
         return{
-    user: this.$store.state.user,
-    hasValidationError: false,
-     sexValidationError: false,
+      originalUser: { ...this.$store.state.user },
+      hasValidationError: false,
+      sexValidationError: false,
       weightValidationError: false,
       heightValidationError: false,
       bmiValidationError: false,
     };
     
+    },  
+    computed: {
+    user() {
+      return { ...this.originalUser};
+    },
+    calculatedBMI() {
+  if (!isNaN(this.user.weight) && !isNaN(this.user.height)) {
+    const weightInPounds = parseFloat(this.user.weight);
+    const heightInInches = parseFloat(this.user.height);
+    return ((weightInPounds / (heightInInches * heightInInches)) * 703).toFixed(2);
+  }
+  return '';
+},
     },
 
 methods:{
-   submitForm() {
+    submitForm() {
       this.validateForm();
-      if (!this.hasValidationError) {
-        this.saveProfile();
+      if (this.hasValidationError) {
+        return;
       }
+      this.saveProfile();
     },
         saveProfile(){
             UserService.updateProfile(this.user.id, this.user).then(response => {
@@ -107,41 +121,31 @@ methods:{
           });
         },
 
-       validateForm() {
-      this.hasValidationError = false;
+validateForm() {
+    this.sexValidationError = this.user.sex && (this.user.sex.length !== 1 || !['M', 'F', 'O'].includes(this.user.sex.toUpperCase()));
+    this.weightValidationError = isNaN(this.user.weight);
+    this.heightValidationError = isNaN(this.user.height);
+    this.bmiValidationError = isNaN(this.user.bmi);
 
-      if (
-        (this.user.sex.length !== 1 && this.user.sex.length !== 0) ||
-        (this.user.sex.length === 1 && !['M', 'F', 'O'].includes(this.user.sex.toUpperCase()))
-      ) {
-        this.sexValidationError = true;
-        this.hasValidationError = true;
-      } else {
-        this.sexValidationError = false;
-      }
-
-      if (isNaN(this.user.weight)) {
-        this.weightValidationError = true;
-        this.hasValidationError = true;
-      } else {
-        this.weightValidationError = false;
-      }
-
-      if (isNaN(this.user.height)) {
-        this.heightValidationError = true;
-        this.hasValidationError = true;
-      } else {
-        this.heightValidationError = false;
-      }
-
-      if (isNaN(this.user.bmi)) {
-        this.bmiValidationError = true;
-        this.hasValidationError = true;
-      } else {
-        this.bmiValidationError = false;
-      }
-    },
-
+    this.hasValidationError = this.sexValidationError || this.weightValidationError || this.heightValidationError || this.bmiValidationError;
+  },
+    //   openImageUpload() {
+    //   this.$refs.imageInput.click();
+    // },
+    // handleFileUpload(event) {
+    //   const file = event.target.files[0];
+    //   if (file) {
+    //     const formData = new FormData();
+    //     formData.append('photo', file);
+    //     ProfileService.uploadImage(formData)
+    //       .then(response => {
+    //         this.editUser.photo = response.data.photoUrl;
+    //       })
+    //       .catch(error => {
+    //         console.error('Error uploading image:', error);
+    //       });
+    //   }
+    // },
         cancelEdit(){
         this.$router.push({ name: 'profile', params: { id: this.user.id} });
         },

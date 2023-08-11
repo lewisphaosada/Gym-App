@@ -136,8 +136,12 @@ label {
   margin-right: 0.5rem;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 </style>
   
 =======
 </style>  
 >>>>>>> 8556e213b5520e5d975b07a293f7d60700e6b6b7
+=======
+</style> 
+>>>>>>> ccb1fc3718751aa6e2db27187865435f779542bb

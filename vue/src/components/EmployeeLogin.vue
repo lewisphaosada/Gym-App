@@ -1,12 +1,12 @@
 <template>
   <div id="login" class="login-container">
-    <form @submit.prevent="login" class="login-form">
+    <form @submit.prevent="employeeLogin" class="login-form">
       <h1 class="login-heading">Employee Login</h1>
       <div role="alert" v-if="invalidCredentials" class="alert">
         Invalid username and password!
       </div>
       <div class="form-input-group">
-        <label for="username" class="input-label">Username: </label>
+        <label for="username" class="input-label">Username </label>
         <input
           type="text"
           id="username"
@@ -17,7 +17,7 @@
         />
       </div>
       <div class="form-input-group">
-        <label for="password" class="input-label">Password: </label>
+        <label for="password" class="input-label">Password </label>
         <input
           type="password"
           id="password"
@@ -27,12 +27,15 @@
         />
       </div>
       <button type="submit" class="submit-button">Sign in</button>
+      <p class="register-link">
+        <router-link :to="{ name: 'login' }">Member Log In.</router-link>
+      </p>
     </form>
   </div>
 </template>
 
 <script>
-import authService from "../services/AuthService";
+import AuthService from "../services/AuthService";
 
 export default {
   data() {
@@ -45,20 +48,16 @@ export default {
     };
   },
   methods: {
-    EmployeeLogin() {
-      authService
-        .login(this.user)
+    employeeLogin() {
+      AuthService.login(this.employee)
         .then((response) => {
           if (response.status == 200) {
-            if (response.data.user.role != "ROLE_USER") {
-              this.$store.commit("SET_AUTH_TOKEN", response.data.token);
+            if (response.data.user.authorities[0].name != "ROLE_USER") {
               this.$store.commit("SET_USER", response.data.user);
+              this.$store.commit("SET_AUTH_TOKEN", response.data.token);
               this.$router.push({
-                path: "/",
-                query: { registration: "success" },
+                path: "/employee-portal",
               });
-            } else {
-              this.invalidCredentials = true;
             }
           }
         })
