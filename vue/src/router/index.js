@@ -32,7 +32,7 @@ const router = new Router({
       component: Home,
       meta: {
         requiresAuth: true,
-      },
+      }
     },
     {
       path: '/login',
@@ -40,7 +40,7 @@ const router = new Router({
       component: Login,
       meta: {
         requiresAuth: false,
-      },
+      }
     },
     {
       path: '/logout',
@@ -48,7 +48,7 @@ const router = new Router({
       component: Logout,
       meta: {
         requiresAuth: false,
-      },
+      }
     },
     {
       path: '/register',
@@ -56,7 +56,7 @@ const router = new Router({
       component: Register,
       meta: {
         requiresAuth: false,
-      },
+      }
     },
     {
       path: "/profile/:id",
@@ -64,7 +64,7 @@ const router = new Router({
       component: Profile,
       meta: {
         requiresAuth: true,
-      },
+      }
     },
     {
       path: '/profile/:id/edit',

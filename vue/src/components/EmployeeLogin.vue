@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import authService from "../services/AuthService";
+import AuthService from "../services/AuthService";
 
 export default {
   data() {
@@ -46,7 +46,7 @@ export default {
   },
   methods: {
     EmployeeLogin() {
-      authService
+      AuthService
         .login(this.user)
         .then((response) => {
           if (response.status == 200) {
@@ -54,7 +54,7 @@ export default {
               this.$store.commit("SET_AUTH_TOKEN", response.data.token);
               this.$store.commit("SET_USER", response.data.user);
               this.$router.push({
-                path: "/",
+                path: "/employee-portal",
                 query: { registration: "success" },
               });
             } else {
