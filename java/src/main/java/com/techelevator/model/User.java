@@ -10,7 +10,6 @@ public class User {
 
    private int id;
    private String username;
-   private String role;
    @JsonIgnore
    private String password;
    @JsonIgnore
@@ -19,10 +18,9 @@ public class User {
 
    public User() { }
 
-   public User(int id, String username, String password, String authorities, String role) {
+   public User(int id, String username, String password, String authorities) {
       this.id = id;
       this.username = username;
-      this.role = role;
       this.password = password;
       if (authorities != null) this.setAuthorities(authorities);
       this.activated = true;
@@ -42,14 +40,6 @@ public class User {
 
    public void setUsername(String username) {
       this.username = username;
-   }
-
-   public String getRole() {
-      return role;
-   }
-
-   public void setRole(String role) {
-      this.role = role;
    }
 
    public String getPassword() {
@@ -92,14 +82,13 @@ public class User {
       return id == user.id &&
               activated == user.activated &&
               Objects.equals(username, user.username) &&
-              Objects.equals(role, user.role) &&
               Objects.equals(password, user.password) &&
               Objects.equals(authorities, user.authorities);
    }
 
    @Override
    public int hashCode() {
-      return Objects.hash(id, username, role, password, activated, authorities);
+      return Objects.hash(id, username, password, activated, authorities);
    }
 
    @Override
@@ -107,7 +96,6 @@ public class User {
       return "User{" +
               "id=" + id +
               ", username='" + username + '\'' +
-              ",role=" + role +
               ", activated=" + activated +
               ", authorities=" + authorities +
               '}';

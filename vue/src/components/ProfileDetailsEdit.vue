@@ -57,11 +57,7 @@
 
 <script>
 
-<<<<<<< HEAD
-import service from '../services/ProfileService.js'
-=======
 import ProfileService from '../services/ProfileService.js'
->>>>>>> f401c3aa63827ace69e6852833eb98c0d52ed89d
 
 export default{
     name: 'editprofile',

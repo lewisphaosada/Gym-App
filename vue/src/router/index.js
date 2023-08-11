@@ -12,6 +12,7 @@ import EmployeePortal from '../views/EmployeePortal.vue'
 import ViewSessions from '../views/ViewSessions.vue'
 import MachineList from  '../components/MachineList.vue'
 import MachineDetails from '../components/MachineDetails.vue'
+import EmployeeRegister from '../components/EmployeeRegister.vue'
 Vue.use(Router)
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
@@ -82,7 +83,7 @@ const router = new Router({
       }
     },
     {
-      path: '/employee',
+      path: '/employee-login',
       name: 'employeelogin',
       component: EmployeeLogin,
       meta: {
@@ -94,7 +95,15 @@ const router = new Router({
       name: 'employeeportal',
       component: EmployeePortal,
       meta: {
-        requiresAuth: false
+        requiresAuth: true
+      }
+    }, 
+    {
+      path: '/employee-register',
+      name: 'employeeregister',
+      component: EmployeeRegister,
+      meta: {
+        requiresAuth: true
       }
     },
     {
