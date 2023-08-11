@@ -3,14 +3,11 @@
     <nav id="nav">
       <router-link v-bind:to="{ name: 'home' }" class="nav-link">Home</router-link>
       <span class="divider">|</span>
-<<<<<<< HEAD
-=======
 
       <router-link v-bind:to="{ name: 'register' }" class="nav-link">Register</router-link>
 
       <span class="divider" >|</span> <!-- should this vertical line also have v-if="isAuthenticated"? -->
       
->>>>>>> f6fb73410cd9113ee973ecc5f9b2df747a69de9d
       <router-link v-if="!isAuthenticated" v-bind:to="{ name: 'register' }" class="nav-link">Register</router-link>
       <span class="divider" v-if="!isAuthenticated">|</span>
 
