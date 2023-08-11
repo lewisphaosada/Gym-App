@@ -54,8 +54,7 @@ export default {
               this.$store.commit("SET_AUTH_TOKEN", response.data.token);
               this.$store.commit("SET_USER", response.data.user);
               this.$router.push({
-                path: "/",
-                query: { registration: "success" },
+                path: "/employee-portal",
               });
             } else {
               this.invalidCredentials = true;
