@@ -48,6 +48,13 @@ public class JdbcProfileDao implements ProfileDao {
             throw new DaoException("Unable to connect to server or database", e);
         }
     }
+    // Check out ORM (Object Relational Mapping) updateUserName(Username), updateUsernameAndPAssowrd()
+    // Build a query string based off of non-null poperties in updatedProfile
+    // if password_hash != null { concatentate password_hash = ? to query string }
+    // Since JDBC functions require arguments to match placeholders
+    // You can sterilize input, so SQL injection attacks are thwarted, and then add clean values to query string
+    // You can use regular expressions (that checks for only alpha numeric values) to detect SQL
+    // SQL attacks often contain, ;, --, DROP TABLE, SELECT *.
     @Override
     public Profile updateProfileByUserID(int id, Profile updatedProfile) {
         String sql = "UPDATE users SET name = ?, password_hash = ?, username = ?, sex = ?, email = ?, photo = ?, " +
