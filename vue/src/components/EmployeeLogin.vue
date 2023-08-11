@@ -57,7 +57,6 @@ export default {
               this.$store.commit("SET_AUTH_TOKEN", response.data.token);
               this.$router.push({
                 path: "/employee-portal",
-                query: { registration: "success" },
               });
             }
           }
