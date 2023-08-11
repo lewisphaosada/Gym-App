@@ -1,7 +1,7 @@
 <template>
   <div id="register" class="login-container">
     <form @submit.prevent="register" class="login-form">
-      <h1 class="login-heading">Create Account</h1>
+      <h1 class="login-heading">Create Employee</h1>
       <div role="alert" v-if="registrationErrors" class="alert">
         {{ registrationErrorMsg }}
       </div>
@@ -40,9 +40,7 @@
       </div>
       <button type="submit" class="submit-button">Create Account</button>
       <p class="register-link">
-        <router-link :to="{ name: 'login' }"
-          >Already have an account? Log in.</router-link
-        >
+        <router-link :to="{ name: 'login' }">Are you a member? Log in.</router-link>
       </p>
     </form>
   </div>
@@ -59,7 +57,7 @@ export default {
         username: "",
         password: "",
         confirmPassword: "",
-        role: "user",
+        role: "employee",
       },
       registrationErrors: false,
       registrationErrorMsg: "There were problems registering this user.",
@@ -75,7 +73,7 @@ export default {
           .then((response) => {
             if (response.status == 201) {
               this.$router.push({
-                path: "/login",
+                path: "/employee-portal",
                 query: { registration: "success" },
               });
             }
@@ -134,4 +132,4 @@ export default {
 label {
   margin-right: 0.5rem;
 }
-</style> 
+</style>

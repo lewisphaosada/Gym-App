@@ -3,11 +3,11 @@
 </template>
 
 <script>
-// import EmployeePortal from '@/components/EmployeePortal.vue'
+import EmployeePortal from '@/components/EmployeePortal.vue'
 
 export default {
     components: {
-        // EmployeePortal
+        EmployeePortal
     }
 }
 </script>

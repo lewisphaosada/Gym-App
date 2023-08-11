@@ -10,7 +10,7 @@
       
       <router-link v-if="!isAuthenticated" v-bind:to="{ name: 'register' }" class="nav-link">Register</router-link>
       <span class="divider" v-if="!isAuthenticated">|</span>
-
+git 
       <router-link v-if="isAuthenticated" :to="{ name: 'profile', params: { id: $store.state.user.id } }" class="nav-link">Profile</router-link>
       <span class="divider" v-if="isAuthenticated">|</span>
 
