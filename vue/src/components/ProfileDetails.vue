@@ -12,10 +12,10 @@
         <div class="profile-details"><label>Name:</label> {{ user.name }} </div>
         <div class="profile-details"><label>Email:</label> {{ user.email }} </div>
         <div class="profile-details"><label>Username:</label> {{ user.username }} </div>
-        <div class="profile-details"><label>Password:</label> {{ user.password }} </div>
+        <!-- <div class="profile-details"><label>Password:</label> {{ user.password }} </div> -->
         <div class="profile-details"><label>Sex:</label> {{user.sex}} </div>
-        <div class="profile-details"><label>Weight:</label> {{user.weight}} </div>
-        <div class="profile-details"><label>Height:</label> {{user.height}} </div>
+        <div class="profile-details"><label>Weight (pounds):</label> {{user.weight}} </div>
+        <div class="profile-details"><label>Height (Inches):</label> {{user.height}} </div>
         <div class="profile-details"><label>BMI:</label> {{calculatedBMI}} </div>
         <router-link class="profile-edit-button" :to="'/profile/' + $store.state.user.id + '/edit'">Edit Profile</router-link>
 </div>
