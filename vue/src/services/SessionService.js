@@ -1,11 +1,7 @@
 import axios from 'axios';
 
 export default {
-    list() {
-        return axios.get('/sessions');
-    },
-
-    get(id) {
+    list(id) {
         return axios.get(`/sessions/${id}`);
     },
 

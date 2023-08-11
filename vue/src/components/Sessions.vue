@@ -11,7 +11,7 @@
 import SessionService from '../services/SessionService'
 
 export default {
-  name: 'sessions',
+  name: 'session-comp',
   data() {
     return {
       sessions: [
@@ -31,7 +31,7 @@ export default {
     }
   },
   created() {
-    SessionService.list().then(response => {
+    SessionService.list(this.$store.state.user.id).then(response => {
       this.sessions = response.data;
     })
   }

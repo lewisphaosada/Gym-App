@@ -2,31 +2,31 @@ package com.techelevator.dao;
 
 import com.techelevator.exception.DaoException;
 import com.techelevator.model.Session;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
 public class JdbcSessionDao implements SessionDao {
     private JdbcTemplate jdbcTemplate;
-    private SessionDao sessionDao;
 
-    public JdbcSessionDao(JdbcTemplate jdbcTemplate, SessionDao sessionDao) {
+    public JdbcSessionDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
-        this.sessionDao = sessionDao;
     }
 
     @Override
     public List<Session> getSessions() {
-        List<Session> sessions = null;
-        String sql = "SELECT * FROM session";
+        List<Session> sessions = new ArrayList<>();
+        String sql = "SELECT * FROM sessions";
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
-            if(results.next()) {
+            while(results.next()) {
                 sessions.add(mapRowToSession(results));
             }
         } catch (CannotGetJdbcConnectionException e) {
@@ -38,7 +38,7 @@ public class JdbcSessionDao implements SessionDao {
     @Override
     public Session getSessionBySessionId(int sessionId) {
         Session session = null;
-        String sql = "SELECT * FROM session WHERE session_id = ?";
+        String sql = "SELECT * FROM sessions WHERE session_id = ?";
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, sessionId);
             session = mapRowToSession(results);
@@ -50,11 +50,11 @@ public class JdbcSessionDao implements SessionDao {
 
     @Override
     public List<Session> getSessionsByUserId(int userId) {
-        List<Session> sessions = null;
-        String sql = "SELECT * FROM session WHERE user_id = ?";
+        List<Session> sessions = new ArrayList<>();
+        String sql = "SELECT * FROM sessions WHERE user_id = ?";
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
-            if(results.next()) {
+            while(results.next()) {
                 sessions.add(mapRowToSession(results));
             }
         } catch(CannotGetJdbcConnectionException e) {
@@ -65,7 +65,7 @@ public class JdbcSessionDao implements SessionDao {
 
     @Override
     public Session updateSessionBySessionId(int id, Session updatedSession) {
-        String sql = "UPDATE session SET duration = ?, date = ? WHERE session_id = ?";
+        String sql = "UPDATE sessions SET duration = ?, date = ? WHERE session_id = ?";
         try {
             jdbcTemplate.update(sql, updatedSession.getDuration(), updatedSession.getDate(), updatedSession.getSessionId());
             return getSessionBySessionId(id);
@@ -76,7 +76,7 @@ public class JdbcSessionDao implements SessionDao {
 
     @Override
     public void deleteSessionBySessionId(int id) {
-        String sql = "DELETE FROM session WHERE session_id = ?";
+        String sql = "DELETE FROM sessions WHERE session_id = ?";
         try {
             jdbcTemplate.update(sql, id);
         } catch(CannotGetJdbcConnectionException e) {

@@ -10,8 +10,8 @@ public class Session {
 
     }
 
-    public Session(int user_id, long duration, String date) {
-        this.userId = user_id;
+    public Session(int userId, long duration, String date) {
+        this.userId = userId;
         this.duration = duration;
         this.date = date;
     }
