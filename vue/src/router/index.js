@@ -7,14 +7,12 @@ import Register from '../views/Register.vue'
 import store from '../store/index'
 import Profile from '../views/Profile.vue'
 import EditProfile from '../views/EditProfile.vue'
-<<<<<<< HEAD
 import EmployeeLogin from '../views/EmployeeLogin.vue'
 import EmployeePortal from '../views/EmployeePortal.vue'
-=======
 import ViewSessions from '../views/ViewSessions.vue'
 import MachineList from  '../components/MachineList.vue'
 import MachineDetails from '../components/MachineDetails.vue'
->>>>>>> f401c3aa63827ace69e6852833eb98c0d52ed89d
+import Schedule from '../views/Schedule.vue'
 Vue.use(Router)
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
@@ -69,12 +67,20 @@ const router = new Router({
       },
     },
     {
-      path: '/edit',
+      path: '/profile/:id/edit',
       name: 'editprofile',
       component: EditProfile,
       meta: {
         requiresAuth: true,
-      },
+      }
+    },
+    {
+      path: '/schedule',
+      name: 'schedule',
+      component: Schedule,
+      meta:{
+        requiresAuth: true,
+      }
     },
     {
       path: '/sessions',
@@ -85,7 +91,6 @@ const router = new Router({
       }
     },
     {
-<<<<<<< HEAD
       path: '/employee',
       name: 'employeelogin',
       component: EmployeeLogin,
@@ -100,29 +105,27 @@ const router = new Router({
       meta: {
         requiresAuth: false
       }
-    }
-  ]
-})
-=======
+    },
+
+    {
       path: '/machines',
-      name: 'MachineList', 
+      name: 'MachineList',
       component: MachineList,
       meta: {
         requiresAuth: true,
-      },
+      }
     },
     {
       path: '/machine/:id',
-      name: 'MachineDetails', 
+      name: 'MachineDetails',
       component: MachineDetails,
       meta: {
         requiresAuth: true,
-      },
+      }
     },
-  ],
-});
+  ]
+})
 
->>>>>>> f401c3aa63827ace69e6852833eb98c0d52ed89d
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(x => x.meta.requiresAuth);
   if (requiresAuth && store.state.token === '') {

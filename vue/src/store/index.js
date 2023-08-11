@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
-import SessionService from '../services/SessionService.js'
+// import SessionService from '../services/SessionService.js'
 // import UserService from '../services/UserService'
 // import frog from '/DBService'
 
@@ -54,8 +54,8 @@ export default new Vuex.Store({
     },
     STOP_TIMER(state) {
       state.sessionTimerEnd = Date.now();
-      const sessionElapsed = state.sessionTimerEnd - state.sessionTimerStart;
-      SessionService.create({user_id: state.user.id, duration: sessionElapsed, date: state.sessionTimerStart});
+      // const sessionElapsed = state.sessionTimerEnd - state.sessionTimerStart;
+      // SessionService.create({user_id: state.user.id, duration: sessionElapsed, date: state.sessionTimerStart});
       console.log(state.sessionTimerStart, state.sessionTimerEnd)
       state.sessionTimerStart = 0;
       state.sessionTimerEnd = 0;
