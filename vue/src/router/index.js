@@ -14,6 +14,7 @@ import MachineList from  '../components/MachineList.vue'
 import MachineDetails from '../components/MachineDetails.vue'
 import EmployeeRegister from '../components/EmployeeRegister.vue'
 import Schedule from '../views/Schedule.vue'
+import SingleSession from '../views/SingleSession.vue'
 Vue.use(Router)
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
@@ -87,6 +88,14 @@ const router = new Router({
       path: '/sessions/:id',
       name: 'sessions',
       component: ViewSessions,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/session/:id',
+      name: 'session',
+      component: SingleSession,
       meta: {
         requiresAuth: true
       }

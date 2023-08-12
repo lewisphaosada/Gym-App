@@ -23,4 +23,9 @@ public class SessionController {
     public List<Session> getSessionsByUserId(@PathVariable int id) {
         return sessionDao.getSessionsByUserId(id);
     }
+
+    @RequestMapping(path = "/create-session", method = RequestMethod.POST)
+    public void createSession(@RequestBody Session session) {
+        sessionDao.createSession(session);
+    }
 }

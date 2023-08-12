@@ -29,9 +29,8 @@ CREATE TABLE sessions (
 session_id SERIAL,
 user_id INT,
 duration BIGINT,
-date DATE, -- potentially a DATETIME?
-CONSTRAINT PK_session PRIMARY KEY (session_id),
-CONSTRAINT FK_user_session FOREIGN KEY (user_id) REFERENCES users
+date BIGINT, -- potentially a DATETIME?
+CONSTRAINT PK_session PRIMARY KEY (session_id)
 );
 
 --exercise table containing list of exercises

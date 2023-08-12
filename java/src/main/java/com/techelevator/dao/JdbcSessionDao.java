@@ -10,6 +10,7 @@ import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Component
@@ -41,7 +42,9 @@ public class JdbcSessionDao implements SessionDao {
         String sql = "SELECT * FROM sessions WHERE session_id = ?";
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, sessionId);
-            session = mapRowToSession(results);
+            if(results.next()) {
+                session = mapRowToSession(results);
+            }
         } catch(CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
         }
@@ -62,6 +65,19 @@ public class JdbcSessionDao implements SessionDao {
         }
         return sessions;
     };
+
+    @Override
+    public Session createSession(Session session) {
+        Session newSession = null;
+        String sql = "INSERT INTO sessions (user_id, duration, date) VALUES (?, ?, ?) RETURNING session_id";
+        try {
+            int newSessionId = jdbcTemplate.queryForObject(sql, int.class, session.getUserId(), session.getDuration(), session.getDate());
+            newSession = getSessionBySessionId(newSessionId);
+        } catch(CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        }
+        return newSession;
+    }
 
     @Override
     public Session updateSessionBySessionId(int id, Session updatedSession) {
@@ -86,10 +102,14 @@ public class JdbcSessionDao implements SessionDao {
 
     private Session mapRowToSession(SqlRowSet rowSet) {
         Session session = new Session();
+
+        // Print column names for debugging
+        System.out.println("Column Names in Result Set: " + Arrays.toString(rowSet.getMetaData().getColumnNames()));
+
         session.setSessionId(Integer.parseInt(rowSet.getString("session_id")));
         session.setUserId(Integer.parseInt(rowSet.getString("user_id")));
         session.setDuration(Long.parseLong(rowSet.getString("duration")));
-        session.setDate(rowSet.getString("date"));
+        session.setDate(Long.parseLong(rowSet.getString("date")));
         return session;
     }
 }

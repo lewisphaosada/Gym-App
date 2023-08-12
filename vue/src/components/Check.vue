@@ -10,9 +10,6 @@
         class="check-image"
       />
     </button>
-    <div>{{sessionStartTime}}</div>
-    <div>{{sessionEndTime}}</div>
-    <div>{{sessionElapsed}}</div>
   </div>
 </template>
 

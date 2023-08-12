@@ -4,13 +4,13 @@ public class Session {
     private int sessionId;
     private int userId;
     private long duration;
-    private String date;
+    private long date;
 
     public Session() {
 
     }
 
-    public Session(int userId, long duration, String date) {
+    public Session(int userId, long duration, long date) {
         this.userId = userId;
         this.duration = duration;
         this.date = date;
@@ -40,11 +40,11 @@ public class Session {
         this.duration = duration;
     }
 
-    public String getDate() {
+    public long getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(long date) {
         this.date = date;
     }
 }
