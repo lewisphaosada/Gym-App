@@ -34,7 +34,7 @@ const router = new Router({
       component: Home,
       meta: {
         requiresAuth: true,
-      }
+      },
     },
     {
       path: '/login',
@@ -43,7 +43,7 @@ const router = new Router({
       meta: {
         requiresAuth: false,
         redirectToEmployeePortal: true, // New meta property
-      }
+      },
     },
     {
       path: '/logout',
@@ -51,7 +51,7 @@ const router = new Router({
       component: Logout,
       meta: {
         requiresAuth: false,
-      }
+      },
     },
     {
       path: '/register',
@@ -59,7 +59,7 @@ const router = new Router({
       component: Register,
       meta: {
         requiresAuth: false,
-      }
+      },
     },
     {
       path: "/profile/:id",
@@ -67,10 +67,10 @@ const router = new Router({
       component: Profile,
       meta: {
         requiresAuth: true,
-      }
+      },
     },
     {
-      path: '/profile/:id/edit',
+      path: '/edit',
       name: 'editprofile',
       component: EditProfile,
       meta: {
@@ -94,14 +94,6 @@ const router = new Router({
       }
     },
     {
-      path: '/employee-login',
-      name: 'employeelogin',
-      component: EmployeeLogin,
-      meta: {
-        requiresAuth: true
-      }
-    },
-    {
       path: '/employee-portal',
       name: 'employeeportal',
       component: EmployeePortal,
@@ -119,26 +111,28 @@ const router = new Router({
     },
     {
       path: '/machines',
-      name: 'MachineList',
+      name: 'MachineList', 
       component: MachineList,
       meta: {
         requiresAuth: true,
-      }
+      },
     },
-    
     {
       path: '/machine/:id',
-      name: 'MachineDetails',
+      name: 'MachineDetails', 
       component: MachineDetails,
       meta: {
         requiresAuth: true,
-      }
+      },
     },
     {
       path: '/employee-login',
-    name: 'EmployeeLogin',
-    component: EmployeeLogin
-  },
+      name: 'employeelogin',
+      component: EmployeeLogin,
+      meta: {
+        requiresAuth: false,
+      },
+    },
   ],
 });
 
