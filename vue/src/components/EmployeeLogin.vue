@@ -49,17 +49,6 @@ export default {
   },
   methods: {
     employeeLogin() {
-<<<<<<< HEAD
-      authService.login(this.employee)
-        .then((response) => {
-          if (response.status == 200) {
-            this.$store.commit("SET_AUTH_TOKEN", response.data.token);
-            this.$store.commit("SET_USER", response.data.user);
-            this.$router.push({ 
-              path: "/employee-portal",
-              query: { registration: "success" }
-               });
-=======
       AuthService.login(this.employee)
         .then((response) => {
           if (response.status == 200) {
@@ -72,7 +61,6 @@ export default {
             } else {
               this.invalidCredentials = true;
             }
->>>>>>> ebac83d2d21ef6bd0c021ecb49cff7398a90f4fa
           }
         })
         .catch((error) => {

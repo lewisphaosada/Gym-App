@@ -7,21 +7,17 @@ import Register from '../views/Register.vue'
 import store from '../store/index'
 import Profile from '../views/Profile.vue'
 import EditProfile from '../views/EditProfile.vue'
-<<<<<<< HEAD
 import ViewSessions from '../views/ViewSessions.vue'
 import MachineList from  '../components/MachineList.vue'
 import MachineDetails from '../components/MachineDetails.vue'
-import EmployeeLogin from '../components/EmployeeLogin.vue';
-
-=======
-import EmployeeLogin from '../views/EmployeeLogin.vue'
+import EmployeeLogin from '../components/EmployeeLogin.vue'; // Correct import path
 import EmployeePortal from '../views/EmployeePortal.vue'
-import ViewSessions from '../views/ViewSessions.vue'
-import MachineList from  '../components/MachineList.vue'
-import MachineDetails from '../components/MachineDetails.vue'
-import EmployeeRegister from '../components/EmployeeRegister.vue'
+import EmployeeRegister from '@/components/EmployeeRegister.vue'
 import Schedule from '../views/Schedule.vue'
->>>>>>> ebac83d2d21ef6bd0c021ecb49cff7398a90f4fa
+
+// Rest of your imports and code...
+
+
 Vue.use(Router)
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
@@ -49,12 +45,8 @@ const router = new Router({
       component: Login,
       meta: {
         requiresAuth: false,
-<<<<<<< HEAD
         redirectToEmployeePortal: true, // New meta property
       },
-=======
-      }
->>>>>>> ebac83d2d21ef6bd0c021ecb49cff7398a90f4fa
     },
     {
       path: '/logout',
@@ -81,7 +73,7 @@ const router = new Router({
       }
     },
     {
-      path: '/profile/:id/edit',
+      path: '/edit',
       name: 'editprofile',
       component: EditProfile,
       meta: {
@@ -105,16 +97,6 @@ const router = new Router({
       }
     },
     {
-<<<<<<< HEAD
-=======
-      path: '/employee-login',
-      name: 'employeelogin',
-      component: EmployeeLogin,
-      meta: {
-        requiresAuth: false
-      }
-    },
-    {
       path: '/employee-portal',
       name: 'employeeportal',
       component: EmployeePortal,
@@ -131,7 +113,6 @@ const router = new Router({
       }
     },
     {
->>>>>>> ebac83d2d21ef6bd0c021ecb49cff7398a90f4fa
       path: '/machines',
       name: 'MachineList',
       component: MachineList,
@@ -147,7 +128,6 @@ const router = new Router({
         requiresAuth: true,
       }
     },
-<<<<<<< HEAD
     {
       path: '/employee-login',
       name: 'employeelogin',
@@ -155,13 +135,10 @@ const router = new Router({
       meta: {
         requiresAuth: false,
       },
+      
     },
   ],
 });
-=======
-  ]
-})
->>>>>>> ebac83d2d21ef6bd0c021ecb49cff7398a90f4fa
 
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(x => x.meta.requiresAuth);
