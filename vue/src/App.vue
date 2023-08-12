@@ -12,6 +12,10 @@
       <span class="divider" v-if="isAuthenticated">|</span>
 
       <router-link v-if="isAuthenticated" v-bind:to="{ name: 'logout' }" class="nav-link">Logout</router-link>
+      <span class="divider" v-if="isAuthenticated">|</span>
+
+      <router-link v-if="isAuthenticated" :to="{ name: 'employeeportal' }" class="nav-link">Employee Portal</router-link>
+<span class="divider" v-if="isAuthenticated">|</span>
 
      
     </nav>

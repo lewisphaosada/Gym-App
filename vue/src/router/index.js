@@ -123,6 +123,7 @@ const router = new Router({
         requiresAuth: true,
       }
     },
+    
     {
       path: '/machine/:id',
       name: 'MachineDetails',
