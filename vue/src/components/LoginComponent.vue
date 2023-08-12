@@ -67,14 +67,7 @@ export default {
             this.$store.commit("SET_AUTH_TOKEN", response.data.token);
             console.log(response.data)
             this.$store.commit("SET_USER", response.data.user);
-<<<<<<< HEAD
-            this.$router.push({
-              path: "/",
-              query: { registration: "success" },
-            });
-=======
              this.$router.push({path: '/'});
->>>>>>> fbfae95b423e1ab404e229aacf3a1c2e85ad4588
           }
         })
         .catch((error) => {
