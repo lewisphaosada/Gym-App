@@ -20,6 +20,7 @@ export default {
   },
   created() {
     this.loadGymMembers();
+    this.employeeCheck();
   },
   methods: {
     loadGymMembers() {
@@ -31,6 +32,11 @@ export default {
          console.error('Error fetching gym members:', error);
        });
     },
+    employeeCheck() {
+        if(this.$store.state.user.authorities[0].name === "ROLE_USER") {
+            this.$router.push({path: '/'});
+        }
+    }
   },
 };
 </script>
