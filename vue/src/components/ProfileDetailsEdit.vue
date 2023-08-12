@@ -4,7 +4,7 @@
   <form v-on:submit.prevent="submitForm">
 
     <div>
-        <label>Photo:</label><input v-model="user.photo"/>
+        <label>Photo URL:</label><input v-model="user.photo"/>
     </div>
 
     <div>
@@ -19,9 +19,9 @@
         <label>Username:</label><input v-model="user.username"/>
     </div>
 
-    <div>
+    <!-- <div>
         <label>Password:</label><input v-model="user.password"/>
-    </div>
+    </div> -->
 
      <div>
         <label>Sex:</label><input v-model="user.sex"/>
@@ -30,13 +30,13 @@
     </div>
 
     <div>
-        <label>Weight:</label><input v-model="user.weight"/>
+        <label>Weight (pounds):</label><input v-model="user.weight"/>
         <span v-if="weightValidationError" class="error-message">Must input numbers</span>
 
     </div>
 
     <div>
-        <label>Height:</label><input v-model="user.height"/>
+        <label>Height (inches):</label><input v-model="user.height"/>
         <span v-if="heightValidationError" class="error-message">Must input numbers</span>
 
     </div>
@@ -44,8 +44,16 @@
     <div>
       <label>BMI:</label><input v-model="calculatedBMI"/>
       <span v-if="bmiValidationError" class="error-message">Must input numbers</span>
-
     </div>
+
+      <!-- <div class="profile-details">
+        <label>Profile Picture:</label>
+        <img v-if="user.photo" :src="user.photo" alt="User Photo" />
+        <div v-else class="empty-profile-picture"></div>
+        <button class="upload-button" @click="openImageUpload">Upload Image</button>
+        <input type="file" accept="image/*" @change="handleFileUpload" ref="imageInput" style="display: none;" />
+      </div> -->
+
 
     <button type="submit">Save</button>
     <button v-on:click="cancelEdit">Cancel</button>
@@ -134,9 +142,9 @@ validateForm() {
     //   if (file) {
     //     const formData = new FormData();
     //     formData.append('photo', file);
-    //     ProfileService.uploadImage(formData)
+    //     UserService.uploadImage(formData)
     //       .then(response => {
-    //         this.editUser.photo = response.data.photoUrl;
+    //         this.user.photo = response.data.photoUrl;
     //       })
     //       .catch(error => {
     //         console.error('Error uploading image:', error);

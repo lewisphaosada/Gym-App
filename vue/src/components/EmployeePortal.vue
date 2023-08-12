@@ -84,6 +84,13 @@ export default {
       showProfileModal: false,
     };
   },
+<<<<<<< HEAD
+=======
+  created() {
+    this.loadGymMembers();
+    this.employeeCheck();
+  },
+>>>>>>> ebac83d2d21ef6bd0c021ecb49cff7398a90f4fa
   methods: {
     searchMembers() {
       if (!this.searchQuery) {
@@ -111,6 +118,11 @@ export default {
       this.selectedProfileMember = null;
       this.showProfileModal = false;
     },
+    employeeCheck() {
+        if(this.$store.state.user.authorities[0].name === "ROLE_USER") {
+            this.$router.push({path: '/'});
+        }
+    }
   },
 };
 </script>
