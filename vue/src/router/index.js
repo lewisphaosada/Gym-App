@@ -12,8 +12,13 @@ import EmployeePortal from '../views/EmployeePortal.vue'
 import ViewSessions from '../views/ViewSessions.vue'
 import MachineList from  '../components/MachineList.vue'
 import MachineDetails from '../components/MachineDetails.vue'
+<<<<<<< HEAD
 import EmployeeRegister from '../components/EmployeeRegister.vue'
 import Schedule from '../views/Schedule.vue'
+=======
+import EmployeeLogin from '../components/EmployeeLogin.vue';
+
+>>>>>>> fbfae95b423e1ab404e229aacf3a1c2e85ad4588
 Vue.use(Router)
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
@@ -41,7 +46,12 @@ const router = new Router({
       component: Login,
       meta: {
         requiresAuth: false,
+<<<<<<< HEAD
       }
+=======
+        redirectToEmployeePortal: true, // New meta property
+      },
+>>>>>>> fbfae95b423e1ab404e229aacf3a1c2e85ad4588
     },
     {
       path: '/logout',
@@ -132,13 +142,28 @@ const router = new Router({
         requiresAuth: true,
       }
     },
+<<<<<<< HEAD
   ]
 })
+=======
+    {
+      path: '/employee-login',
+      name: 'employeelogin',
+      component: EmployeeLogin,
+      meta: {
+        requiresAuth: false,
+      },
+    },
+  ],
+});
+>>>>>>> fbfae95b423e1ab404e229aacf3a1c2e85ad4588
 
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(x => x.meta.requiresAuth);
   if (requiresAuth && store.state.token === '') {
     next('/login');
+  } else if (to.matched.some(x => x.meta.redirectToEmployeePortal && store.state.token !== '')) {
+    next('/employee-portal');
   } else {
     next();
   }
