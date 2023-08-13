@@ -10,7 +10,7 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/sessions")
+//@RequestMapping("/sessions")
 @PreAuthorize("isAuthenticated()")
 public class SessionController {
     @Autowired
@@ -19,13 +19,18 @@ public class SessionController {
         this.sessionDao = sessionDao;
     }
 
-    @RequestMapping(path = "/{id}", method = RequestMethod.GET)
+    @RequestMapping(path = "/sessions/{id}", method = RequestMethod.GET)
     public List<Session> getSessionsByUserId(@PathVariable int id) {
         return sessionDao.getSessionsByUserId(id);
     }
 
-    @RequestMapping(path = "/create-session", method = RequestMethod.POST)
-    public void createSession(@RequestBody Session session) {
-        sessionDao.createSession(session);
+    @RequestMapping(path = "sessions/create-session", method = RequestMethod.POST)
+    public Session createSession(@RequestBody Session session) {
+        return sessionDao.createSession(session);
+    }
+
+    @RequestMapping(path = "/session/{id}", method = RequestMethod.PUT)
+    public Session updateSessionBySessionId(@PathVariable int id, @RequestBody Session session) {
+        return sessionDao.updateSessionBySessionId(id, session);
     }
 }

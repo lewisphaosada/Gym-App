@@ -81,9 +81,9 @@ public class JdbcSessionDao implements SessionDao {
 
     @Override
     public Session updateSessionBySessionId(int id, Session updatedSession) {
-        String sql = "UPDATE sessions SET duration = ?, date = ? WHERE session_id = ?";
+        String sql = "UPDATE sessions SET user_id = ?, duration = ?, date = ? WHERE session_id = ?";
         try {
-            jdbcTemplate.update(sql, updatedSession.getDuration(), updatedSession.getDate(), updatedSession.getSessionId());
+            jdbcTemplate.update(sql, updatedSession.getUserId(), updatedSession.getDuration(), updatedSession.getDate(), id);
             return getSessionBySessionId(id);
         } catch(CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);

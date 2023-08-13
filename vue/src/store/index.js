@@ -22,8 +22,10 @@ export default new Vuex.Store({
     token: currentToken || '',
     user: currentUser || {},
     isCheckedIn: false,
+    currentSessionId: 0,
     sessionTimerStart: 0,
     sessionTimerEnd: 0,
+    sessionTimerElapsed: 0
 },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -47,12 +49,14 @@ export default new Vuex.Store({
     },
     START_TIMER(state) {
       state.sessionTimerStart = Date.now();
+      SessionService.create({userId: state.user.id, date: state.sessionTimerStart}).then(result => {
+        state.currentSessionId = result.data.sessionId;
+      });
     },
     STOP_TIMER(state) {
       state.sessionTimerEnd = Date.now();
-      const sessionElapsed = state.sessionTimerEnd - state.sessionTimerStart;
-      SessionService.create({userId: state.user.id, duration: sessionElapsed, date: state.sessionTimerStart});
-      console.log(state.sessionTimerStart, state.sessionTimerEnd)
+      state.sessionTimerElapsed = state.sessionTimerEnd - state.sessionTimerStart;
+      SessionService.update(state.currentSessionId, {userId: state.user.id, duration: state.sessionTimerElapsed, date: state.sessionTimerStart});
       state.sessionTimerStart = 0;
       state.sessionTimerEnd = 0;
     }

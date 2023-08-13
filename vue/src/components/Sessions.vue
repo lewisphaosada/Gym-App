@@ -1,8 +1,8 @@
 <template>
   <div>
     <ul class="session-list" v-if="sessions.length > 0">
-      <li v-for="session in sessions" v-bind:key="session.id">
-        <router-link :to="{ name: 'session', params: {id: session.id} }" @click="navigateToSession(session.id)">{{ convertUnixToDate(session.date) }}</router-link>
+      <li v-for="session in sessions" v-bind:key="session.sessionId">
+        <router-link :to="{ name: 'session', params: {id: session.sessionId} }">{{ convertUnixToDate(session.date) }} {{session}}</router-link>
       </li>
     </ul>
     <h2 v-else>No sessions yet. Let's workout!</h2>
@@ -28,9 +28,6 @@ export default {
       const formattedDate = `${month}-${day}-${year}`;
       return formattedDate;
     },
-    navigateToSession(sessionId) {
-      this.$router.push({ name: 'session', params: {id: sessionId}});
-    }
   },
   created() {
     SessionService.list(this.$store.state.user.id).then((response) => {

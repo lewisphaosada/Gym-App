@@ -10,7 +10,7 @@ export default {
     },
 
     update(id, session) {
-        return axios.put(`/sessions/${id}`, session)
+        return axios.put(`/session/${id}`, session)
     },
 
     delete(id) {
