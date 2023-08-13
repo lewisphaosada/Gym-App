@@ -3,9 +3,11 @@ import App from './App.vue'
 import router from './router/index'
 import store from './store/index'
 import axios from 'axios'
-import FullCalendar from 'vue-full-calendar'
+//import FullCalendar from 'vue-full-calendar'
 
-Vue.use(FullCalendar)
+
+
+//Vue.use(FullCalendar)
 
 // import datePicker from 'vue-bootstrap-datetimepicker';
 
@@ -18,5 +20,5 @@ axios.defaults.baseURL = process.env.VUE_APP_REMOTE_API;
 new Vue({
   router,
   store,
-  render: h => h(App)
+  render: h => h(App),
 }).$mount('#app')

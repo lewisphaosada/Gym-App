@@ -23,6 +23,10 @@
       <span class="divider" v-if="isAuthenticated">|</span> -->
 >>>>>>> 61dd7f0496ef687ee9a9d345d3cc7b51e438de70
 
+      <router-link to="/monthly-equipment-usage" class="nav-link">Equipment Usage</router-link>
+      <span class="divider" v-if="isAuthenticated">|</span>
+
+
      
     </nav>
     <router-view />

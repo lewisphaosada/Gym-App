@@ -12,6 +12,7 @@ import EditProfile from '../views/EditProfile.vue'
 import ViewSessions from '../views/ViewSessions.vue'
 import MachineList from  '../components/MachineList.vue'
 import MachineDetails from '../components/MachineDetails.vue'
+<<<<<<< HEAD
 import EmployeeLogin from '../components/EmployeeLogin.vue'; // Correct import path
 >>>>>>> 61dd7f0496ef687ee9a9d345d3cc7b51e438de70
 import EmployeePortal from '../views/EmployeePortal.vue'
@@ -19,6 +20,13 @@ import EmployeeRegister from '@/components/EmployeeRegister.vue'
 import Schedule from '../views/Schedule.vue'
 <<<<<<< HEAD
 import EmployeeLogin from '@/components/EmployeeLogin.vue';
+=======
+import EmployeeLogin from '../components/EmployeeLogin.vue'; 
+import EmployeePortal from '../views/EmployeePortal.vue'
+import EmployeeRegister from '@/components/EmployeeRegister.vue'
+import Schedule from '../views/Schedule.vue'
+import MonthlyEquipmentUsage from '../components/MonthlyEquipmentUsage.vue'
+>>>>>>> 784280c56d8b2bfc00a07dcfd73bea0216912638
 
 =======
 import SingleSession from '../views/SingleSession.vue'
@@ -141,6 +149,14 @@ const router = new Router({
       path: '/machines',
       name: 'MachineList', 
       component: MachineList,
+      meta: {
+        requiresAuth: true,
+      },
+    },
+    {
+      path: '/monthly-equipment-usage',
+      name: 'monthlyEquipmentUsage',
+      component: MonthlyEquipmentUsage,
       meta: {
         requiresAuth: true,
       },
