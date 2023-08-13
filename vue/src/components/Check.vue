@@ -10,9 +10,6 @@
         class="check-image"
       />
     </button>
-    <div>{{sessionStartTime}}</div>
-    <div>{{sessionEndTime}}</div>
-    <div>{{sessionElapsed}}</div>
   </div>
 </template>
 
@@ -46,6 +43,7 @@ export default {
         this.$store.commit('STOP_TIMER');
       } else {
         this.$store.commit('START_TIMER');
+        // this.$router.push("VINCENT'S MACHINE STUFF");
       }
       this.toggleCheck();
     },

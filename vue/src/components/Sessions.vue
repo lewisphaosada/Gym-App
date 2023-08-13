@@ -1,45 +1,45 @@
 <template>
   <div>
     <ul class="session-list" v-if="sessions.length > 0">
-      <li v-for="session in sessions" v-bind:key="session.id">{{session.date}}</li>
+      <li v-for="session in sessions" v-bind:key="session.sessionId">
+        <router-link :to="{ name: 'session', params: {id: session.sessionId} }">{{ convertUnixToDate(session.date) }} {{session}}</router-link>
+      </li>
     </ul>
     <h2 v-else>No sessions yet. Let's workout!</h2>
   </div>
 </template>
 
 <script>
-// import SessionService from '../services/SessionService'
+import SessionService from "../services/SessionService";
 
 export default {
-  name: 'sessions',
+  name: "sessions-comp",
   data() {
     return {
-      sessions: [
-        {
-          id: 1,
-          date: '02/14/2023'
-        },
-        {
-          id: 2,
-          date: '02/15/2023'
-        },
-        {
-          id: 3,
-          date: '02/16/2023'
-        }
-      ]
-    }
+      sessions: [],
+    };
   },
-  // created() {
-  //   SessionService.list().then(response => {
-  //     this.sessions = response.data;
-  //   })
-  // }
-}
+  methods: {
+    convertUnixToDate(unixTime) {
+      const date = new Date(unixTime);
+      const year = date.getFullYear();
+      const month = date.getMonth() + 1;
+      const day = date.getDate();
+      const formattedDate = `${month}-${day}-${year}`;
+      return formattedDate;
+    },
+  },
+  created() {
+    SessionService.list(this.$store.state.user.id).then((response) => {
+      this.sessions = response.data;
+    });
+  },
+};
 </script>
 
 <style>
 .session-list {
-  list-style: none
+  list-style: none;
+  cursor: pointer;
 }
 </style>
