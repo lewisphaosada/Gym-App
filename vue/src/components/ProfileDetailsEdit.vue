@@ -46,6 +46,8 @@
       <span v-if="bmiValidationError" class="error-message">Must input numbers</span>
     </div>
 
+
+    
       <!-- <div class="profile-details">
         <label>Profile Picture:</label>
         <img v-if="user.photo" :src="user.photo" alt="User Photo" />
@@ -94,6 +96,7 @@ export default{
     },
 
 methods:{
+
     submitForm() {
       this.validateForm();
       if (this.hasValidationError) {
