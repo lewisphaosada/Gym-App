@@ -1,40 +1,64 @@
 <template>
   <div class="machine-details">
-    <h2 class="form-title">{{ machine.name }}</h2>
-    <img :src="machine.photo" alt="Machine Photo" class="machine-photo" />
+    <h2 class="form-title">{{ exercise.name }}</h2>
+    <img :src="exercise.photo" alt="Exercise Photo" class="machine-photo" />
 
     <div class="form-group">
       <h3 class="form-subtitle">Description:</h3>
-      <p>{{ machine.description }}</p>
+      <p>{{ exercise.description }}</p>
     </div>
 
-    <div class="form-group">
+   <div class="form-group">
       <h3 class="form-subtitle">Enter Your Workout Details:</h3>
       <label class="form-label">Sets:</label>
-      <input v-model="sets" type="number" class="form-input" />
+      <input v-model="exercise.sets" type="number" class="form-input" />
 
       <label class="form-label">Reps:</label>
-      <input v-model="reps" type="number" class="form-input" />
+      <input v-model="exercise.reps" type="number" class="form-input" />
 
-      <label v-if="machine.timeSlot" class="form-label">Time Slot:</label>
-      <input v-if="machine.timeSlot" v-model="timeSlot" type="text" class="form-input" />
+      <label v-if="exercise.timeSlot" class="form-label">Time Slot:</label>
+      <input
+        v-if="exercise.timeSlot"
+        v-model="exercise.duration"
+        type="text"
+        class="form-input"
+      />
 
-      <label v-if="machine.weightUsed" class="form-label">Weight Used:</label>
-      <input v-if="machine.weightUsed" v-model="weightUsed" type="text" class="form-input" />
+     <label v-if="exercise.weightUsed" class="form-label">Weight Used:</label>
+      <input
+        v-if="exercise.weightUsed"
+        v-model="exercise.weight"
+        type="text"
+        class="form-input"
+      />
     </div>
   </div>
 </template>
 
+
 <script>
+import axios from "axios";
+
 export default {
-  props: ['machine'],
+  props: ["id"],
   data() {
     return {
-      sets: '',
-      reps: '',
-      timeSlot: '',
-      weightUsed: '',
+      exercise: {
+        name: '',
+        photo: '',
+        description: '',
+        
+      },
     };
+  },
+  async created() {
+    try {
+      const response = await axios.get(`http://localhost:9000/exercises/${this.id}`);
+      this.exercise = response.data;
+      
+    } catch (error) {
+      console.error('Error fetching exercise:', error);
+    }
   },
 };
 </script>
@@ -85,5 +109,4 @@ export default {
   border-radius: 5px;
   font-size: 16px;
 }
-
 </style>
