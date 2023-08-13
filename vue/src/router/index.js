@@ -14,10 +14,7 @@ import EmployeeLogin from '../components/EmployeeLogin.vue'; // Correct import p
 import EmployeePortal from '../views/EmployeePortal.vue'
 import EmployeeRegister from '@/components/EmployeeRegister.vue'
 import Schedule from '../views/Schedule.vue'
-
-// Rest of your imports and code...
-
-
+import SingleSession from '../views/SingleSession.vue'
 Vue.use(Router)
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
@@ -89,11 +86,27 @@ const router = new Router({
       }
     },
     {
-      path: '/sessions',
+      path: '/sessions/:id',
       name: 'sessions',
       component: ViewSessions,
       meta: {
         requiresAuth: true
+      }
+    },
+    {
+      path: '/session/:id',
+      name: 'session',
+      component: SingleSession,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/employee-login',
+      name: 'employeelogin',
+      component: EmployeeLogin,
+      meta: {
+        requiresAuth: false
       }
     },
     {
