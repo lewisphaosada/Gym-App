@@ -14,5 +14,8 @@ export default {
   },
   delete(id) {
     return axios.delete(`${BASE_URL}/workouts/${id}`);
+  },
+  exercises() {
+    return axios.get('/exercises');
   }
 };
