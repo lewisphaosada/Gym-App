@@ -205,21 +205,22 @@ h2 {
   text-decoration: underline; /* Optional: Add an underline to make it look more like a link */
 }
 .search-input {
- width: 95%;
+ width: 50%;
  height: 40px;
- line-height: 28px;
+ line-height: 36px;
  padding: 0 1rem;
  padding-left: 2.5rem;
- border: 2px solid transparent;
+ border: 5.5px solid transparent;
  border-radius: 8px;
  outline: none;
  background-color: #f3f3f4;
  color: #0d0c22;
  transition: .3s ease;
+ margin: 1.5%;
 }
 .icon {
  position: absolute;
- left: 1.6rem;
+ left: 2.5rem;
  fill: #9e9ea7;
  width: 1rem;
  height: 2.3rem;

@@ -17,6 +17,10 @@
       <router-link to="/employee-portal" class="nav-link">Employee Portal</router-link>
       <span class="divider" v-if="isAuthenticated">|</span>
 
+      <router-link to="/monthly-equipment-usage" class="nav-link">Equipment Usage</router-link>
+      <span class="divider" v-if="isAuthenticated">|</span>
+
+
      
     </nav>
     <router-view />

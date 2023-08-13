@@ -10,10 +10,11 @@ import EditProfile from '../views/EditProfile.vue'
 import ViewSessions from '../views/ViewSessions.vue'
 import MachineList from  '../components/MachineList.vue'
 import MachineDetails from '../components/MachineDetails.vue'
-import EmployeeLogin from '../components/EmployeeLogin.vue'; // Correct import path
+import EmployeeLogin from '../components/EmployeeLogin.vue'; 
 import EmployeePortal from '../views/EmployeePortal.vue'
 import EmployeeRegister from '@/components/EmployeeRegister.vue'
 import Schedule from '../views/Schedule.vue'
+import MonthlyEquipmentUsage from '../components/MonthlyEquipmentUsage.vue'
 
 // Rest of your imports and code...
 
@@ -119,6 +120,14 @@ const router = new Router({
       meta: {
         requiresAuth: true,
       }
+    },
+    {
+      path: '/monthly-equipment-usage',
+      name: 'monthlyEquipmentUsage',
+      component: MonthlyEquipmentUsage,
+      meta: {
+        requiresAuth: true,
+      },
     },
     {
       path: '/machine/:id',
