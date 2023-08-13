@@ -10,29 +10,29 @@
 </template>
 
 <script>
-import { computed, onMounted } from 'vue';
-import { useStore } from '@/store';
+// import { computed, onMounted } from 'vue';
+// import { useStore } from '@/store';
 
-export default {
-  setup() {
-    const store = useStore();
-    const machines = computed(() => store.state.machines.machines);
-  onMounted(() => {
-      store.dispatch('machines/fetchMachines');
-    });
+// export default {
+//   setup() {
+//     const store = useStore();
+//     const machines = computed(() => store.state.machines.machines);
+//   onMounted(() => {
+//       store.dispatch('machines/fetchMachines');
+//     });
 
-    const navigateToDetails = (machineId) => {
-      // You can navigate to the details page using router programmatically here
-      // For now, I'll just log the machine ID
-      console.log('Navigating to details of machine:', machineId);
-    };
+//     const navigateToDetails = (machineId) => {
+//       // You can navigate to the details page using router programmatically here
+//       // For now, I'll just log the machine ID
+//       console.log('Navigating to details of machine:', machineId);
+//     };
 
-    return {
-      machines,
-      navigateToDetails,
-    };
-  },
-}
+//     return {
+//       machines,
+//       navigateToDetails,
+//     };
+//   },
+// }
 </script>
 
 <style scoped>

@@ -14,11 +14,8 @@ import EmployeeLogin from '../components/EmployeeLogin.vue'; // Correct import p
 import EmployeePortal from '../views/EmployeePortal.vue'
 import EmployeeRegister from '@/components/EmployeeRegister.vue'
 import Schedule from '../views/Schedule.vue'
-<<<<<<< HEAD
 import GoalDetails from '../views/Goals.vue'
-=======
 import SingleSession from '../views/SingleSession.vue'
->>>>>>> 624512906205061e194958959ac310b8cd301095
 Vue.use(Router)
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
@@ -145,7 +142,6 @@ const router = new Router({
         requiresAuth: true,
       }
     },
-<<<<<<< HEAD
     {
       path:'/goals',
       name: 'goals',
@@ -156,10 +152,7 @@ const router = new Router({
     },
   ]
 })
-=======
-  ],
-});
->>>>>>> 624512906205061e194958959ac310b8cd301095
+
 
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(x => x.meta.requiresAuth);

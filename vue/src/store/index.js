@@ -57,8 +57,8 @@ export default new Vuex.Store({
       state.sessionTimerEnd = 0;
     }
   },
-  modules: {
-    machines: machinesModule,
+  // modules: {
+  //   machines: machinesModule,
     
-  }
+  // }
 });

@@ -90,12 +90,7 @@ export default {
     },
   },
 
-<<<<<<< HEAD
-methods:{
-
-=======
   methods: {
->>>>>>> 624512906205061e194958959ac310b8cd301095
     submitForm() {
       this.validateForm();
       if (this.hasValidationError) {
@@ -236,8 +231,4 @@ methods:{
   text-align: center;
   margin-top: 10px;
 }
-<<<<<<< HEAD
 </style>
-=======
-</style>
->>>>>>> 624512906205061e194958959ac310b8cd301095
