@@ -40,7 +40,9 @@
       </div>
       <button type="submit" class="submit-button">Create Account</button>
       <p class="register-link">
-        <router-link :to="{ name: 'login' }">Are you a member? Log in.</router-link>
+        <router-link :to="{ name: 'login' }"
+          >Are you a member? Log in.</router-link
+        >
       </p>
     </form>
   </div>
@@ -62,6 +64,9 @@ export default {
       registrationErrors: false,
       registrationErrorMsg: "There were problems registering this user.",
     };
+  },
+  created() {
+    this.adminCheck();
   },
   methods: {
     register() {
@@ -89,37 +94,14 @@ export default {
           });
       }
     },
-    methods: {
-      register() {
-        if (this.user.password != this.user.confirmPassword) {
-          this.registrationErrors = true;
-          this.registrationErrorMsg =
-            "Password & Confirm Password do not match.";
-        } else {
-          AuthService
-            .register(this.user)
-            .then((response) => {
-              if (response.status == 201) {
-                this.$router.push({
-                  path: "/login",
-                  query: { registration: "success" },
-                });
-              }
-            })
-            .catch((error) => {
-              const response = error.response;
-              this.registrationErrors = true;
-              if (response.status === 400) {
-                this.registrationErrorMsg = "Bad Request: Validation Errors";
-              }
-            });
+    adminCheck() {
+      if (this.$store.state.user.authorities[0].name != "ROLE_ADMIN") {
+        if(this.$store.state.user.authorities[0].name === "ROLE_EMPLOYEE") {
+          this.$router.push({path: '/employee-portal'})
+        } else if(this.$store.state.user.authorities[0].name === "ROLE_USER") {
+          this.$router.push({ path: "/" });
         }
-      },
-      clearErrors() {
-        this.registrationErrors = false;
-        this.registrationErrorMsg =
-          "There were problems registering this user.";
-      },
+      }
     },
   },
 };

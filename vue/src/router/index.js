@@ -7,14 +7,18 @@ import Register from '../views/Register.vue'
 import store from '../store/index'
 import Profile from '../views/Profile.vue'
 import EditProfile from '../views/EditProfile.vue'
-import EmployeeLogin from '../views/EmployeeLogin.vue'
-import EmployeePortal from '../views/EmployeePortal.vue'
 import ViewSessions from '../views/ViewSessions.vue'
 import MachineList from  '../components/MachineList.vue'
 import MachineDetails from '../components/MachineDetails.vue'
-import EmployeeRegister from '../components/EmployeeRegister.vue'
+import EmployeeLogin from '../components/EmployeeLogin.vue'; // Correct import path
+import EmployeePortal from '../views/EmployeePortal.vue'
+import EmployeeRegister from '@/components/EmployeeRegister.vue'
 import Schedule from '../views/Schedule.vue'
+<<<<<<< HEAD
 import GoalDetails from '../views/Goals.vue'
+=======
+import SingleSession from '../views/SingleSession.vue'
+>>>>>>> 624512906205061e194958959ac310b8cd301095
 Vue.use(Router)
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
@@ -42,7 +46,8 @@ const router = new Router({
       component: Login,
       meta: {
         requiresAuth: false,
-      }
+        redirectToEmployeePortal: true, // New meta property
+      },
     },
     {
       path: '/logout',
@@ -85,9 +90,17 @@ const router = new Router({
       }
     },
     {
-      path: '/sessions',
+      path: '/sessions/:id',
       name: 'sessions',
       component: ViewSessions,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/session/:id',
+      name: 'session',
+      component: SingleSession,
       meta: {
         requiresAuth: true
       }
@@ -132,6 +145,7 @@ const router = new Router({
         requiresAuth: true,
       }
     },
+<<<<<<< HEAD
     {
       path:'/goals',
       name: 'goals',
@@ -142,11 +156,17 @@ const router = new Router({
     },
   ]
 })
+=======
+  ],
+});
+>>>>>>> 624512906205061e194958959ac310b8cd301095
 
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(x => x.meta.requiresAuth);
   if (requiresAuth && store.state.token === '') {
     next('/login');
+  } else if (to.matched.some(x => x.meta.redirectToEmployeePortal && store.state.token !== '')) {
+    next('/employee-portal');
   } else {
     next();
   }

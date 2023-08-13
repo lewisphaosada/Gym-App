@@ -4,15 +4,25 @@
       <router-link v-bind:to="{ name: 'home' }" class="nav-link">Home</router-link>
       <span class="divider">|</span>
       <router-link v-if="!isAuthenticated" v-bind:to="{ name: 'register' }" class="nav-link">Register</router-link>
-      <span class="divider" v-if="!isAuthenticated">|</span>
       <router-link v-if="isAuthenticated" :to="{ name: 'profile', params: { id: $store.state.user.id } }" class="nav-link">Profile</router-link>
       <span class="divider" v-if="isAuthenticated">|</span>
+<<<<<<< HEAD
        <router-link v-if="isAuthenticated" :to="{ name: 'schedule' }" class="nav-link">Schedule</router-link>
       <span class="divider" v-if="isAuthenticated">|</span>
       <router-link v-if="isAuthenticated" :to="{ name: 'goals', params: { id: $store.state.user.id } }" class="nav-link">Goals</router-link>
       <span class="divider" v-if="isAuthenticated">|</span>
 
+=======
+      <router-link v-if="isAuthenticated" :to="{ name: 'sessions', params: { id: $store.state.user.id } }" class="nav-link">Your Sessions</router-link>
+      <span class="divider" v-if="isAuthenticated">|</span>
+      <router-link v-if="isAuthenticated" :to="{ name: 'schedule' }" class="nav-link">Schedule</router-link>
+      <span class="divider" v-if="isAuthenticated">|</span>
+>>>>>>> 624512906205061e194958959ac310b8cd301095
       <router-link v-if="isAuthenticated" v-bind:to="{ name: 'logout' }" class="nav-link">Logout</router-link>
+      <span class="divider" v-if="isAuthenticated">|</span>
+
+      <router-link to="/employee-portal" class="nav-link">Employee Portal</router-link>
+      <span class="divider" v-if="isAuthenticated">|</span>
 
      
     </nav>
