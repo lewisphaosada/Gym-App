@@ -1,20 +1,16 @@
 import axios from 'axios';
 
 export default {
-    list() {
-        return axios.get('/sessions');
-    },
-
-    get(id) {
-        return axios.get(`/sessions/${id}`);
+    list(userId) {
+        return axios.get(`/sessions/${userId}`);
     },
 
     create(session) {
-        return axios.post(`/sessions`, session);
+        return axios.post(`/sessions/create-session`, session);
     },
 
     update(id, session) {
-        return axios.put(`/sessions/${id}`, session)
+        return axios.put(`/session/${id}`, session)
     },
 
     delete(id) {

@@ -28,10 +28,9 @@ CREATE TABLE users (
 CREATE TABLE sessions (
 session_id SERIAL,
 user_id INT,
-duration TIME,
-date DATE, -- potentially a DATETIME?
-CONSTRAINT PK_session PRIMARY KEY (session_id),
-CONSTRAINT FK_user_session FOREIGN KEY (user_id) REFERENCES users
+duration BIGINT,
+date BIGINT, -- potentially a DATETIME?
+CONSTRAINT PK_session PRIMARY KEY (session_id)
 );
 
 --exercise table containing list of exercises
@@ -39,7 +38,8 @@ CONSTRAINT FK_user_session FOREIGN KEY (user_id) REFERENCES users
 CREATE TABLE exercise (
 exercise_id SERIAL,
 name VARCHAR(50),
-description VARCHAR(300),
+photo VARCHAR(500),
+description VARCHAR(1000),
 gif VARCHAR(500),
 CONSTRAINT PK_exercise PRIMARY KEY (exercise_id)
 );

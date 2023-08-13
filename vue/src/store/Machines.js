@@ -200,8 +200,8 @@ export const machines = [
       },
       {
         id: 17,
-        name: '',
-        photo: 'gym-equipment/leg-extension-machine.jpg',
+        name: 'Leg Extension Machine',
+        photo: '/gym-equipment/leg-extension-machine.jpg',
         description: "The leg extension machine involves you sitting on a padded seat and using a lever or cable attached to weights to extend your legs. Out of the many machines that exist, this is one of the oldest and most effective for strengthening and toning your legs. To use the leg extension machine effectively, follow these steps:\n\nSit on the leg extension machine and put your feet underneath the pad. After this, grab the levers with your hands so you’re ready to begin.\n\nExtend your legs outwards and exhale while doing so.\n\nPause for a second, then slowly inhale as you return to the starting position.\n\nRepeat this for as many reps as you wish.",
         sets: '',
         reps: '',
