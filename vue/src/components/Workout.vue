@@ -36,8 +36,9 @@ export default {
   methods: {
     async fetchSavedWorkouts() {
       try {
-        const response = await WorkoutService.list();
-        this.savedWorkouts = response.data; // Assign fetched data to savedWorkouts
+       const userId = this.$store.state.user.id;
+        const response = await WorkoutService.list(userId);
+        this.savedWorkouts = response.data; 
       } catch (error) {
         console.error("Error fetching saved workouts:", error);
       }

@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from 'axios';
-import machinesModule from './machines';
+
 
 
 Vue.use(Vuex);
@@ -21,7 +21,7 @@ export default new Vuex.Store({
     isCheckedIn: false,
     sessionTimerStart: 0,
     sessionTimerEnd: 0,
-},
+  },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
       state.token = token;
@@ -30,7 +30,7 @@ export default new Vuex.Store({
     },
     SET_USER(state, user) {
       state.user = user;
-      localStorage.setItem('user',JSON.stringify(user));
+      localStorage.setItem('user', JSON.stringify(user));
       // state.currentUser = UserService.getUserByUsername(user.username);
     },
     LOGOUT(state) {
@@ -55,8 +55,5 @@ export default new Vuex.Store({
       state.sessionTimerEnd = 0;
     }
   },
-  modules: {
-    machines: machinesModule,
-    
-  }
+
 });

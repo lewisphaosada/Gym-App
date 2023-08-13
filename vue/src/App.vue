@@ -11,6 +11,9 @@
        <router-link v-if="isAuthenticated" :to="{ name: 'schedule' }" class="nav-link">Schedule</router-link>
       <span class="divider" v-if="isAuthenticated">|</span>
 
+       <router-link v-if="isAuthenticated" :to="{ name: 'WorkoutPage' }" class="nav-link">Your Workout</router-link>
+      <span class="divider" v-if="isAuthenticated">|</span>
+
       <router-link v-if="isAuthenticated" v-bind:to="{ name: 'logout' }" class="nav-link">Logout</router-link>
 
      

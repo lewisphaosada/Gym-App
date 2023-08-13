@@ -5,7 +5,7 @@ import java.time.LocalTime;
 
 public class Workout {
 
-    private Long id;
+    private Long workoutId;
     private Long sessionId;
     private Long userId;
     private Long exerciseId;
@@ -14,12 +14,12 @@ public class Workout {
     private Integer sets;
     private Integer reps;
 
-    public Long getId() {
-        return id;
+    public Long getWorkoutId() {
+        return workoutId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setWorkoutId(Long workoutId) {
+        this.workoutId = workoutId;
     }
 
     public Long getSessionId() {

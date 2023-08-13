@@ -1,67 +1,77 @@
 <template>
   <div class="machine-list">
-    <h1>Machine List</h1>
-    <div class="image-scroll-view">
-      <div v-for="machine in machines" :key="machine.id" class="image-item">
-        <img :src="machine.photo" alt="Machine" class="machine-image" @click="navigateToDetails(machine.id)" />
-      </div>
-    </div>
+    <router-link
+      v-for="machine in machines"
+      :key="machine.id"
+      :to="{ name: 'MachineDetails', params: { id: machine.id } }"
+      class="machine-item"
+    >
+      <img
+        :src="machine.photo"
+        :alt="machine.name"
+        class="machine-image"
+        @click="navigateToMachineDetails(machine.id)"
+      />
+      <h3 class="machine-title">{{ machine.name }}</h3>
+    </router-link>
   </div>
 </template>
 
 <script>
-import { computed, onMounted } from 'vue';
-import { useStore } from '@/store';
+import { machines } from "@/store/machines.js";
 
 export default {
-  setup() {
-    const store = useStore();
-    const machines = computed(() => store.state.machines.machines);
-  onMounted(() => {
-      store.dispatch('machines/fetchMachines');
-    });
-
-    const navigateToDetails = (machineId) => {
-      // You can navigate to the details page using router programmatically here
-      // For now, I'll just log the machine ID
-      console.log('Navigating to details of machine:', machineId);
-    };
-
+  data() {
     return {
-      machines,
-      navigateToDetails,
+      machines: machines,
     };
   },
-}
+  methods: {
+    navigateToMachineDetails(machineId) {
+      if (
+        this.$route.name !== "MachineDetails" ||
+        this.$route.params.id !== machineId
+      ) {
+        this.$router.push({
+          name: "MachineDetails",
+          params: { id: machineId },
+        });
+      }
+    },
+  },
+};
 </script>
 
 <style scoped>
+
 .machine-list {
-  max-width: 800px;
-  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Maximum of 4 items in a row */
+  grid-gap: 20px;
   padding: 20px;
 }
-
-.image-scroll-view {
-  display: flex;
-  overflow-x: auto;
-  padding-bottom: 20px;
-}
-.image-item {
-  flex: 0 0 auto;
-  margin-right: 10px;
-}
-.machine-image {
-  width: 150px;
-  height: 150px;
-  object-fit: cover;
-  cursor: pointer;
+.machine-item {
   border: 1px solid #ccc;
-  border-radius: 5px;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  text-align: center;
   transition: transform 0.2s;
 }
+.machine-item:hover {
+  transform: scale(1.05);
+}
 
-.machine-image:hover {
-  transform: scale(1.1);
+.machine-image {
+  max-width: 100%;
+  height: 150px; 
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.machine-title {
+  font-size: 16px;
+  margin: 0;
+  color: #333;
 }
 </style>

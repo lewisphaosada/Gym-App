@@ -14,6 +14,7 @@ import MachineList from  '../components/MachineList.vue'
 import MachineDetails from '../components/MachineDetails.vue'
 import EmployeeRegister from '../components/EmployeeRegister.vue'
 import Schedule from '../views/Schedule.vue'
+import Workout from '../components/Workout.vue';
 Vue.use(Router)
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
@@ -127,6 +128,14 @@ const router = new Router({
       path: '/machine/:id',
       name: 'MachineDetails',
       component: MachineDetails,
+      meta: {
+        requiresAuth: true,
+      }
+    },
+    {
+      path: '/workouts',
+      name: 'WorkoutPage',
+      component: Workout,
       meta: {
         requiresAuth: true,
       }

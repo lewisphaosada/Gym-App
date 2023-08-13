@@ -5,9 +5,6 @@ import com.techelevator.model.Workout;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -45,7 +42,7 @@ public class JdbcWorkoutDao implements WorkoutDao {
 
     private Workout mapRowToWorkout(SqlRowSet rowSet) {
         Workout workout = new Workout();
-        workout.setId(rowSet.getLong("workout_id"));
+        workout.setWorkoutId(rowSet.getLong("workout_id"));
         workout.setSessionId(rowSet.getLong("session_id"));
         workout.setUserId(rowSet.getLong("user_id"));
         workout.setExerciseId(rowSet.getLong("exercise_id"));
@@ -99,7 +96,7 @@ public class JdbcWorkoutDao implements WorkoutDao {
                     workout.getWeight(),
                     workout.getSets(),
                     workout.getReps(),
-                    workout.getId()
+                    workout.getWorkoutId()
             );
             return workout;
         } catch (CannotGetJdbcConnectionException e) {
