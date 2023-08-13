@@ -63,6 +63,9 @@ export default {
           this.user.weight = userInfo.weight;
           this.user.height = userInfo.height;
           this.user.bmi = userInfo.bmi;
+
+          this.user = { ...this.user, ...userInfo };
+
       })
   
     }

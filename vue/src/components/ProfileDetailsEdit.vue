@@ -164,29 +164,68 @@ validateForm() {
 
 
 <style scoped>
-.profile-container {
-  max-width: 600px;
-  margin: 0 auto;
+.edit-profile-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.edit-profile-form {
+  width: 300px;
   padding: 20px;
-  background-color: #f6f6f6;
   border: 1px solid #ccc;
   border-radius: 5px;
+  background-color: #F6F6F6;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
-
-.profile-heading {
+.edit-profile-heading {
   font-size: 24px;
   margin-bottom: 20px;
 }
-.profile-details {
-  margin-bottom: 10px;
-  font-size: 16px;
+.form-input-group {
+  margin-bottom: 15px;
 }
-
-.profile-details label {
+.input-label {
   display: block;
   font-weight: bold;
   margin-bottom: 5px;
+}
+.input-field {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+.error-message {
+  color: #D9534F;
+  margin-top: 5px;
+  display: inline-block;
+}
+.submit-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007BFF;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  font-size: 16px;
+  cursor: pointer;
+}
+.cancel-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #ccc;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  font-size: 16px;
+  cursor: pointer;
+}
+.register-link {
+  text-align: center;
+  margin-top: 10px;
 }
 </style>
