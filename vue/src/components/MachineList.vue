@@ -1,42 +1,38 @@
 <template>
-  <div class="machine-details">
-    <h2>{{ machine.name }}</h2>
-    <img :src="machine.photo" alt="Machine Photo" />
-
-    <div class="description">
-      <h3>Description:</h3>
-      <p>{{ machine.description }}</p>
-    </div>
-
-    <div class="user-input">
-      <h3>Enter Your Workout Details:</h3>
-      <label>Sets:</label>
-      <input v-model="sets" type="number" />
-
-      <label>Reps:</label>
-      <input v-model="reps" type="number" />
-
-      <label v-if="machine.timeSlot">Time Slot:</label>
-      <input v-if="machine.timeSlot" v-model="timeSlot" type="text" />
-
-      <label v-if="machine.weightUsed">Weight Used:</label>
-      <input v-if="machine.weightUsed" v-model="weightUsed" type="text" />
+  <div class="machine-list">
+    <h1>Machine List</h1>
+    <div class="image-scroll-view">
+      <div v-for="machine in machines" :key="machine.id" class="image-item">
+        <img :src="machine.photo" alt="Machine" class="machine-image" @click="navigateToDetails(machine.id)" />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import { computed, onMounted } from 'vue';
+import { useStore } from '@/store';
+
 export default {
-  props: ['machine'],
-  data() {
-    return {
-      sets: '',
-      reps: '',
-      timeSlot: '',
-      weightUsed: ''
+  setup() {
+    const store = useStore();
+    const machines = computed(() => store.state.machines.machines);
+  onMounted(() => {
+      store.dispatch('machines/fetchMachines');
+    });
+
+    const navigateToDetails = (machineId) => {
+      // You can navigate to the details page using router programmatically here
+      // For now, I'll just log the machine ID
+      console.log('Navigating to details of machine:', machineId);
     };
-  }
-};
+
+    return {
+      machines,
+      navigateToDetails,
+    };
+  },
+}
 </script>
 
 <style scoped>
@@ -46,51 +42,26 @@ export default {
   padding: 20px;
 }
 
-.section-title {
-  font-size: 24px;
-  margin-bottom: 20px;
+.image-scroll-view {
+  display: flex;
+  overflow-x: auto;
+  padding-bottom: 20px;
 }
-.machine-items {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
+.image-item {
+  flex: 0 0 auto;
+  margin-right: 10px;
 }
-
-.machine-item {
+.machine-image {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  cursor: pointer;
   border: 1px solid #ccc;
-  padding: 10px;
-  text-align: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
   transition: transform 0.2s;
 }
-.machine-item:hover {
-  transform: translateY(-5px);
-}
 
-.machine-image {
-  width: 100%;
-  max-height: 150px;
-  object-fit: cover;
-  margin-bottom: 10px;
+.machine-image:hover {
+  transform: scale(1.1);
 }
-
-.machine-name {
-  font-size: 18px;
-  margin: 10px 0;
-}
-
-.details-link {
-  background-color: #007bff;
-  color: #fff;
-  padding: 5px 10px;
-  border-radius: 5px;
-  text-decoration: none;
-  display: inline-block;
-  transition: background-color 0.2s;
-}
-
-.details-link:hover {
-  background-color: #0056b3;
-}
-
 </style>
