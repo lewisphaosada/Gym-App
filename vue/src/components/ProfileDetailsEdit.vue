@@ -178,11 +178,11 @@ export default {
   border-radius: 5px;
   background-color: #F6F6F6;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  text-align: center;
 }
 .edit-profile-heading {
   font-size: 24px;
   margin-bottom: 20px;
+  text-align: center;
 }
 .form-input-group {
   margin-bottom: 15px;
