@@ -70,7 +70,7 @@ const router = new Router({
       }
     },
     {
-      path: '/edit',
+      path: '/profile/:id/edit',
       name: 'editprofile',
       component: EditProfile,
       meta: {
@@ -140,15 +140,6 @@ const router = new Router({
       meta: {
         requiresAuth: true,
       }
-    },
-    {
-      path: '/employee-login',
-      name: 'employeelogin',
-      component: EmployeeLogin,
-      meta: {
-        requiresAuth: false,
-      },
-      
     },
   ],
 });
