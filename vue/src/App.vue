@@ -4,18 +4,24 @@
       <router-link v-bind:to="{ name: 'home' }" class="nav-link">Home</router-link>
       <span class="divider">|</span>
       <router-link v-if="!isAuthenticated" v-bind:to="{ name: 'register' }" class="nav-link">Register</router-link>
-      <span class="divider" v-if="!isAuthenticated">|</span>
       <router-link v-if="isAuthenticated" :to="{ name: 'profile', params: { id: $store.state.user.id } }" class="nav-link">Profile</router-link>
       <span class="divider" v-if="isAuthenticated">|</span>
-
-       <router-link v-if="isAuthenticated" :to="{ name: 'schedule' }" class="nav-link">Schedule</router-link>
+      <router-link v-if="isAuthenticated" :to="{ name: 'sessions', params: { id: $store.state.user.id } }" class="nav-link">Your Sessions</router-link>
       <span class="divider" v-if="isAuthenticated">|</span>
-
+      <router-link v-if="isAuthenticated" :to="{ name: 'schedule' }" class="nav-link">Schedule</router-link>
+      <span class="divider" v-if="isAuthenticated">|</span>
+        <router-link v-if="isAuthenticated" :to="{ name: 'goals', params: { id: $store.state.user.id } }" class="nav-link">Goals</router-link>
+      <span class="divider" v-if="isAuthenticated">|</span>
       <router-link v-if="isAuthenticated" v-bind:to="{ name: 'logout' }" class="nav-link">Logout</router-link>
       <span class="divider" v-if="isAuthenticated">|</span>
 
+<<<<<<< HEAD
       <router-link v-if="isAuthenticated" :to="{ name: 'employeeportal' }" class="nav-link">Employee Portal</router-link>
 <span class="divider" v-if="isAuthenticated">|</span>
+=======
+      <!-- <router-link to="/employee-portal" class="nav-link">Employee Portal</router-link>
+      <span class="divider" v-if="isAuthenticated">|</span> -->
+>>>>>>> 61dd7f0496ef687ee9a9d345d3cc7b51e438de70
 
      
     </nav>

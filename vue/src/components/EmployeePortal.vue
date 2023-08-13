@@ -40,7 +40,10 @@
     <MemberProfileModal
       :selectedMember="selectedProfileMember"
       v-if="showProfileModal"
+<<<<<<< HEAD
       @close="hideProfile"
+=======
+>>>>>>> 61dd7f0496ef687ee9a9d345d3cc7b51e438de70
     />
   </div>
 </template>
@@ -111,11 +114,6 @@ export default {
       this.selectedProfileMember = null;
       this.showProfileModal = false;
     },
-    employeeCheck() {
-        if(this.$store.state.user.authorities[0].name === "ROLE_USER") {
-            this.$router.push({path: '/'});
-        }
-    }
   },
 };
 </script>
@@ -143,10 +141,17 @@ export default {
   background: -webkit-linear-gradient(to right, #3f4c6b, #606c88);
   background: linear-gradient(to right top, #3f4c6b, #606c88);
   padding: 1rem;
+<<<<<<< HEAD
   color: #ffffff;
   box-shadow: 0px 87px 78px -39px rgba(0, 0, 0, 0.4);
   margin: auto;
   width: 40em;
+=======
+  color: white;
+  box-shadow: 0px 87px 78px -39px rgba(0, 0, 0, 0.4);
+  margin: auto;
+  width: 35em;
+>>>>>>> 61dd7f0496ef687ee9a9d345d3cc7b51e438de70
 }
 h2 {
   color: blue;
