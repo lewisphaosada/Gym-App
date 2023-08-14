@@ -135,11 +135,4 @@ export default {
 label {
   margin-right: 0.5rem;
 }
-<<<<<<< HEAD
-
-</style>
-  
- 
-=======
 </style> 
->>>>>>> 61dd7f0496ef687ee9a9d345d3cc7b51e438de70

@@ -5,25 +5,6 @@
 </template>
 
 <script>
-<<<<<<< HEAD
-//popular vue full calendar library used
-//import { FullCalendar } from 'vue-full-calendar'
-//import 'vue-full-calendar/node_modules/fullcalendar/dist/fullcalendar.css';
-
-
-//export default {
-  //components: {
-  //  FullCalendar
- // },
-  //data() {
-  //  return {
-   //   calendarConfig: {
-   //   }
-  //  }
- // }
-//}
-//</script>
-=======
 //popular vue full calendar library used. moment also installed to display blocks to 12hr format. looked through fullcalendar documentation and still can't get it to convert to 12 hour.
 import { FullCalendar } from 'vue-full-calendar'
 import 'vue-full-calendar/node_modules/fullcalendar/dist/fullcalendar.css';
@@ -88,4 +69,3 @@ export default {
   },
 };
 </script>
->>>>>>> 61dd7f0496ef687ee9a9d345d3cc7b51e438de70
