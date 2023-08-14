@@ -15,13 +15,10 @@
       <router-link v-if="isAuthenticated" v-bind:to="{ name: 'logout' }" class="nav-link">Logout</router-link>
       <span class="divider" v-if="isAuthenticated">|</span>
 
-<<<<<<< HEAD
       <router-link v-if="isAuthenticated" :to="{ name: 'employeeportal' }" class="nav-link">Employee Portal</router-link>
 <span class="divider" v-if="isAuthenticated">|</span>
-=======
       <!-- <router-link to="/employee-portal" class="nav-link">Employee Portal</router-link>
       <span class="divider" v-if="isAuthenticated">|</span> -->
->>>>>>> 61dd7f0496ef687ee9a9d345d3cc7b51e438de70
 
       <router-link to="/monthly-equipment-usage" class="nav-link">Equipment Usage</router-link>
       <span class="divider" v-if="isAuthenticated">|</span>
