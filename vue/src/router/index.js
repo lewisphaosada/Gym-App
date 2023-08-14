@@ -7,31 +7,16 @@ import Register from '../views/Register.vue'
 import store from '../store/index'
 import Profile from '../views/Profile.vue'
 import EditProfile from '../views/EditProfile.vue'
-<<<<<<< HEAD
-=======
 import ViewSessions from '../views/ViewSessions.vue'
 import MachineList from  '../components/MachineList.vue'
 import MachineDetails from '../components/MachineDetails.vue'
-<<<<<<< HEAD
-import EmployeeLogin from '../components/EmployeeLogin.vue'; // Correct import path
->>>>>>> 61dd7f0496ef687ee9a9d345d3cc7b51e438de70
-import EmployeePortal from '../views/EmployeePortal.vue'
-import EmployeeRegister from '@/components/EmployeeRegister.vue'
-import Schedule from '../views/Schedule.vue'
-<<<<<<< HEAD
-import EmployeeLogin from '@/components/EmployeeLogin.vue';
-=======
 import EmployeeLogin from '../components/EmployeeLogin.vue'; 
 import EmployeePortal from '../views/EmployeePortal.vue'
 import EmployeeRegister from '@/components/EmployeeRegister.vue'
 import Schedule from '../views/Schedule.vue'
 import MonthlyEquipmentUsage from '../components/MonthlyEquipmentUsage.vue'
->>>>>>> 784280c56d8b2bfc00a07dcfd73bea0216912638
-
-=======
 import SingleSession from '../views/SingleSession.vue'
 import GoalDetails from '../views/Goals.vue'
->>>>>>> 61dd7f0496ef687ee9a9d345d3cc7b51e438de70
 Vue.use(Router)
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
@@ -87,7 +72,7 @@ const router = new Router({
       },
     },
     {
-      path: '/edit',
+      path: '/profile/:id/edit',
       name: 'editprofile',
       component: EditProfile,
       meta: {
@@ -111,8 +96,6 @@ const router = new Router({
       }
     },
     {
-<<<<<<< HEAD
-=======
       path: '/session/:id',
       name: 'session',
       component: SingleSession,
@@ -129,7 +112,6 @@ const router = new Router({
       }
     },
     {
->>>>>>> 61dd7f0496ef687ee9a9d345d3cc7b51e438de70
       path: '/employee-portal',
       name: 'employeeportal',
       component: EmployeePortal,
