@@ -2,11 +2,15 @@ import axios from 'axios';
 
 const state = {
   exercises: [],
+  selectedExerciseId: null, // 
 };
 
 const mutations = {
   setExercises(state, exercises) {
     state.exercises = exercises;
+  },
+  setSelectedExerciseId(state, exerciseId) { 
+    state.selectedExerciseId = exerciseId;
   },
 };
 
@@ -28,5 +32,4 @@ export default {
   mutations,
   actions,
 };
-
 

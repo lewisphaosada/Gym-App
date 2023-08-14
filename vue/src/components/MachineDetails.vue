@@ -8,7 +8,7 @@
       <p>{{ exercise.description }}</p>
     </div>
 
-   <div class="form-group">
+    <div class="form-group">
       <h3 class="form-subtitle">Enter Your Workout Details:</h3>
       <label class="form-label">Sets:</label>
       <input v-model="exercise.sets" type="number" class="form-input" />
@@ -16,7 +16,7 @@
       <label class="form-label">Reps:</label>
       <input v-model="exercise.reps" type="number" class="form-input" />
 
-      <label v-if="exercise.timeSlot" class="form-label">Time Slot:</label>
+      <!-- <label v-if="exercise.timeSlot" class="form-label">Time Slot:</label>
       <input
         v-if="exercise.timeSlot"
         v-model="exercise.duration"
@@ -30,35 +30,41 @@
         v-model="exercise.weight"
         type="text"
         class="form-input"
-      />
+      /> -->
     </div>
   </div>
 </template>
 
 
 <script>
+import { ref, onMounted } from "vue";
 import axios from "axios";
 
 export default {
-  props: ["id"],
-  data() {
+  props: ["exerciseId"],
+  setup(props) {
+    const exercise = ref({
+      photo: "",
+      name: "",
+      description: "",
+      sets: "",
+      reps: "",
+    });
+
+    onMounted(async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:9000/exercises/${props.exerciseId}`
+        );
+        exercise.value = response.data;
+        console.log("Fetched exercise details:", exercise.value);
+      } catch (error) {
+        console.error("Error fetching exercise:", error);
+      }
+    });
     return {
-      exercise: {
-        name: '',
-        photo: '',
-        description: '',
-        
-      },
+      exercise,
     };
-  },
-  async created() {
-    try {
-      const response = await axios.get(`http://localhost:9000/exercises/${this.id}`);
-      this.exercise = response.data;
-      
-    } catch (error) {
-      console.error('Error fetching exercise:', error);
-    }
   },
 };
 </script>

@@ -2,51 +2,57 @@
   <div class="exercise-list">
     <h1>Exercise List</h1>
     <div class="image-scroll-view">
-      <div v-for="exercise in exercises" :key="exercise.id" class="image-item">
-        <img
-          :src="exercise.photo"
-          alt="Exercise"
-          class="exercise-image"
-          @click="navigateToDetails(exercise)"
-        />
-        <p>{{ exercise.name }}</p>
+      <div
+        v-for="exercise in exercises"
+        :key="exercise.exercise_id"
+        class="image-item"
+      >
+        <router-link
+          :to="{
+            name: 'MachineDetails',
+            params: { exerciseId: exercise.exercise_id },
+          }"
+        >
+          <img :src="exercise.photo" alt="Exercise" class="exercise-image" />
+          <p>{{ exercise.name }}</p>
+        </router-link>
       </div>
     </div>
   </div>
 </template>
 
+
 <script>
-import { ref, onMounted } from "vue";
 import axios from "axios";
-import router from "@/router";
 
 export default {
-  setup() {
-    const exercises = ref([]);
-
-    onMounted(async () => {
+  data() {
+    return {
+      exercises: [],
+    };
+  },
+  methods: {
+    async fetchExercises() {
       try {
         const response = await axios.get("http://localhost:9000/exercises");
-        exercises.value = response.data;
-        console.log("Fetched exercises:", exercises.value);
+        this.exercises = response.data;
+        console.log("Fetched exercises:", this.exercises);
       } catch (error) {
         console.error("Error fetching exercises:", error);
       }
-    });
+    },
 
-    const navigateToDetails = (exerciseId) => {
-      console.log("Clicked on exercise with ID:", exerciseId);
-      console.log(exerciseId)
-      router.push({ name: "MachineDetails", params: { id: exerciseId } });
-    };
-
-    return {
-      exercises,
-      navigateToDetails,
-    };
+    navigateToDetails(exerciseId) {
+      this.$store.commit("SET_SELECTED_EXERCISE_ID", exerciseId);
+      this.$router.push({ name: "MachineDetails" });
+    },
+  },
+  mounted() {
+    this.fetchExercises();
   },
 };
 </script>
+
 
 <style scoped>
 .exercise-list {
