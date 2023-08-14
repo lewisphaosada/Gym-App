@@ -10,9 +10,15 @@
       <span class="divider" v-if="isAuthenticated">|</span>
       <router-link v-if="isAuthenticated" :to="{ name: 'schedule' }" class="nav-link">Schedule</router-link>
       <span class="divider" v-if="isAuthenticated">|</span>
+        <router-link v-if="isAuthenticated" :to="{ name: 'goals', params: { id: $store.state.user.id } }" class="nav-link">Goals</router-link>
+      <span class="divider" v-if="isAuthenticated">|</span>
       <router-link v-if="isAuthenticated" v-bind:to="{ name: 'logout' }" class="nav-link">Logout</router-link>
       <span class="divider" v-if="isAuthenticated">|</span>
-      <router-link to="/employee-portal" class="nav-link">Employee Portal</router-link>
+      <router-link v-if="isAuthenticated" :to="{ name: 'employeeportal' }" class="nav-link">Employee Portal</router-link>
+      <span class="divider" v-if="isAuthenticated">|</span>
+
+      <router-link to="/monthly-equipment-usage" class="nav-link">Equipment Usage</router-link>
+
 
      
     </nav>

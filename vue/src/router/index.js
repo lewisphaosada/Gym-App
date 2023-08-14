@@ -10,11 +10,13 @@ import EditProfile from '../views/EditProfile.vue'
 import ViewSessions from '../views/ViewSessions.vue'
 import MachineList from  '../components/MachineList.vue'
 import MachineDetails from '../components/MachineDetails.vue'
-import EmployeeLogin from '../components/EmployeeLogin.vue'; // Correct import path
+import EmployeeLogin from '../components/EmployeeLogin.vue'; 
 import EmployeePortal from '../views/EmployeePortal.vue'
 import EmployeeRegister from '@/components/EmployeeRegister.vue'
 import Schedule from '../views/Schedule.vue'
+import MonthlyEquipmentUsage from '../components/MonthlyEquipmentUsage.vue'
 import SingleSession from '../views/SingleSession.vue'
+import GoalDetails from '../views/Goals.vue'
 Vue.use(Router)
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
@@ -34,7 +36,7 @@ const router = new Router({
       component: Home,
       meta: {
         requiresAuth: true,
-      }
+      },
     },
     {
       path: '/login',
@@ -51,7 +53,7 @@ const router = new Router({
       component: Logout,
       meta: {
         requiresAuth: false,
-      }
+      },
     },
     {
       path: '/register',
@@ -59,7 +61,7 @@ const router = new Router({
       component: Register,
       meta: {
         requiresAuth: false,
-      }
+      },
     },
     {
       path: "/profile/:id",
@@ -67,10 +69,10 @@ const router = new Router({
       component: Profile,
       meta: {
         requiresAuth: true,
-      }
+      },
     },
     {
-      path: '/profile/:id/edit',
+      path: '/edit',
       name: 'editprofile',
       component: EditProfile,
       meta: {
@@ -127,17 +129,33 @@ const router = new Router({
     },
     {
       path: '/machines',
-      name: 'MachineList',
+      name: 'MachineList', 
       component: MachineList,
       meta: {
         requiresAuth: true,
-      }
+      },
+    },
+    {
+      path: '/monthly-equipment-usage',
+      name: 'monthlyEquipmentUsage',
+      component: MonthlyEquipmentUsage,
+      meta: {
+        requiresAuth: true,
+      },
     },
     {
       path: '/machine/:id',
-      name: 'MachineDetails',
+      name: 'MachineDetails', 
       component: MachineDetails,
       meta: {
+        requiresAuth: true,
+      },
+    },
+    {
+      path:'/goals',
+      name: 'goals',
+      component: GoalDetails,
+      meta:{
         requiresAuth: true,
       }
     },

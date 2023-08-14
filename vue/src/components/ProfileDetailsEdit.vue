@@ -57,7 +57,13 @@
 </template>
 
 <script>
+<<<<<<< HEAD
+
+
+import UserService from '../services/UserService.js'
+=======
 import UserService from "../services/UserService.js";
+>>>>>>> 61dd7f0496ef687ee9a9d345d3cc7b51e438de70
 
 export default {
   name: "editprofile",
