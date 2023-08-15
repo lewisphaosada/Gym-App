@@ -2,21 +2,26 @@ package com.techelevator.model;
 
 public class Exercise {
 
-    private int exercise_Id;
+    private int exercise_id;
     private String name;
     private String photo;
     private String description;
     private String gif;
 
-    public void setExercise_id(int exercise_id) {
-        this.exercise_Id = exercise_id;
+    public int getExercise_id() {
+        return exercise_id;
     }
 
     public Exercise() {
+
     }
 
-    public Exercise(int exercise_Id,String name, String photo, String description, String gif) {
-        this.exercise_Id = exercise_Id;
+    public void setExercise_id(int exercise_id) {
+        this.exercise_id = exercise_id;
+    }
+
+    public Exercise(int exercise_id, String name, String photo, String description, String gif) {
+        this.exercise_id = exercise_id;
         this.name = name;
         this.photo = photo;
         this.description = description;

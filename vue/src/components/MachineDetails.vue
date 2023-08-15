@@ -15,6 +15,7 @@
 
       <label class="form-label">Reps:</label>
       <input v-model="reps" type="number" class="form-input" />
+
       <label class="form-label">Weight (lbs):</label>
       <input v-model="weight" type="number" class="form-input" />
 
@@ -29,12 +30,12 @@
   </div>
 </template>
 
-
-
 <script>
 import { ref, onMounted } from "vue";
 import axios from "axios";
 import router from "@/router";
+import WorkoutService from "../services/WorkoutService.js";
+
 
 export default {
   props: ["exerciseId"],
@@ -43,11 +44,11 @@ export default {
       photo: "",
       name: "",
       description: "",
-      sets: "",
-      reps: "",
-      weight: "",
-      duration: "",
     });
+    const sets = ref("");
+    const reps = ref("");
+    const weight = ref("");
+    const duration = ref("");
 
     onMounted(async () => {
       try {
@@ -61,29 +62,43 @@ export default {
       }
     });
 
-    const addWorkout = () => {
-      // Implement the logic to add the workout data to your workout table here
-      console.log("Workout data:", {
-        sets: exercise.sets,
-        reps: exercise.reps,
-        weight: exercise.weight,
-        duration: exercise.duration,
-      });
+    const addWorkout = async () => {
+      const workoutData = {
+       // user_id: this.$store.state.user.user_id,
+        exercise_id: props.exerciseId,
+        sets: sets.value,
+        reps: reps.value,
+        weight: weight.value,
+        duration: duration.value,
+      };
+
+      try {
+        await WorkoutService.create(workoutData);
+        router.push({
+          name: "WorkoutPage",
+          props: { workoutData, exerciseName: exercise.value.name },
+        });
+      } catch (error) {
+        console.error("Error adding workout:", error);
+      }
     };
 
     const goToMachines = () => {
       router.push("/machines");
     };
+
     return {
       exercise,
+      sets,
+      reps,
+      weight,
+      duration,
       addWorkout,
       goToMachines,
     };
   },
 };
 </script>
-
-
 
 <style scoped>
 .machine-details {

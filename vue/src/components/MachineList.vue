@@ -43,9 +43,7 @@ export default {
         console.error("Error fetching exercises:", error);
       }
     },
-    navigateToDetails(exerciseId) {
-      this.$router.push({ name: "MachineDetails", params: { exerciseId } });
-    },
+    
   },
   mounted() {
     this.fetchExercises();

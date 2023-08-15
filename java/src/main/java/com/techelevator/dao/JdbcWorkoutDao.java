@@ -46,9 +46,9 @@ public class JdbcWorkoutDao implements WorkoutDao {
     private Workout mapRowToWorkout(SqlRowSet rowSet) {
         Workout workout = new Workout();
         workout.setId(rowSet.getLong("workout_id"));
-        workout.setSessionId(rowSet.getLong("session_id"));
-        workout.setUserId(rowSet.getLong("user_id"));
-        workout.setExerciseId(rowSet.getLong("exercise_id"));
+        workout.setSession_id(rowSet.getLong("session_id"));
+        workout.setUser_id(rowSet.getLong("user_id"));
+        workout.setExercise_id(rowSet.getLong("exercise_id"));
 
         // Use getTimestamp to retrieve a java.sql.Timestamp
         java.sql.Timestamp durationTimestamp = rowSet.getTimestamp("duration");
@@ -62,15 +62,14 @@ public class JdbcWorkoutDao implements WorkoutDao {
         return workout;
     }
 
-    @RequestMapping(path = "", method = RequestMethod.POST)
-    public Workout saveWorkout(@RequestBody Workout workout) {
+    public Workout saveWorkout( Workout workout) {
         String sql = "INSERT INTO workout (user_id, exercise_id, sets, reps, weight, duration) " +
                 "VALUES (?, ?, ?, ?, ?, ?)";
         try {
             jdbcTemplate.update(
                     sql,
-                    workout.getUserId(),
-                    workout.getExerciseId(),
+                    workout.getUser_id(),
+                    workout.getExercise_id(),
                     workout.getSets(),
                     workout.getReps(),
                     workout.getWeight(),
@@ -92,9 +91,9 @@ public class JdbcWorkoutDao implements WorkoutDao {
         try {
             jdbcTemplate.update(
                     sql,
-                    workout.getSessionId(),
-                    workout.getUserId(),
-                    workout.getExerciseId(),
+                    workout.getSession_id(),
+                    workout.getUser_id(),
+                    workout.getExercise_id(),
                     workout.getDuration(),
                     workout.getWeight(),
                     workout.getSets(),
@@ -115,6 +114,7 @@ public class JdbcWorkoutDao implements WorkoutDao {
             throw new DaoException("Unable to connect to the server or database", e);
         }
     }
+
 }
 
 
