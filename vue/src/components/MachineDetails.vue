@@ -45,10 +45,10 @@ export default {
       name: "",
       description: "",
     });
-    const sets = ref("");
-    const reps = ref("");
-    const weight = ref("");
-    const duration = ref("");
+    const sets = ref(0);
+    const reps = ref(0);
+    const weight = ref(0);
+    const duration = ref(0);
 
     onMounted(async () => {
       try {
@@ -64,23 +64,21 @@ export default {
 
     const addWorkout = async () => {
       const workoutData = {
-       // user_id: this.$store.state.user.user_id,
+        //user_id: this.$store.state.user.user_id,
         exercise_id: props.exerciseId,
         sets: sets.value,
         reps: reps.value,
         weight: weight.value,
         duration: duration.value,
       };
-
-      try {
+      console.log(workoutData);
+      
         await WorkoutService.create(workoutData);
         router.push({
-          name: "WorkoutPage",
-          props: { workoutData, exerciseName: exercise.value.name },
+          path: "/machines",
+         // props: { workoutData, exerciseName: exercise.value.name },
         });
-      } catch (error) {
-        console.error("Error adding workout:", error);
-      }
+      
     };
 
     const goToMachines = () => {

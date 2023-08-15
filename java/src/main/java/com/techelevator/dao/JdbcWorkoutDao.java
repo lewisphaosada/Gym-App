@@ -63,8 +63,8 @@ public class JdbcWorkoutDao implements WorkoutDao {
         try {
             int newWorkoutId = jdbcTemplate.queryForObject(
                     sql, int.class,
-                    workout.getUser_id(),
-                    workout.getExercise_id(),
+                    workout.getUserId(),
+                    workout.getExerciseId(),
                     workout.getSets(),
                     workout.getReps(),
                     workout.getWeight(),
@@ -100,9 +100,9 @@ public class JdbcWorkoutDao implements WorkoutDao {
         try {
             jdbcTemplate.update(
                     sql,
-                    workout.getSession_id(),
-                    workout.getUser_id(),
-                    workout.getExercise_id(),
+                    workout.getSessionId(),
+                    workout.getUserId(),
+                    workout.getExerciseId(),
                     workout.getDuration(),
                     workout.getWeight(),
                     workout.getSets(),

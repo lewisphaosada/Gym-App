@@ -33,7 +33,7 @@ public class WorkoutController {
     }
 
     @RequestMapping(path = "/{workoutId}", method = RequestMethod.PUT)
-    public Workout updateWorkout(@PathVariable int workoutId, @RequestBody Workout workout) {
+    public Workout updateWorkout(@PathVariable Long workoutId, @RequestBody Workout workout) {
         workout.setId(workoutId);
         return workoutDao.updateWorkout(workout);
     }
