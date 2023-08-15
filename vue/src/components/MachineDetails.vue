@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import { machines } from "@/store/machines.js";
+
 import axios from "axios";
 
 export default {
@@ -62,11 +62,11 @@ export default {
     };
   },
   created() {
-    console.log("Received id prop:", this.id);
-    this.machine = machines.find(
-      (machine) => machine.id === parseInt(this.$route.params.id)
-    );
-  },
+  //   console.log("Received id prop:", this.id);
+  //   this.machine = machines.find(
+  //     (machine) => machine.id === parseInt(this.$route.params.id)
+  //   );
+   },
   methods: {
     async saveWorkout() {
       const userId = this.$store.state.user.id;

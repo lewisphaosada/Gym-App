@@ -26,7 +26,7 @@
 
 <script>
 import WorkoutService from "../services/WorkoutService.js";
-import { machines } from "@/store/machines.js";
+
 
 export default {
   props: ["workoutData"],
@@ -49,7 +49,7 @@ export default {
   },
   data() {
     return {
-      machines: machines,
+      // machines: machines,
       savedWorkouts: [], 
     };
   },

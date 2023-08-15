@@ -18,12 +18,12 @@
 </template>
 
 <script>
-import { machines } from "@/store/machines.js";
+// import { machines } from "@/store/machines.js";
 
 export default {
   data() {
     return {
-      machines: machines,
+      // machines: machines,
     };
   },
   methods: {
