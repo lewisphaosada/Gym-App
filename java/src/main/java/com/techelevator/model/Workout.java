@@ -5,44 +5,44 @@ import java.time.LocalTime;
 
 public class Workout {
 
-    private Long id;
-    private Long session_id;
-    private Long user_id;
-    private Long exercise_id;
+    private int id;
+    private int session_id;
+    private int user_id;
+    private int exercise_id;
     private LocalTime duration;
     private BigDecimal weight;
     private Integer sets;
     private Integer reps;
 
-    public Long getSession_id() {
+    public int getSession_id() {
         return session_id;
     }
 
-    public void setSession_id(Long session_id) {
+    public void setSession_id(int session_id) {
         this.session_id = session_id;
     }
 
-    public void setUser_id(Long user_id) {
+    public void setUser_id(int user_id) {
         this.user_id = user_id;
     }
 
-    public void setExercise_id(Long exercise_id) {
+    public void setExercise_id(int exercise_id) {
         this.exercise_id = exercise_id;
     }
 
-    public Long getUser_id() {
+    public int getUser_id() {
         return user_id;
     }
 
-    public Long getExercise_id() {
+    public int getExercise_id() {
         return exercise_id;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
