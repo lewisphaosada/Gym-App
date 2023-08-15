@@ -9,7 +9,7 @@ const mutations = {
   setExercises(state, exercises) {
     state.exercises = exercises;
   },
-  setSelectedExerciseId(state, exerciseId) {
+  setSelectedExerciseId(state, exerciseId) { 
     state.selectedExerciseId = exerciseId;
   },
 };
