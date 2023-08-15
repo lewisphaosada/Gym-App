@@ -27,10 +27,18 @@ public class JdbcExerciseDao implements ExerciseDao {
     }
 
     @Override
-    public Exercise getExerciseByExerciseID() {
-        Exercise exercise = new Exercise();
-
-        return exercise;
+    public Exercise getExerciseByExerciseID(int exerciseId) {
+        String sql = "SELECT * FROM exercise WHERE exercise_id = ?";
+        try {
+            SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, exerciseId);
+            if (rowSet.next()) {
+                return mapRowToExercise(rowSet);
+            } else {
+                return null;
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        }
     }
 
     @Override
@@ -44,7 +52,13 @@ public class JdbcExerciseDao implements ExerciseDao {
     public void deleteExerciseByExerciseID() {
 
     }
-
+    @Override
+    public void insertExercises(List<Exercise> exercises) {
+        for (Exercise exercise : exercises) {
+            String sql = "INSERT INTO exercise (name, photo, description, gif) VALUES (?, ?, ?, ?)";
+            jdbcTemplate.update(sql, exercise.getName(), exercise.getPhoto(), exercise.getDescription(), exercise.getGif());
+        }
+    }
     @Override
     public List<Exercise> getExerciseList() {
         List<Exercise> exercises = new ArrayList<>();
@@ -62,7 +76,7 @@ public class JdbcExerciseDao implements ExerciseDao {
 
     private Exercise mapRowToExercise(SqlRowSet rowSet) {
         Exercise exercise = new Exercise();
-
+        exercise.setExercise_id(rowSet.getInt("exercise_id"));
         exercise.setName(rowSet.getString("name"));
         exercise.setDescription(rowSet.getString("description"));
         exercise.setPhoto(rowSet.getString("photo"));
@@ -70,4 +84,6 @@ public class JdbcExerciseDao implements ExerciseDao {
 
         return exercise;
     }
+
+
 }

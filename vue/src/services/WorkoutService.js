@@ -17,4 +17,5 @@ export default {
   exercises() {
     return axios.get('/exercises');
   }
+  
 };

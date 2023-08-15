@@ -1,11 +1,11 @@
 <template>
   <div class="machine-details">
-    <h2 class="form-title">{{ machine.name }}</h2>
-    <img :src="machine.photo" alt="Machine Photo" class="machine-photo" />
+    <h2 class="form-title">{{ exercise.name }}</h2>
+    <img :src="exercise.photo" alt="Exercise Photo" class="machine-photo" />
 
     <div class="form-group">
       <h3 class="form-subtitle">Description:</h3>
-      <p>{{ machine.description }}</p>
+      <p>{{ exercise.description }}</p>
     </div>
 
     <div class="form-group">
@@ -16,24 +16,85 @@
       <label class="form-label">Reps:</label>
       <input v-model="reps" type="number" class="form-input" />
 
-      <label v-if="machine.timeSlot" class="form-label">Time Slot:</label>
-      <input v-if="machine.timeSlot" v-model="timeSlot" type="text" class="form-input" />
+      <label class="form-label">Weight (lbs):</label>
+      <input v-model="weight" type="number" class="form-input" />
 
-      <label v-if="machine.weightUsed" class="form-label">Weight Used:</label>
-      <input v-if="machine.weightUsed" v-model="weightUsed" type="text" class="form-input" />
+      <label class="form-label">Duration (minutes):</label>
+      <input v-model="duration" type="number" class="form-input" />
+
+      <div class="button-group">
+        <button @click="addWorkout" class="form-button">Add to Workout</button>
+        <button @click="goToMachines" class="form-button">Cancel</button>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import { ref, onMounted } from "vue";
+import axios from "axios";
+import router from "@/router";
+import WorkoutService from "../services/WorkoutService.js";
+
+
 export default {
-  props: ['machine'],
-  data() {
+  props: ["exerciseId"],
+  setup(props) {
+    const exercise = ref({
+      photo: "",
+      name: "",
+      description: "",
+    });
+    const sets = ref("");
+    const reps = ref("");
+    const weight = ref("");
+    const duration = ref("");
+
+    onMounted(async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:9000/exercises/${props.exerciseId}`
+        );
+        exercise.value = response.data;
+        console.log("Fetched exercise details:", exercise.value);
+      } catch (error) {
+        console.error("Error fetching exercise:", error);
+      }
+    });
+
+    const addWorkout = async () => {
+      const workoutData = {
+       // user_id: this.$store.state.user.user_id,
+        exercise_id: props.exerciseId,
+        sets: sets.value,
+        reps: reps.value,
+        weight: weight.value,
+        duration: duration.value,
+      };
+
+      try {
+        await WorkoutService.create(workoutData);
+        router.push({
+          name: "WorkoutPage",
+          props: { workoutData, exerciseName: exercise.value.name },
+        });
+      } catch (error) {
+        console.error("Error adding workout:", error);
+      }
+    };
+
+    const goToMachines = () => {
+      router.push("/machines");
+    };
+
     return {
-      sets: '',
-      reps: '',
-      timeSlot: '',
-      weightUsed: '',
+      exercise,
+      sets,
+      reps,
+      weight,
+      duration,
+      addWorkout,
+      goToMachines,
     };
   },
 };
@@ -54,11 +115,11 @@ export default {
   font-size: 24px;
   margin-bottom: 20px;
 }
-
 .machine-photo {
   width: 100%;
-  max-height: 300px;
-  object-fit: cover;
+  height: auto;
+  max-height: 400px; /* Adjust the max-height for better fit */
+  object-fit: contain; /* Use 'contain' to fit within the space */
   border-radius: 5px;
   margin-bottom: 20px;
 }
@@ -77,7 +138,6 @@ export default {
   font-weight: bold;
   margin-bottom: 5px;
 }
-
 .form-input {
   width: 100%;
   padding: 10px;
@@ -86,4 +146,28 @@ export default {
   font-size: 16px;
 }
 
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.form-button {
+  flex: 1;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-right: 10px;
+}
+.form-button:last-child {
+  margin-right: 0;
+}
+
+.form-button:hover {
+  background-color: #0056b3;
+}
 </style>

@@ -14,39 +14,44 @@ public class Workout {
     private Integer sets;
     private Integer reps;
 
-    public Long getId() {
+    public int getSession_id() {
+        return session_id;
+    }
+
+    public void setSession_id(int session_id) {
+        this.session_id = session_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
+    }
+
+    public void setExercise_id(int exercise_id) {
+        this.exercise_id = exercise_id;
+    }
+
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public int getExercise_id() {
+        return exercise_id;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public Long getSessionId() {
-        return sessionId;
-    }
-
-    public void setSessionId(Long sessionId) {
-        this.sessionId = sessionId;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public Long getExerciseId() {
-        return exerciseId;
-    }
-
-    public void setExerciseId(Long exerciseId) {
-        this.exerciseId = exerciseId;
-    }
-
+<<<<<<< HEAD
     public Long getDuration() {
+=======
+
+    public LocalTime getDuration() {
+>>>>>>> d6af3960b4fb62adb197e481721e3c3fb441fa94
         return duration;
     }
 
