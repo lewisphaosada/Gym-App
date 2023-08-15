@@ -93,9 +93,10 @@ export default {
 </script>
 <style scoped>
 .monthly-equipment-usage {
-  max-width: 800px;
-  margin: auto;
-  padding: 20px;
+   border-radius: 50px;
+background: linear-gradient(315deg, #cacaca, #f0f0f0);
+box-shadow:  -8px -8px 16px #b5b5b5,
+             8px 8px 16px #ffffff;
 }
 
 .title {
@@ -123,11 +124,28 @@ export default {
   padding: 10px 20px;
   cursor: pointer;
   border-radius: 40px;
+  margin: auto 350px;
 }
 
 .usage-table {
   margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+  background: black;
+  background: -webkit-linear-gradient(to right, #3f4c6b, #606c88);
+  background: linear-gradient(to right top, #3f4c6b, #606c88);
+  padding: 1rem;
+  color: white;
+  box-shadow: 0px 87px 78px -39px rgba(0, 0, 0, 0.4);
+  margin: auto;
+  width: 32em;
 }
+
 
 .usage-table table {
   width: 100%;
@@ -145,6 +163,10 @@ export default {
   text-align: center;
   font-style: italic;
   color: #888;
+}
+label{
+  margin-left:400px ;
+  
 }
 
 </style>

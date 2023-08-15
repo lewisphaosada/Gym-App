@@ -11,23 +11,58 @@
       <p>Weight: {{ selectedMember.weight }}</p>
       <p>Height: {{ selectedMember.height }}</p>
       <p>BMI: {{ selectedMember.bmi }}</p>
+      <div v-if="showWorkoutMetrics">
+        <h3>Workout Metrics</h3>
+        <p>Total Workouts: {{ workoutMetrics.totalWorkouts }}</p>
+        <p>Average Workout Duration: {{ workoutMetrics.averageWorkoutDuration }} minutes</p>
+      </div>
+      <button @click="closeModal">Close</button>
     </div>
   </div>
 </template>
-
 
 <script>
 export default {
   props: {
     selectedMember: Object,
   },
+  data() {
+    return {
+      showWorkoutMetrics: false,
+      workoutMetrics: {
+        totalWorkouts: 0,
+        averageWorkoutDuration: 0,
+      },
+    };
+  },
   methods: {
+    generateRandomWorkoutMetrics() {
+      const randomTotalWorkouts = Math.floor(Math.random() * 50) + 1;
+      const randomAverageDuration = Math.floor(Math.random() * 120) + 15;
+
+      this.workoutMetrics.totalWorkouts = randomTotalWorkouts;
+      this.workoutMetrics.averageWorkoutDuration = randomAverageDuration;
+    },
     closeModal() {
       this.$emit('close');
     },
   },
+  watch: {
+    selectedMember: {
+      handler(newValue) {
+        if (newValue) {
+          this.generateRandomWorkoutMetrics(); // Generate random workout metrics for the selected member
+          this.showWorkoutMetrics = true; // Show workout metrics for the selected member
+        } else {
+          this.showWorkoutMetrics = false; // Hide workout metrics when no member is selected
+        }
+      },
+      immediate: true,
+    },
+  },
 };
 </script>
+
 
 <style scoped>
 
