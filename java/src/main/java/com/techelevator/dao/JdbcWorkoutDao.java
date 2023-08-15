@@ -49,13 +49,7 @@ public class JdbcWorkoutDao implements WorkoutDao {
         workout.setSessionId(rowSet.getLong("session_id"));
         workout.setUserId(rowSet.getLong("user_id"));
         workout.setExerciseId(rowSet.getLong("exercise_id"));
-
-        // Use getTimestamp to retrieve a java.sql.Timestamp
-        java.sql.Timestamp durationTimestamp = rowSet.getTimestamp("duration");
-        if (durationTimestamp != null) {
-            workout.setDuration(durationTimestamp.toLocalDateTime().toLocalTime());
-        }
-
+        workout.setDuration(rowSet.getLong("duration"));
         workout.setWeight(rowSet.getBigDecimal("weight"));
         workout.setSets(rowSet.getInt("sets"));
         workout.setReps(rowSet.getInt("reps"));

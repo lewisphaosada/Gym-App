@@ -9,7 +9,7 @@ public class Workout {
     private Long sessionId;
     private Long userId;
     private Long exerciseId;
-    private LocalTime duration;
+    private Long duration;
     private BigDecimal weight;
     private Integer sets;
     private Integer reps;
@@ -46,11 +46,11 @@ public class Workout {
         this.exerciseId = exerciseId;
     }
 
-    public LocalTime getDuration() {
+    public Long getDuration() {
         return duration;
     }
 
-    public void setDuration(LocalTime duration) {
+    public void setDuration(Long duration) {
         this.duration = duration;
     }
 
