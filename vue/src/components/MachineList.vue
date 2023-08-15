@@ -1,22 +1,20 @@
 <template>
   <div class="exercise-list">
-    <h1>Choose an Exercise:</h1>
-    <div class="exercise-grid">
+    <h1>Exercise List</h1>
+    <div class="image-scroll-view">
       <div
         v-for="exercise in exercises"
-        :key="exercise.exerciseId"
-        class="exercise-item"
+        :key="exercise.exercise_id"
+        class="image-item"
       >
         <router-link
           :to="{
             name: 'MachineDetails',
-            params: { exerciseId: exercise.exerciseId },
+            params: { exerciseId: exercise.exercise_id },
           }"
         >
-          <div class="exercise-box">
-            <img :src="exercise.photo" alt="Exercise" class="exercise-image" />
-            <p class="exercise-title">{{ exercise.name }}</p>
-          </div>
+          <img :src="exercise.photo" alt="Exercise" class="exercise-image" />
+          <p>{{ exercise.name }}</p>
         </router-link>
       </div>
     </div>
@@ -45,7 +43,8 @@ export default {
     },
 
     navigateToDetails(exerciseId) {
-      this.$router.push({ name: "MachineDetails", params: { exerciseId } });
+      this.$store.commit("SET_SELECTED_EXERCISE_ID", exerciseId);
+      this.$router.push({ name: "MachineDetails" });
     },
   },
   mounted() {
@@ -54,49 +53,36 @@ export default {
 };
 </script>
 
+
 <style scoped>
 .exercise-list {
-  max-width: 1200px;
+  max-width: 800px;
   margin: 0 auto;
   padding: 20px;
 }
 
-.exercise-grid {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 20px;
-}
-
-.exercise-item {
+.image-scroll-view {
   display: flex;
-  justify-content: center;
+  overflow-x: auto;
+  padding-bottom: 20px;
 }
 
-.exercise-box {
-  border: 1px solid #ccc;
-  padding: 10px;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-  text-align: center;
-  transition: transform 0.2s;
-}
-
-.exercise-box:hover {
-  transform: scale(1.05);
+.image-item {
+  flex: 0 0 auto;
+  margin-right: 10px;
 }
 
 .exercise-image {
-  width: 100%;
-  height: auto;
-  max-height: 150px;
+  width: 150px;
+  height: 150px;
   object-fit: cover;
   cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: transform 0.2s;
 }
 
-.exercise-title {
-  font-size: 16px;
-  margin-top: 10px;
-  color: #333;
+.exercise-image:hover {
+  transform: scale(1.1);
 }
 </style>
-

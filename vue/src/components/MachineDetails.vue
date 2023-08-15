@@ -11,21 +11,26 @@
     <div class="form-group">
       <h3 class="form-subtitle">Enter Your Workout Details:</h3>
       <label class="form-label">Sets:</label>
-      <input v-model="sets" type="number" class="form-input" />
+      <input v-model="exercise.sets" type="number" class="form-input" />
 
       <label class="form-label">Reps:</label>
-      <input v-model="reps" type="number" class="form-input" />
+      <input v-model="exercise.reps" type="number" class="form-input" />
 
-      <label class="form-label">Weight (lbs):</label>
-      <input v-model="weight" type="number" class="form-input" />
+      <!-- <label v-if="exercise.timeSlot" class="form-label">Time Slot:</label>
+      <input
+        v-if="exercise.timeSlot"
+        v-model="exercise.duration"
+        type="text"
+        class="form-input"
+      />
 
-      <label class="form-label">Duration (minutes):</label>
-      <input v-model="duration" type="number" class="form-input" />
-
-      <div class="button-group">
-        <button @click="addWorkout" class="form-button">Add to Workout</button>
-        <button @click="goToMachines" class="form-button">Cancel</button>
-      </div>
+     <label v-if="exercise.weightUsed" class="form-label">Weight Used:</label>
+      <input
+        v-if="exercise.weightUsed"
+        v-model="exercise.weight"
+        type="text"
+        class="form-input"
+      /> -->
     </div>
   </div>
 </template>
@@ -34,7 +39,6 @@
 <script>
 import { ref, onMounted } from "vue";
 import axios from "axios";
-import router from "@/router";
 
 export default {
   props: ["exerciseId"],
@@ -45,8 +49,6 @@ export default {
       description: "",
       sets: "",
       reps: "",
-      weight: "",
-      duration: "",
     });
 
     onMounted(async () => {
@@ -60,25 +62,8 @@ export default {
         console.error("Error fetching exercise:", error);
       }
     });
-
-    const addWorkout = () => {
-      // Implement the logic to add the workout data to your workout table here
-      console.log("Workout data:", {
-        sets: exercise.sets,
-        reps: exercise.reps,
-        weight: exercise.weight,
-        duration: exercise.duration,
-      });
-    };
-
-    const goToMachines = () => {
-       router.push("/machines");
-    };
-
     return {
       exercise,
-      addWorkout,
-      goToMachines,
     };
   },
 };
@@ -102,9 +87,8 @@ export default {
 
 .machine-photo {
   width: 100%;
-  height: auto;
-  max-height: 400px; /* Adjust the max-height for better fit */
-  object-fit: contain; /* Use 'contain' to fit within the space */
+  max-height: 300px;
+  object-fit: cover;
   border-radius: 5px;
   margin-bottom: 20px;
 }
@@ -130,31 +114,5 @@ export default {
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 16px;
-}
-
-.button-group {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
-}
-
-.form-button {
-  flex: 1;
-  padding: 10px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  margin-right: 10px;
-}
-
-.form-button:last-child {
-  margin-right: 0;
-}
-
-.form-button:hover {
-  background-color: #0056b3;
 }
 </style>
