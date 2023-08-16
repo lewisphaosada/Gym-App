@@ -35,10 +35,14 @@ import { ref, onMounted } from "vue";
 import axios from "axios";
 import router from "@/router";
 import WorkoutService from "../services/WorkoutService.js";
+import Store from "../store/index.js";
 
 
 export default {
   props: ["exerciseId"],
+  created() {
+    Store.state.currentSessionId;
+  },
   setup(props) {
     const exercise = ref({
       photo: "",
@@ -64,7 +68,8 @@ export default {
 
     const addWorkout = async () => {
       const workoutData = {
-        //user_id: this.$store.state.user.user_id,
+        session_id: Store.state.currentSessionId,
+        user_id: Store.state.user.id,
         exercise_id: props.exerciseId,
         sets: sets.value,
         reps: reps.value,
@@ -78,7 +83,6 @@ export default {
           path: "/machines",
          // props: { workoutData, exerciseName: exercise.value.name },
         });
-      
     };
 
     const goToMachines = () => {

@@ -33,6 +33,9 @@ export default {
       exercises: [],
     };
   },
+  created() {
+    console.log(this.$store.state.currentSessionId);
+  },
   methods: {
     async fetchExercises() {
       try {

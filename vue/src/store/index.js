@@ -49,6 +49,7 @@ export default new Vuex.Store({
       SessionService.create({ userId: state.user.id, date: state.sessionTimerStart }).then(result => {
         state.currentSessionId = result.data.sessionId;
       });
+      console.log(state.currentSessionId)
     },
     STOP_TIMER(state) {
       state.sessionTimerEnd = Date.now();
