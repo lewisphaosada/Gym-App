@@ -68,9 +68,9 @@ export default {
 
     const addWorkout = async () => {
       const workoutData = {
-        session_id: Store.state.currentSessionId,
-        user_id: Store.state.user.id,
-        exercise_id: props.exerciseId,
+        sessionId: Store.state.currentSessionId,
+        userId: Store.state.user.id,
+        exerciseId: props.exerciseId,
         sets: sets.value,
         reps: reps.value,
         weight: weight.value,

@@ -58,11 +58,12 @@ public class JdbcWorkoutDao implements WorkoutDao {
 
     public Workout saveWorkout( Workout workout) {
         Workout newWorkout = null;
-        String sql = "INSERT INTO workout (user_id, exercise_id, sets, reps, weight, duration) " +
-                "VALUES (?, ?, ?, ?, ?, ?) RETURNING workout_id";
+        String sql = "INSERT INTO workout (session_id, user_id, exercise_id, sets, reps, weight, duration) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING workout_id";
         try {
             int newWorkoutId = jdbcTemplate.queryForObject(
                     sql, int.class,
+                    workout.getSessionId(),
                     workout.getUserId(),
                     workout.getExerciseId(),
                     workout.getSets(),
