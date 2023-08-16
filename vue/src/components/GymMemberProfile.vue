@@ -1,39 +1,42 @@
 <template>
-  <div class="modal">
-    <div class="modal-content">
+  <div class="model">
+    <div class="model-content">
       <h2>Member Profile</h2>
       <img src="https://img.freepik.com/free-icon/user_318-286823.jpg" alt="Logo" class="logo" />
-      <p>Name: {{ selectedMember.name }}</p>
-      <p>Email: {{ selectedMember.email }}</p>
-      <p>Username: {{ selectedMember.username }}</p>
-      <p>Password: {{ selectedMember.password }}</p>
-      <p>Sex: {{ selectedMember.sex }}</p>
-      <p>Weight: {{ selectedMember.weight }}</p>
-      <p>Height: {{ selectedMember.height }}</p>
-      <p>BMI: {{ selectedMember.bmi }}</p>
+      <p>Name: {{ userProfile.name }}</p>
+      <p>Email: {{ userProfile.email }}</p>
+      <p>Username: {{ userProfile.username }}</p>
+      <p>Sex: {{ userProfile.sex }}</p>
+      <p>Weight: {{ userProfile.weight }}</p>
+      <p>Height: {{ userProfile.height }}</p>
       <div v-if="showWorkoutMetrics">
         <h3>Workout Metrics</h3>
         <p>Total Workouts: {{ workoutMetrics.totalWorkouts }}</p>
         <p>Average Workout Duration: {{ workoutMetrics.averageWorkoutDuration }} minutes</p>
       </div>
-      <button @click="closeModal">Close</button>
     </div>
   </div>
 </template>
 
 <script>
+import UserService from '../services/UserService';
+
 export default {
   props: {
     selectedMember: Object,
   },
   data() {
     return {
+      userProfile: {},
       showWorkoutMetrics: false,
       workoutMetrics: {
         totalWorkouts: 0,
         averageWorkoutDuration: 0,
       },
     };
+  },
+  created() {
+    this.populateUserProfile();
   },
   methods: {
     generateRandomWorkoutMetrics() {
@@ -43,9 +46,13 @@ export default {
       this.workoutMetrics.totalWorkouts = randomTotalWorkouts;
       this.workoutMetrics.averageWorkoutDuration = randomAverageDuration;
     },
-    closeModal() {
-      this.$emit('close');
-    },
+    populateUserProfile() {
+      UserService.getProfile(this.selectedMember.id).then(response => {
+        this.userProfile = response.data
+        console.log(this.userProfile)
+      })
+    }
+
   },
   watch: {
     selectedMember: {
@@ -72,7 +79,7 @@ export default {
   margin-top: 10px;
   margin: auto;
 }
-.modal {
+.model {
 display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -89,7 +96,7 @@ display: flex;
   margin: auto;
   width: 32em;
 }
-.modal-content {
+.model-content {
  margin: auto;
 }
 .logo-image {
