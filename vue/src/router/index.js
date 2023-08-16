@@ -8,15 +8,16 @@ import store from '../store/index'
 import Profile from '../views/Profile.vue'
 import EditProfile from '../views/EditProfile.vue'
 import ViewSessions from '../views/ViewSessions.vue'
-import MachineList from  '../components/MachineList.vue'
+import MachineList from '../components/MachineList.vue'
 import MachineDetails from '../components/MachineDetails.vue'
-import EmployeeLogin from '../components/EmployeeLogin.vue'; 
+import EmployeeLogin from '../components/EmployeeLogin.vue';
 import EmployeePortal from '../views/EmployeePortal.vue'
 import EmployeeRegister from '@/components/EmployeeRegister.vue'
 import Schedule from '../views/Schedule.vue'
 import GoalDetails from '../views/Goals.vue'
 import SingleSession from '../views/SingleSession.vue'
-import GoalDetails from '../views/Goals.vue'
+import Workout from '../components/Workout.vue'
+
 Vue.use(Router)
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
@@ -83,7 +84,7 @@ const router = new Router({
       path: '/schedule',
       name: 'schedule',
       component: Schedule,
-      meta:{
+      meta: {
         requiresAuth: true,
       }
     },
@@ -118,7 +119,7 @@ const router = new Router({
       meta: {
         requiresAuth: true
       }
-    }, 
+    },
     {
       path: '/employee-register',
       name: 'employeeregister',
@@ -131,6 +132,7 @@ const router = new Router({
       path: '/machines',
       name: 'MachineList', 
       component: MachineList,
+      props: true,
       meta: {
         requiresAuth: true,
       },
@@ -144,20 +146,18 @@ const router = new Router({
       },
     },
     {
-      path: '/machine/:id',
-      name: 'MachineDetails', 
+      path: '/exercises/:exerciseId',
+      name: "MachineDetails",
       component: MachineDetails,
+      props: true,
       meta: {
         requiresAuth: true,
       },
     },
     {
-      path:'/goals',
-      name: 'goals',
-      component: GoalDetails,
-      meta:{
-        requiresAuth: true,
-      }
+      path: "/workouts",
+      name: "WorkoutPage",
+      component: Workout,
     },
     {
       path:'/goals',
@@ -169,7 +169,6 @@ const router = new Router({
     },
   ]
 })
-
 
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(x => x.meta.requiresAuth);

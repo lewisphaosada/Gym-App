@@ -49,26 +49,21 @@ public class JdbcWorkoutDao implements WorkoutDao {
         workout.setSessionId(rowSet.getLong("session_id"));
         workout.setUserId(rowSet.getLong("user_id"));
         workout.setExerciseId(rowSet.getLong("exercise_id"));
-
-        // Use getTimestamp to retrieve a java.sql.Timestamp
-        java.sql.Timestamp durationTimestamp = rowSet.getTimestamp("duration");
-        if (durationTimestamp != null) {
-            workout.setDuration(durationTimestamp.toLocalDateTime().toLocalTime());
-        }
-
+        workout.setDuration(rowSet.getLong("duration"));
         workout.setWeight(rowSet.getBigDecimal("weight"));
         workout.setSets(rowSet.getInt("sets"));
         workout.setReps(rowSet.getInt("reps"));
         return workout;
     }
 
-    @RequestMapping(path = "", method = RequestMethod.POST)
-    public Workout saveWorkout(@RequestBody Workout workout) {
-        String sql = "INSERT INTO workout (user_id, exercise_id, sets, reps, weight, duration) " +
-                "VALUES (?, ?, ?, ?, ?, ?)";
+    public Workout saveWorkout( Workout workout) {
+        Workout newWorkout = null;
+        String sql = "INSERT INTO workout (session_id, user_id, exercise_id, sets, reps, weight, duration) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING workout_id";
         try {
-            jdbcTemplate.update(
-                    sql,
+            int newWorkoutId = jdbcTemplate.queryForObject(
+                    sql, int.class,
+                    workout.getSessionId(),
                     workout.getUserId(),
                     workout.getExerciseId(),
                     workout.getSets(),
@@ -76,11 +71,25 @@ public class JdbcWorkoutDao implements WorkoutDao {
                     workout.getWeight(),
                     workout.getDuration()
             );
-
-            return workout;
+            newWorkout = getWorkoutByWorkoutId(newWorkoutId);
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to the server or database", e);
         }
+        return newWorkout;
+    }
+
+    public Workout getWorkoutByWorkoutId(int workoutId) {
+        Workout workout = null;
+        String sql = "SELECT * FROM workout WHERE workout_id = ?";
+        try {
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, workoutId);
+            if(results.next()) {
+                workout = mapRowToWorkout(results);
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database");
+        }
+        return workout;
     }
 
 
@@ -115,6 +124,7 @@ public class JdbcWorkoutDao implements WorkoutDao {
             throw new DaoException("Unable to connect to the server or database", e);
         }
     }
+
 }
 
 

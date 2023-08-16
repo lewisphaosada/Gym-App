@@ -12,11 +12,11 @@ import java.util.List;
 @CrossOrigin
 @RestController
 @RequestMapping("/workouts")
-@PreAuthorize("isAuthenticated()")
+//@PreAuthorize("isAuthenticated()")
 public class WorkoutController {
 
     private WorkoutDao workoutDao;
-
+    @Autowired
     public WorkoutController(WorkoutDao workoutDao) {
         this.workoutDao = workoutDao;
     }
@@ -26,9 +26,8 @@ public class WorkoutController {
         return workoutDao.getWorkoutsByUserId(userId);
     }
 
-    @RequestMapping(path = "", method = RequestMethod.POST)
+    @RequestMapping(path = "/save", method = RequestMethod.POST)
     public Workout saveWorkout(@RequestBody Workout workout) {
-        System.out.println("Received workout data: " + workout.toString());
         return workoutDao.saveWorkout(workout);
     }
 
@@ -42,5 +41,6 @@ public class WorkoutController {
     public void deleteWorkout(@PathVariable Long workoutId) {
         workoutDao.deleteWorkout(workoutId);
     }
+
 }
 

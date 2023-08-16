@@ -1,67 +1,101 @@
 <template>
-  <div class="machine-list">
-    <h1>Machine List</h1>
-    <div class="image-scroll-view">
-      <div v-for="machine in machines" :key="machine.id" class="image-item">
-        <img :src="machine.photo" alt="Machine" class="machine-image" @click="navigateToDetails(machine.id)" />
+  <div class="exercise-list">
+    <h1>Choose an Exercise:</h1>
+    <div class="exercise-grid">
+      <div
+        v-for="exercise in exercises"
+        :key="exercise.exercise_id"
+        class="exercise-item"
+      >
+        <router-link
+          :to="{
+            name: 'MachineDetails',
+            params: { exerciseId: exercise.exercise_id },
+          }"
+        >
+          <div class="exercise-box">
+            <img :src="exercise.photo" alt="Exercise" class="exercise-image" />
+            <p class="exercise-title">{{ exercise.name }}</p>
+          </div>
+        </router-link>
       </div>
     </div>
   </div>
 </template>
 
+
 <script>
-// import { computed, onMounted } from 'vue';
-// import { useStore } from '@/store';
+import axios from "axios";
 
-// export default {
-//   setup() {
-//     const store = useStore();
-//     const machines = computed(() => store.state.machines.machines);
-//   onMounted(() => {
-//       store.dispatch('machines/fetchMachines');
-//     });
-
-//     const navigateToDetails = (machineId) => {
-//       // You can navigate to the details page using router programmatically here
-//       // For now, I'll just log the machine ID
-//       console.log('Navigating to details of machine:', machineId);
-//     };
-
-//     return {
-//       machines,
-//       navigateToDetails,
-//     };
-//   },
-// }
+export default {
+  data() {
+    return {
+      exercises: [],
+    };
+  },
+  created() {
+    console.log(this.$store.state.currentSessionId);
+  },
+  methods: {
+    async fetchExercises() {
+      try {
+        const response = await axios.get("http://localhost:9000/exercises");
+        this.exercises = response.data;
+        console.log("Fetched exercises:", this.exercises);
+      } catch (error) {
+        console.error("Error fetching exercises:", error);
+      }
+    },
+    
+  },
+  mounted() {
+    this.fetchExercises();
+  },
+};
 </script>
 
+
 <style scoped>
-.machine-list {
-  max-width: 800px;
+.exercise-list {
+  max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
 }
 
-.image-scroll-view {
+.exercise-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 20px;
+}
+
+.exercise-item {
   display: flex;
-  overflow-x: auto;
-  padding-bottom: 20px;
+  justify-content: center;
 }
-.image-item {
-  flex: 0 0 auto;
-  margin-right: 10px;
-}
-.machine-image {
-  width: 150px;
-  height: 150px;
-  object-fit: cover;
-  cursor: pointer;
+exercise-box {
   border: 1px solid #ccc;
-  border-radius: 5px;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  text-align: center;
   transition: transform 0.2s;
 }
 
-.machine-image:hover {
-  transform: scale(1.1);
+.exercise-box:hover {
+  transform: scale(1.05);
+}
+
+.exercise-image {
+  width: 100%;
+  height: auto;
+  max-height: 150px;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.exercise-title {
+  font-size: 16px;
+  margin-top: 10px;
+  color: #333;
 }
 </style>
