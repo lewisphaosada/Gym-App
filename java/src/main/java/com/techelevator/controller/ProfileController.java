@@ -3,11 +3,7 @@ package com.techelevator.controller;
 import com.techelevator.dao.ProfileDao;
 import com.techelevator.model.Profile;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @CrossOrigin
 @RestController

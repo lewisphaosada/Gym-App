@@ -1,7 +1,8 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
-import axios from 'axios';
-
+import Vue from 'vue'
+import Vuex from 'vuex'
+import axios from 'axios'
+import SessionService from '../services/SessionService.js'
+import exercise from './exercise.js';
 
 
 Vue.use(Vuex);
@@ -17,10 +18,11 @@ export default new Vuex.Store({
   state: {
     token: currentToken || '',
     user: currentUser || {},
-    // currentUser: {},
     isCheckedIn: false,
+    currentSessionId: 0,
     sessionTimerStart: 0,
     sessionTimerEnd: 0,
+    sessionTimerElapsed: 0
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -31,7 +33,6 @@ export default new Vuex.Store({
     SET_USER(state, user) {
       state.user = user;
       localStorage.setItem('user', JSON.stringify(user));
-      // state.currentUser = UserService.getUserByUsername(user.username);
     },
     LOGOUT(state) {
       localStorage.removeItem('token');
@@ -45,15 +46,25 @@ export default new Vuex.Store({
     },
     START_TIMER(state) {
       state.sessionTimerStart = Date.now();
+      SessionService.create({ userId: state.user.id, date: state.sessionTimerStart }).then(result => {
+        state.currentSessionId = result.data.sessionId;
+      });
+      console.log(state.currentSessionId)
     },
     STOP_TIMER(state) {
       state.sessionTimerEnd = Date.now();
-      // const sessionElapsed = state.sessionTimerEnd - state.sessionTimerStart;
-      // SessionService.create({user_id: state.user.id, duration: sessionElapsed, date: state.sessionTimerStart});
-      console.log(state.sessionTimerStart, state.sessionTimerEnd)
+      state.sessionTimerElapsed = state.sessionTimerEnd - state.sessionTimerStart;
+      SessionService.update(state.currentSessionId, { userId: state.user.id, duration: state.sessionTimerElapsed, date: state.sessionTimerStart });
       state.sessionTimerStart = 0;
       state.sessionTimerEnd = 0;
-    }
+    },
+    SET_SELECTED_EXERCISE_ID(state, exerciseId) {
+      state.selectedExerciseId = exerciseId;
+    },
   },
+  modules: {
+    exercise,
+  }
+}
 
-});
+);

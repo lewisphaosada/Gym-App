@@ -159,35 +159,8 @@ export default {
   margin-bottom: 15px;
 }
 
-.input-label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-.input-field {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  font-size: 14px;
-  box-sizing: border-box;
-}
-
-.submit-button {
-  width: 100%;
-  padding: 10px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 3px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.register-link {
-  text-align: center;
-  margin-top: 10px;
+label {
+  margin-right: 0.5rem;
 }
 </style>
 

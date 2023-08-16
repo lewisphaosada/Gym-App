@@ -9,7 +9,7 @@ public class Workout {
     private Long sessionId;
     private Long userId;
     private Long exerciseId;
-    private LocalTime duration;
+    private Long duration;
     private BigDecimal weight;
     private Integer sets;
     private Integer reps;
@@ -30,27 +30,27 @@ public class Workout {
         this.sessionId = sessionId;
     }
 
-    public Long getUserId() {
-        return userId;
-    }
-
     public void setUserId(Long userId) {
         this.userId = userId;
-    }
-
-    public Long getExerciseId() {
-        return exerciseId;
     }
 
     public void setExerciseId(Long exerciseId) {
         this.exerciseId = exerciseId;
     }
 
-    public LocalTime getDuration() {
+    public Long getUserId() {
+        return userId;
+    }
+
+    public Long getExerciseId() {
+        return exerciseId;
+    }
+
+    public Long getDuration() {
         return duration;
     }
 
-    public void setDuration(LocalTime duration) {
+    public void setDuration(Long duration) {
         this.duration = duration;
     }
 

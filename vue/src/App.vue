@@ -4,17 +4,26 @@
       <router-link v-bind:to="{ name: 'home' }" class="nav-link">Home</router-link>
       <span class="divider">|</span>
       <router-link v-if="!isAuthenticated" v-bind:to="{ name: 'register' }" class="nav-link">Register</router-link>
-      <span class="divider" v-if="!isAuthenticated">|</span>
       <router-link v-if="isAuthenticated" :to="{ name: 'profile', params: { id: $store.state.user.id } }" class="nav-link">Profile</router-link>
       <span class="divider" v-if="isAuthenticated">|</span>
-
-       <router-link v-if="isAuthenticated" :to="{ name: 'schedule' }" class="nav-link">Schedule</router-link>
+      <router-link v-if="isAuthenticated" :to="{ name: 'sessions', params: { id: $store.state.user.id } }" class="nav-link">Your Sessions</router-link>
       <span class="divider" v-if="isAuthenticated">|</span>
-
-       <router-link v-if="isAuthenticated" :to="{ name: 'WorkoutPage' }" class="nav-link">Your Workout</router-link>
+      <router-link v-if="isAuthenticated" :to="{ name: 'schedule' }" class="nav-link">Schedule</router-link>
       <span class="divider" v-if="isAuthenticated">|</span>
-
+      <router-link v-if="isAuthenticated" :to="{path: '/machines'}" class="nav-link">Workouts</router-link>
+      <span class="divider" v-if="isAuthenticated">|</span>
+      <router-link v-if="isAuthenticated" :to="{ name: 'goals', params: { id: $store.state.user.id } }" class="nav-link">Goals</router-link>
+      <span class="divider" v-if="isAuthenticated">|</span>
       <router-link v-if="isAuthenticated" v-bind:to="{ name: 'logout' }" class="nav-link">Logout</router-link>
+      <span class="divider" v-if="isAuthenticated">|</span>
+      <router-link v-if="isAuthenticated" v-bind:to="{ name: 'logout' }" class="nav-link" @click="populateUserRole()">Logout</router-link>
+      <span class="divider" v-if="isEmployee() && isAuthenticated">|</span>
+      <router-link  v-if="isEmployee() && isAuthenticated" :to="{ name: 'employeeportal' }" class="nav-link">Employee Portal</router-link>
+      <span class="divider" v-if="isEmployee() && isAuthenticated">|</span>
+      <router-link to="/monthly-equipment-usage" class="nav-link" v-if="isEmployee() && isAuthenticated">Equipment Usage</router-link>
+
+      <!-- <router-link to="/employee-portal" class="nav-link">Employee Portal</router-link>
+      <span class="divider" v-if="isAuthenticated">|</span> -->
 
      
     </nav>
@@ -24,13 +33,41 @@
 <script>
 export default {
   name: "App",
+  userRole: '',
+  created() {
+    this.populateUserRole();
+  },
+  watch: {
+    // eslint-disable-next-line no-unused-vars
+    $route (to, from){
+      this.populateUserRole();
+    }
+  },
   computed: {
     isAuthenticated() {
+      return this.$store.state.token !== '';
+    }
+  },
+  methods: {
+    populateUserRole() {
+      if(this.isAuthenticatedMethod()){
+        this.userRole = this.$store.state.user.authorities[0].name;
+      }
+    },
+    isEmployee() {
+      if(this.userRole === 'ROLE_EMPLOYEE' || this.userRole === 'ROLE_ADMIN'){
+        return true
+      } else {
+        return false
+      }
+    },
+    isAuthenticatedMethod() {
       return this.$store.state.token !== '';
     }
   }
 };
 </script>
+
 <style>
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;

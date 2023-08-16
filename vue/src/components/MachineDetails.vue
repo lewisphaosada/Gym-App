@@ -1,11 +1,11 @@
 <template>
-  <div class="machine-details" v-if="machine">
-    <h2 class="form-title">{{ machine.name }}</h2>
-    <img :src="machine.photo" alt="Machine Photo" class="machine-photo" />
+  <div class="machine-details">
+    <h2 class="form-title">{{ exercise.name }}</h2>
+    <img :src="exercise.photo" alt="Exercise Photo" class="machine-photo" />
 
     <div class="form-group">
       <h3 class="form-subtitle">Description:</h3>
-      <p>{{ machine.description }}</p>
+      <p>{{ exercise.description }}</p>
     </div>
 
     <div class="form-group">
@@ -16,57 +16,95 @@
       <label class="form-label">Reps:</label>
       <input v-model="reps" type="number" class="form-input" />
 
-      <label v-if="machine.weightUsed !== undefined" class="form-label"
-        >Weight Used (lbs):</label
-      >
-      <input
-        v-if="machine.weightUsed !== undefined"
-        v-model="weight"
-        type="text"
-        class="form-input"
-      />
+      <label class="form-label">Weight (lbs):</label>
+      <input v-model="weight" type="number" class="form-input" />
 
-      <label v-if="machine.Duration !== undefined" class="form-label"
-        >Duration:</label
-      >
-      <input
-        v-if="machine.Duration !== undefined"
-        v-model="duration"
-        type="time"
-        step="1"
-        class="form-input"
-      />
-    </div>
+      <label class="form-label">Duration (minutes):</label>
+      <input v-model="duration" type="number" class="form-input" />
 
-    <div class="button-group">
-      <button @click="saveWorkout" class="btn btn-save">Save</button>
-      <button @click="cancelWorkout" class="btn btn-cancel">Cancel</button>
+      <div class="button-group">
+        <button @click="addWorkout" class="form-button">Add to Workout</button>
+        <button @click="goToMachines" class="form-button">Cancel</button>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-
+import { ref, onMounted } from "vue";
 import axios from "axios";
+import router from "@/router";
+import WorkoutService from "../services/WorkoutService.js";
+import Store from "../store/index.js";
+
 
 export default {
-  props: ["id"],
-  data() {
+  props: ["exerciseId"],
+  created() {
+    Store.state.currentSessionId;
+  },
+  setup(props) {
+    const exercise = ref({
+      photo: "",
+      name: "",
+      description: "",
+    });
+    const sets = ref(0);
+    const reps = ref(0);
+    const weight = ref(0);
+    const duration = ref(0);
+
+    onMounted(async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:9000/exercises/${props.exerciseId}`
+        );
+        exercise.value = response.data;
+        console.log("Fetched exercise details:", exercise.value);
+      } catch (error) {
+        console.error("Error fetching exercise:", error);
+      }
+    });
+
+    const addWorkout = async () => {
+      const workoutData = {
+        sessionId: Store.state.currentSessionId,
+        userId: Store.state.user.id,
+        exerciseId: props.exerciseId,
+        sets: sets.value,
+        reps: reps.value,
+        weight: weight.value,
+        duration: duration.value,
+      };
+      console.log(workoutData);
+      
+        await WorkoutService.create(workoutData);
+        router.push({
+          path: "/machines",
+         // props: { workoutData, exerciseName: exercise.value.name },
+        });
+    };
+
+    const goToMachines = () => {
+      router.push("/machines");
+    };
+
     return {
-      sets: "",
-      reps: "",
-      weight: "",
-      duration: "",
-      userId: null,
-      machine: null,
+      exercise,
+      sets,
+      reps,
+      weight,
+      duration,
+      addWorkout,
+      goToMachines,
     };
   },
-  created() {
+  // created() {
   //   console.log("Received id prop:", this.id);
   //   this.machine = machines.find(
   //     (machine) => machine.id === parseInt(this.$route.params.id)
   //   );
-   },
+  //  },
   methods: {
     async saveWorkout() {
       const userId = this.$store.state.user.id;
@@ -118,11 +156,11 @@ export default {
   font-size: 24px;
   margin-bottom: 20px;
 }
-
 .machine-photo {
   width: 100%;
-  max-height: 300px;
-  object-fit: cover;
+  height: auto;
+  max-height: 400px; /* Adjust the max-height for better fit */
+  object-fit: contain; /* Use 'contain' to fit within the space */
   border-radius: 5px;
   margin-bottom: 20px;
 }
@@ -140,7 +178,6 @@ export default {
   font-weight: bold;
   margin-bottom: 5px;
 }
-
 .form-input {
   width: 100%;
   padding: 10px;
@@ -149,13 +186,28 @@ export default {
   font-size: 16px;
 }
 
-.btn {
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.form-button {
+  flex: 1;
+  padding: 10px;
   background-color: #007bff;
   color: #fff;
   border: none;
   border-radius: 5px;
-  padding: 10px 20px;
   cursor: pointer;
-  margin-top: 10px;
+  transition: background-color 0.3s;
+  margin-right: 10px;
+}
+.form-button:last-child {
+  margin-right: 0;
+}
+
+.form-button:hover {
+  background-color: #0056b3;
 }
 </style>

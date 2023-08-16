@@ -1,56 +1,47 @@
 <template>
   <div class="workout-page">
-    <h2 class="page-title">Your Workouts</h2>
-    <div class="workout-list">
-      <div
-        class="workout-item"
-        v-for="(workout, index) in savedWorkouts"
-        :key="index"
-      >
-        <div class="workout-card">
-          <h3 class="workout-title">{{ workout.machineName }}</h3>
-          <p><strong>Sets:</strong> {{ workout.sets }}</p>
-          <p><strong>Reps:</strong> {{ workout.reps }}</p>
-          <p v-if="workout.weightUsed">
-            <strong>Weight Used:</strong> {{ workout.weightUsed }}
-          </p>
-          <p v-if="workout.duration">
-            <strong>Duration:</strong> {{ workout.duration }}
-          </p>
-        </div>
-      </div>
+    <h2 class="page-title">Your Workout</h2>
+    <div class="workout-details">
+      <h3 class="workout-machine">{{ exerciseName }}</h3>
+      <p><strong>Sets:</strong> {{ workoutData.sets }}</p>
+      <p><strong>Reps:</strong> {{ workoutData.reps }}</p>
+      <p v-if="workoutData.weight">
+        <strong>Weight Used:</strong> {{ workoutData.weight }}
+      </p>
+      <p v-if="workoutData.duration">
+        <strong>Duration:</strong> {{ workoutData.duration }} minutes
+      </p>
     </div>
-    <button @click="goToMachineList" class="btn btn-back">Add Exercise</button>
+    <button @click="goToMachineList" class="btn btn-back">Back to Machines</button>
   </div>
 </template>
 
 <script>
 import WorkoutService from "../services/WorkoutService.js";
 
+import router from "@/router";
 
 export default {
-  props: ["workoutData"],
+  props: ["workoutData", "exerciseName"],
   created() {
     this.fetchSavedWorkouts();
   },
   methods: {
     async fetchSavedWorkouts() {
       try {
-       const userId = this.$store.state.user.id;
-        const response = await WorkoutService.list(userId);
-        this.savedWorkouts = response.data; 
+        const response = await WorkoutService.list();
+        this.savedWorkouts = response.data;
       } catch (error) {
         console.error("Error fetching saved workouts:", error);
       }
     },
     goToMachineList() {
-      this.$router.push({ name: "MachineList" });
+      router.push({ name: "MachineList" });
     },
   },
   data() {
     return {
-      // machines: machines,
-      savedWorkouts: [], 
+      savedWorkouts: [],
     };
   },
 };
