@@ -9,16 +9,17 @@
       <p>Sex: {{ userProfile.sex }}</p>
       <p>Weight: {{ userProfile.weight }}</p>
       <p>Height: {{ userProfile.height }}</p>
-      <div v-if="showWorkoutMetrics">
-        <h3>Workout Metrics</h3>
-        <p>Total Workouts: {{ workoutMetrics.totalWorkouts }}</p>
-        <p>Average Workout Duration: {{ workoutMetrics.averageWorkoutDuration }} minutes</p>
+      <div>
+        <router-link :to="{ name: 'sessions', params: { id: selectedMember.id } }"><h3>Workout Metrics</h3></router-link>
+        <p>Total Workouts: {{ userSesions.length }}</p>
+        <p>Average Workout Duration: {{ getAverageSessionTime }} minutes</p>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import SessionService from '../services/SessionService';
 import UserService from '../services/UserService';
 
 export default {
@@ -28,45 +29,35 @@ export default {
   data() {
     return {
       userProfile: {},
+      userSesions: [],
       showWorkoutMetrics: false,
-      workoutMetrics: {
-        totalWorkouts: 0,
-        averageWorkoutDuration: 0,
-      },
     };
   },
   created() {
     this.populateUserProfile();
+    this.getUserSessions(this.selectedMember.id);
+  },
+  computed: {
+    getAverageSessionTime() {
+      let totalTime = 0;
+      this.userSesions.forEach(userSession => totalTime += userSession.duration)
+      const averageTime = totalTime / this.userSesions.length
+      return averageTime
+    }
   },
   methods: {
-    generateRandomWorkoutMetrics() {
-      const randomTotalWorkouts = Math.floor(Math.random() * 50) + 1;
-      const randomAverageDuration = Math.floor(Math.random() * 120) + 15;
-
-      this.workoutMetrics.totalWorkouts = randomTotalWorkouts;
-      this.workoutMetrics.averageWorkoutDuration = randomAverageDuration;
-    },
     populateUserProfile() {
       UserService.getProfile(this.selectedMember.id).then(response => {
         this.userProfile = response.data
-        console.log(this.userProfile)
+
+      })
+    },
+    getUserSessions(userId) {
+      SessionService.list(userId).then(response => {
+        this.userSesions = response.data
       })
     }
-
-  },
-  watch: {
-    selectedMember: {
-      handler(newValue) {
-        if (newValue) {
-          this.generateRandomWorkoutMetrics(); // Generate random workout metrics for the selected member
-          this.showWorkoutMetrics = true; // Show workout metrics for the selected member
-        } else {
-          this.showWorkoutMetrics = false; // Hide workout metrics when no member is selected
-        }
-      },
-      immediate: true,
-    },
-  },
+  }
 };
 </script>
 
