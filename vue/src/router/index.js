@@ -137,14 +137,14 @@ const router = new Router({
         requiresAuth: true,
       },
     },
-    {
-      path: '/monthly-equipment-usage',
-      name: 'monthlyEquipmentUsage',
-      component: MonthlyEquipmentUsage,
-      meta: {
-        requiresAuth: true,
-      },
-    },
+    // {
+    //   path: '/monthly-equipment-usage',
+    //   name: 'monthlyEquipmentUsage',
+    //   component: MonthlyEquipmentUsage,
+    //   meta: {
+    //     requiresAuth: true,
+    //   },
+    // },
     {
       path: '/exercises/:exerciseId',
       name: "MachineDetails",
