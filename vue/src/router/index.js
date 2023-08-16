@@ -14,6 +14,7 @@ import EmployeeLogin from '../components/EmployeeLogin.vue';
 import EmployeePortal from '../views/EmployeePortal.vue'
 import EmployeeRegister from '@/components/EmployeeRegister.vue'
 import Schedule from '../views/Schedule.vue'
+import GoalDetails from '../views/Goals.vue'
 import SingleSession from '../views/SingleSession.vue'
 import Workout from '../components/Workout.vue'
 
@@ -36,7 +37,7 @@ const router = new Router({
       component: Home,
       meta: {
         requiresAuth: true,
-      }
+      },
     },
     {
       path: '/login',
@@ -53,7 +54,7 @@ const router = new Router({
       component: Logout,
       meta: {
         requiresAuth: false,
-      }
+      },
     },
     {
       path: '/register',
@@ -61,7 +62,7 @@ const router = new Router({
       component: Register,
       meta: {
         requiresAuth: false,
-      }
+      },
     },
     {
       path: "/profile/:id",
@@ -69,7 +70,7 @@ const router = new Router({
       component: Profile,
       meta: {
         requiresAuth: true,
-      }
+      },
     },
     {
       path: '/profile/:id/edit',
@@ -129,12 +130,20 @@ const router = new Router({
     },
     {
       path: '/machines',
-      name: 'MachineList',
+      name: 'MachineList', 
       component: MachineList,
       props: true,
       meta: {
         requiresAuth: true,
-      }
+      },
+    },
+    {
+      path: '/monthly-equipment-usage',
+      name: 'monthlyEquipmentUsage',
+      component: MonthlyEquipmentUsage,
+      meta: {
+        requiresAuth: true,
+      },
     },
     {
       path: '/exercises/:exerciseId',
@@ -150,9 +159,16 @@ const router = new Router({
       name: "WorkoutPage",
       component: Workout,
     },
-    
-  ],
-});
+    {
+      path:'/goals',
+      name: 'goals',
+      component: GoalDetails,
+      meta:{
+        requiresAuth: true,
+      }
+    },
+  ]
+})
 
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(x => x.meta.requiresAuth);

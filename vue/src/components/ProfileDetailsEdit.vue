@@ -42,6 +42,8 @@
         >
       </div>
 
+
+    
       <!-- <div class="profile-details">
         <label>Profile Picture:</label>
         <img v-if="user.photo" :src="user.photo" alt="User Photo" />
