@@ -16,8 +16,10 @@
         <div class="profile-details"><label>Sex:</label> {{user.sex}} </div>
         <div class="profile-details"><label>Weight (pounds):</label> {{user.weight}} </div>
         <div class="profile-details"><label>Height (Inches):</label> {{user.height}} </div>
-        <div class="profile-details"><label>BMI:</label> {{calculatedBMI}} </div>
-        <router-link class="profile-edit-button" :to="'/profile/' + $store.state.user.id + '/edit'">Edit Profile</router-link>
+        <div class="profile-details"><label>BMI:</label> {{calculatedBMI}} </div> 
+
+
+      <router-link class="profile-edit-button" :to="'/profile/' + $store.state.user.id + '/edit'">Edit Profile</router-link>
 </div>
 </div>
 </div>
@@ -27,6 +29,7 @@
 import UserService from '../services/UserService.js'
 
 export default {
+
   name: 'profile',
   data() {
     return {
@@ -42,7 +45,7 @@ export default {
   }
   return '';
 },
-    },
+},
    created() {
     this.retrieveProfile(this.user.id);
   },

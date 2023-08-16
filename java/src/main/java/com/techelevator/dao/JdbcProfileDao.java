@@ -12,12 +12,8 @@ public class JdbcProfileDao implements ProfileDao {
 
     private JdbcTemplate jdbcTemplate;
 
-    private UserDao userDao;
-
-    public JdbcProfileDao(JdbcTemplate jdbcTemplate, UserDao userDao) {
+    public JdbcProfileDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
-        this.userDao = userDao;
-
     }
 
     @Override

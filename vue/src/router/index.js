@@ -14,7 +14,7 @@ import EmployeeLogin from '../components/EmployeeLogin.vue';
 import EmployeePortal from '../views/EmployeePortal.vue'
 import EmployeeRegister from '@/components/EmployeeRegister.vue'
 import Schedule from '../views/Schedule.vue'
-import MonthlyEquipmentUsage from '../components/MonthlyEquipmentUsage.vue'
+import GoalDetails from '../views/Goals.vue'
 import SingleSession from '../views/SingleSession.vue'
 import GoalDetails from '../views/Goals.vue'
 Vue.use(Router)
@@ -159,8 +159,17 @@ const router = new Router({
         requiresAuth: true,
       }
     },
-  ],
-});
+    {
+      path:'/goals',
+      name: 'goals',
+      component: GoalDetails,
+      meta:{
+        requiresAuth: true,
+      }
+    },
+  ]
+})
+
 
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(x => x.meta.requiresAuth);

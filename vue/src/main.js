@@ -9,13 +9,9 @@ import axios from 'axios'
 
 //Vue.use(FullCalendar)
 
-// import datePicker from 'vue-bootstrap-datetimepicker';
-
 Vue.config.productionTip = false
 
 axios.defaults.baseURL = process.env.VUE_APP_REMOTE_API;
-
-// Vue.use(datePicker);
 
 new Vue({
   router,
