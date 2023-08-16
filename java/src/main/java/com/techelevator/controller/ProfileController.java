@@ -11,7 +11,7 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/profile")
+//@RequestMapping("/profile")
 @PreAuthorize("isAuthenticated()")
 public class ProfileController {
 
@@ -25,21 +25,23 @@ public class ProfileController {
         this.userDao = userDao;
     }
 
-    @RequestMapping(path = "/{id}", method = RequestMethod.GET)
+    @RequestMapping(path = "/profile/{id}", method = RequestMethod.GET)
     public Profile getProfileByUserID(@PathVariable int id) {
         return profileDao.getProfileByUserID(id);
     }
 
-    @RequestMapping(path = "/{id}/edit", method = RequestMethod.PUT)
+    @RequestMapping(path = "/profile/{id}/edit", method = RequestMethod.PUT)
     public Profile updateProfileByUserID(@PathVariable int id, @RequestBody Profile updatedProfile) {
         return profileDao.updateProfileByUserID(id, updatedProfile);
     }
 
-    @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(path = "/profile/{id}", method = RequestMethod.DELETE)
     public void deleteProfileByUserID(@PathVariable int id) {
         profileDao.deleteProfileByUserID(id);
     }
 
-//    @RequestMapping(path = "/users", method = RequestMethod.GET)
-//    public List<User> getUsers() {}
+    @RequestMapping(path = "/users", method = RequestMethod.GET)
+    public List<User> getUsers() {
+        return userDao.getUsers();
+    }
 }
