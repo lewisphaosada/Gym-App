@@ -14,6 +14,11 @@
       <span class="divider" v-if="isAuthenticated">|</span>
       <router-link v-if="isAuthenticated" v-bind:to="{ name: 'logout' }" class="nav-link">Logout</router-link>
       <span class="divider" v-if="isAuthenticated">|</span>
+      <router-link v-if="isAuthenticated" v-bind:to="{ name: 'logout' }" class="nav-link" @click="populateUserRole()">Logout</router-link>
+      <span class="divider" v-if="isEmployee() && isAuthenticated">|</span>
+      <router-link  v-if="isEmployee() && isAuthenticated" :to="{ name: 'employeeportal' }" class="nav-link">Employee Portal</router-link>
+      <span class="divider" v-if="isEmployee() && isAuthenticated">|</span>
+      <router-link to="/monthly-equipment-usage" class="nav-link" v-if="isEmployee() && isAuthenticated">Equipment Usage</router-link>
 
       <!-- <router-link to="/employee-portal" class="nav-link">Employee Portal</router-link>
       <span class="divider" v-if="isAuthenticated">|</span> -->
@@ -26,8 +31,35 @@
 <script>
 export default {
   name: "App",
+  userRole: '',
+  created() {
+    this.populateUserRole();
+  },
+  watch: {
+    // eslint-disable-next-line no-unused-vars
+    $route (to, from){
+      this.populateUserRole();
+    }
+  },
   computed: {
     isAuthenticated() {
+      return this.$store.state.token !== '';
+    }
+  },
+  methods: {
+    populateUserRole() {
+      if(this.isAuthenticatedMethod()){
+        this.userRole = this.$store.state.user.authorities[0].name;
+      }
+    },
+    isEmployee() {
+      if(this.userRole === 'ROLE_EMPLOYEE' || this.userRole === 'ROLE_ADMIN'){
+        return true
+      } else {
+        return false
+      }
+    },
+    isAuthenticatedMethod() {
       return this.$store.state.token !== '';
     }
   }
