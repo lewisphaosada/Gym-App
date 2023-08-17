@@ -1,65 +1,63 @@
 <template>
-  <div class="modal">
-    <div class="modal-content">
+  <div class="model">
+    <div class="model-content">
       <h2>Member Profile</h2>
       <img src="https://img.freepik.com/free-icon/user_318-286823.jpg" alt="Logo" class="logo" />
-      <p>Name: {{ selectedMember.name }}</p>
-      <p>Email: {{ selectedMember.email }}</p>
-      <p>Username: {{ selectedMember.username }}</p>
-      <p>Password: {{ selectedMember.password }}</p>
-      <p>Sex: {{ selectedMember.sex }}</p>
-      <p>Weight: {{ selectedMember.weight }}</p>
-      <p>Height: {{ selectedMember.height }}</p>
-      <p>BMI: {{ selectedMember.bmi }}</p>
-      <div v-if="showWorkoutMetrics">
-        <h3>Workout Metrics</h3>
-        <p>Total Workouts: {{ workoutMetrics.totalWorkouts }}</p>
-        <p>Average Workout Duration: {{ workoutMetrics.averageWorkoutDuration }} minutes</p>
+      <p>Name: {{ userProfile.name }}</p>
+      <p>Email: {{ userProfile.email }}</p>
+      <p>Username: {{ userProfile.username }}</p>
+      <p>Sex: {{ userProfile.sex }}</p>
+      <p>Weight: {{ userProfile.weight }}</p>
+      <p>Height: {{ userProfile.height }}</p>
+      <div>
+        <router-link :to="{ name: 'sessions', params: { id: selectedMember.id } }"><h3>Workout Metrics</h3></router-link>
+        <p>Total Workouts: {{ userSesions.length }}</p>
+        <p>Average Workout Duration: {{ getAverageSessionTime }} minutes</p>
       </div>
-      <button @click="closeModal">Close</button>
     </div>
   </div>
 </template>
 
 <script>
+import SessionService from '../services/SessionService';
+import UserService from '../services/UserService';
+
 export default {
   props: {
     selectedMember: Object,
   },
   data() {
     return {
+      userProfile: {},
+      userSesions: [],
       showWorkoutMetrics: false,
-      workoutMetrics: {
-        totalWorkouts: 0,
-        averageWorkoutDuration: 0,
-      },
     };
   },
+  created() {
+    this.populateUserProfile();
+    this.getUserSessions(this.selectedMember.id);
+  },
+  computed: {
+    getAverageSessionTime() {
+      let totalTime = 0;
+      this.userSesions.forEach(userSession => totalTime += userSession.duration)
+      const averageTime = totalTime / this.userSesions.length
+      return averageTime
+    }
+  },
   methods: {
-    generateRandomWorkoutMetrics() {
-      const randomTotalWorkouts = Math.floor(Math.random() * 50) + 1;
-      const randomAverageDuration = Math.floor(Math.random() * 120) + 15;
+    populateUserProfile() {
+      UserService.getProfile(this.selectedMember.id).then(response => {
+        this.userProfile = response.data
 
-      this.workoutMetrics.totalWorkouts = randomTotalWorkouts;
-      this.workoutMetrics.averageWorkoutDuration = randomAverageDuration;
+      })
     },
-    closeModal() {
-      this.$emit('close');
-    },
-  },
-  watch: {
-    selectedMember: {
-      handler(newValue) {
-        if (newValue) {
-          this.generateRandomWorkoutMetrics(); // Generate random workout metrics for the selected member
-          this.showWorkoutMetrics = true; // Show workout metrics for the selected member
-        } else {
-          this.showWorkoutMetrics = false; // Hide workout metrics when no member is selected
-        }
-      },
-      immediate: true,
-    },
-  },
+    getUserSessions(userId) {
+      SessionService.list(userId).then(response => {
+        this.userSesions = response.data
+      })
+    }
+  }
 };
 </script>
 
@@ -72,7 +70,7 @@ export default {
   margin-top: 10px;
   margin: auto;
 }
-.modal {
+.model {
 display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -89,7 +87,7 @@ display: flex;
   margin: auto;
   width: 32em;
 }
-.modal-content {
+.model-content {
  margin: auto;
 }
 .logo-image {

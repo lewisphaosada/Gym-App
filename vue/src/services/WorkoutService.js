@@ -16,6 +16,9 @@ export default {
   },
   exercises() {
     return axios.get('/exercises');
+  },
+  listBySessionId(sessionId) {
+    return axios.get(`/workouts/session/${sessionId}`)
   }
   
 };

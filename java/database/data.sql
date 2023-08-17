@@ -125,6 +125,12 @@ INSERT INTO exercise (name, photo, description) VALUES (
 );
 
 INSERT INTO exercise (name, photo, description) VALUES (
+'Hack Squat',
+'classpath:gym-equipment-images.gym-equipment-images/hack-squat.jpg',
+'For added support during regular squats, the hack squat machine, also referred to as a squat rack, can be beneficial. This equipment enables better balance during squats and provides the option to incorporate more weight onto the power rack, effectively targeting and isolating your quadriceps.'
+);
+
+INSERT INTO exercise (name, photo, description) VALUES (
 'Treadmill',
 '/gym-equipment/treadmill.jpg',
 'A cardio machine for running or walking.'

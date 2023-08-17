@@ -4,8 +4,8 @@
       <img
         v-bind:src="
           checkedStatus
-            ? 'https://png.pngtree.com/png-vector/20230330/ourmid/pngtree-click-the-done-button-and-tick-icon-vector-png-image_6674611.png'
-            : 'https://www.pngkit.com/png/detail/28-282402_check-in-button-2-check-in-button-png.png'"
+            ? 'https://media.istockphoto.com/id/1289427302/vector/check-out-button-rounded-sign-on-white-background.jpg?s=612x612&w=0&k=20&c=_8X-Ho3T2EJ3QPVs5Is7ahaU5hh2BRldKLbWxKPFvUo='
+            : 'https://media.istockphoto.com/id/1289427422/vector/check-in-button-sticker-banner-rounded-glass-sign.jpg?s=612x612&w=0&k=20&c=5EhSNKqgoMeSrhbr5-n5jMVFiQS2m1NiavhF5wAOLsM='"
         v-bind:alt="checkedStatus ? 'Check Out' : 'Check In'"
         class="check-image"
       />

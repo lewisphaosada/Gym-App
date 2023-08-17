@@ -98,4 +98,18 @@ exercise-box {
   margin-top: 10px;
   color: #333;
 }
+<<<<<<< HEAD
 </style>
+=======
+
+.exercise-image {
+  width: 100%;
+  height: auto;
+  max-height: 400px;
+  object-fit: contain;
+  border: 2px solid rgb(63, 195, 240); 
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+</style>
+>>>>>>> b93241e5911e79d110407c3796f2c40253533f3e

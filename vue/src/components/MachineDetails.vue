@@ -4,8 +4,13 @@
     <img :src="exercise.photo" alt="Exercise Photo" class="machine-photo" />
 
     <div class="form-group">
-      <h3 class="form-subtitle">Description:</h3>
-      <p>{{ exercise.description }}</p>
+      <!-- <h3 class="form-subtitle">Description:</h3> -->
+      <div class="description-dropdown">
+        <p class="dropdown-trigger" @click="toggleDescription">
+          {{ showDescription ? 'Hide' : 'Show' }} Description
+        </p>
+        <p v-if="showDescription && exercise.description">{{ exercise.description }}</p>
+      </div>
     </div>
 
     <div class="form-group">
@@ -42,6 +47,16 @@ export default {
   props: ["exerciseId"],
   created() {
     Store.state.currentSessionId;
+  },
+  data(){
+    return{
+    showDescription: false,
+    }
+  },
+  methods:{
+    toggleDescription() {
+      this.showDescription = !this.showDescription;
+    },
   },
   setup(props) {
     const exercise = ref({
@@ -209,5 +224,24 @@ export default {
 
 .form-button:hover {
   background-color: #0056b3;
+}
+.description-dropdown {
+  position: relative;
+  cursor: pointer;
+}
+
+.dropdown-trigger {
+  color: #007bff;
+  margin: 0;
+  font-size: 16px;
+}
+
+.description-dropdown p:not(.dropdown-trigger) {
+  display: none;
+  margin-top: 10px;
+}
+
+.description-dropdown p:not(.dropdown-trigger) {
+  display: block;
 }
 </style>
