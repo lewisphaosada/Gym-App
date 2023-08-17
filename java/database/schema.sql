@@ -52,7 +52,7 @@ CREATE TABLE workout (
 workout_id SERIAL,
 session_id INT,
 user_id INT,
-name VARCHAR(50),
+exercise_id INT,
 duration BIGINT,
 weight DECIMAL(5,2),
 sets INT,
@@ -60,7 +60,7 @@ reps INT,
 CONSTRAINT PK_workout PRIMARY KEY (workout_id),
 CONSTRAINT FK_session_workout FOREIGN KEY (session_id) REFERENCES sessions,
 CONSTRAINT FK_user_workout FOREIGN KEY (user_id) REFERENCES users,
-CONSTRAINT FK_workout_exercise FOREIGN KEY (name) REFERENCES exercise
+CONSTRAINT FK_workout_exercise FOREIGN KEY (exercise_id) REFERENCES exercise
 );
 
 --goal - Contains users' goals
