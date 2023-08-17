@@ -42,18 +42,19 @@ public class JdbcWorkoutDao implements WorkoutDao {
         return workouts;
     }
 
-
-    private Workout mapRowToWorkout(SqlRowSet rowSet) {
-        Workout workout = new Workout();
-        workout.setId(rowSet.getLong("workout_id"));
-        workout.setSessionId(rowSet.getLong("session_id"));
-        workout.setUserId(rowSet.getLong("user_id"));
-        workout.setExerciseId(rowSet.getLong("exercise_id"));
-        workout.setDuration(rowSet.getLong("duration"));
-        workout.setWeight(rowSet.getBigDecimal("weight"));
-        workout.setSets(rowSet.getInt("sets"));
-        workout.setReps(rowSet.getInt("reps"));
-        return workout;
+    public List<Workout> getWorkoutsBySessionId(int sessionId) {
+        List<Workout> workouts = new ArrayList<>();
+        String sql = "SELECT * FROM workout WHERE session_id = ?";
+        try{
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, sessionId);
+            while (results.next()) {
+                Workout workout = mapRowToWorkout(results);
+                workouts.add(workout);
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to serve or database");
+        }
+        return workouts;
     }
 
     public Workout saveWorkout( Workout workout) {
@@ -125,6 +126,18 @@ public class JdbcWorkoutDao implements WorkoutDao {
         }
     }
 
+    private Workout mapRowToWorkout(SqlRowSet rowSet) {
+        Workout workout = new Workout();
+        workout.setId(rowSet.getLong("workout_id"));
+        workout.setSessionId(rowSet.getLong("session_id"));
+        workout.setUserId(rowSet.getLong("user_id"));
+        workout.setExerciseId(rowSet.getLong("exercise_id"));
+        workout.setDuration(rowSet.getLong("duration"));
+        workout.setWeight(rowSet.getBigDecimal("weight"));
+        workout.setSets(rowSet.getInt("sets"));
+        workout.setReps(rowSet.getInt("reps"));
+        return workout;
+    }
 }
 
 

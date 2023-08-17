@@ -42,5 +42,10 @@ public class WorkoutController {
         workoutDao.deleteWorkout(workoutId);
     }
 
+    @RequestMapping(path = "/session/{sessionId}", method = RequestMethod.GET)
+    public List<Workout> getWorkoutsBySessionId(@PathVariable int sessionId) {
+       return workoutDao.getWorkoutsBySessionId(sessionId);
+    }
+
 }
 
