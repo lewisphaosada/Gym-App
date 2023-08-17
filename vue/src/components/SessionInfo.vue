@@ -1,5 +1,7 @@
 <template>
   <div>
+    <h2>Total Workouts: {{sessionWorkouts.length}}</h2>
+    <h2></h2>
     <ul v-for="workout in sessionWorkouts" v-bind:key="workout.id">
       <li class="exercise-name">{{exerciseNames[workout.id]}}
         <div>
