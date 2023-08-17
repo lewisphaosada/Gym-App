@@ -3,7 +3,7 @@
     <h2>Average Session Time: {{averageSessionTime}}</h2>
     <ul class="session-list" v-if="sessions.length > 0">
       <li v-for="session in sessions" v-bind:key="session.sessionId">
-        <router-link :to="{ name: 'session', params: {id: session.sessionId} }">{{ convertUnixToDate(session.date) }} {{session}}</router-link>
+        <router-link :to="{ name: 'session', params: {id: session.sessionId} }">{{ convertUnixToDate(session.date) }}</router-link>
       </li>
     </ul>
     <h2 v-else>No sessions yet. Let's workout!</h2>

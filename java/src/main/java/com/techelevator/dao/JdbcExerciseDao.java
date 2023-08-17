@@ -74,6 +74,21 @@ public class JdbcExerciseDao implements ExerciseDao {
         return exercises;
     }
 
+    @Override
+    public String getExerciseNameByExerciseId(Long exerciseId) {
+        String exerciseName = "";
+        String sql = "SELECT name FROM exercise WHERE exercise_id = ?";
+        try {
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, exerciseId);
+            if(results.next()) {
+                exerciseName = results.getString("name");
+            }
+        } catch(CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        }
+        return exerciseName;
+    }
+
     private Exercise mapRowToExercise(SqlRowSet rowSet) {
         Exercise exercise = new Exercise();
         exercise.setExercise_id(rowSet.getInt("exercise_id"));
