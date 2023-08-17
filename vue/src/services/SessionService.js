@@ -13,6 +13,10 @@ export default {
         return axios.put(`/session/${id}`, session)
     },
 
+    getExerciseName(exerciseId) {
+        return axios.get(`/session/${exerciseId}`)
+    },
+
     delete(id) {
         return axios.delete(`/sessions/${id}`);
     }

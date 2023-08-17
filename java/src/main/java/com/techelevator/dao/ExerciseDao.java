@@ -18,4 +18,5 @@ public interface ExerciseDao {
     List<Exercise> getExerciseList();
 
     void insertExercises(List<Exercise> exercises);
+    public String getExerciseNameByExerciseId(Long exerciseId);
 }

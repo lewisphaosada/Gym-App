@@ -64,10 +64,10 @@ export default {
       name: "",
       description: "",
     });
-    const sets = ref(0);
-    const reps = ref(0);
-    const weight = ref(0);
-    const duration = ref(0);
+    const sets = ref("");
+    const reps = ref("");
+    const weight = ref("");
+    const duration = ref("");
 
     onMounted(async () => {
       try {

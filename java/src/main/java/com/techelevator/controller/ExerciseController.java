@@ -36,4 +36,9 @@ public class ExerciseController {
     public List<Exercise> getExerciseList() {
         return exerciseDao.getExerciseList();
     }
+
+    @RequestMapping(path = "/session/{id}", method = RequestMethod.GET)
+    public String getExerciseNameByExerciseId(@PathVariable Long id) {
+        return exerciseDao.getExerciseNameByExerciseId(id);
+    }
 }
