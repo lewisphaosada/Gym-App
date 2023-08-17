@@ -98,9 +98,6 @@ exercise-box {
   margin-top: 10px;
   color: #333;
 }
-<<<<<<< HEAD
-</style>
-=======
 
 .exercise-image {
   width: 100%;
@@ -112,4 +109,3 @@ exercise-box {
   margin-bottom: 20px;
 }
 </style>
->>>>>>> b93241e5911e79d110407c3796f2c40253533f3e

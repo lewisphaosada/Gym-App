@@ -7,9 +7,11 @@
       <!-- <h3 class="form-subtitle">Description:</h3> -->
       <div class="description-dropdown">
         <p class="dropdown-trigger" @click="toggleDescription">
-          {{ showDescription ? 'Hide' : 'Show' }} Description
+          {{ showDescription ? "Hide" : "Show" }} Description
         </p>
-        <p v-if="showDescription && exercise.description">{{ exercise.description }}</p>
+        <p v-if="showDescription && exercise.description">
+          {{ exercise.description }}
+        </p>
       </div>
     </div>
 
@@ -42,18 +44,17 @@ import router from "@/router";
 import WorkoutService from "../services/WorkoutService.js";
 import Store from "../store/index.js";
 
-
 export default {
   props: ["exerciseId"],
   created() {
     Store.state.currentSessionId;
   },
-  data(){
-    return{
-    showDescription: false,
-    }
+  data() {
+    return {
+      showDescription: false,
+    };
   },
-  methods:{
+  methods: {
     toggleDescription() {
       this.showDescription = !this.showDescription;
     },
@@ -92,12 +93,12 @@ export default {
         duration: duration.value,
       };
       console.log(workoutData);
-      
-        await WorkoutService.create(workoutData);
-        router.push({
-          path: "/machines",
-         // props: { workoutData, exerciseName: exercise.value.name },
-        });
+
+      await WorkoutService.create(workoutData);
+      router.push({
+        path: "/machines",
+        // props: { workoutData, exerciseName: exercise.value.name },
+      });
     };
 
     const goToMachines = () => {
@@ -120,37 +121,36 @@ export default {
   //     (machine) => machine.id === parseInt(this.$route.params.id)
   //   );
   //  },
-  methods: {
-    async saveWorkout() {
-      const userId = this.$store.state.user.id;
 
-      const workoutData = {
-        user_id: userId,
-        exercise_id: this.id,
-        session_id: null,
-        weight: parseFloat(this.weight),
-        sets: parseInt(this.sets),
-        reps: parseInt(this.reps),
-        duration: this.duration,
-      };
-      try {
-        const response = await axios.post(
-          "http://localhost:9000/workouts",
-          workoutData
-        );
-        const savedWorkout = response.data;
-        console.log("Saved workout data:", savedWorkout);
+  async saveWorkout() {
+    const userId = this.$store.state.user.id;
 
-        this.$router.push({
-          name: "WorkoutPage",
-        });
-      } catch (error) {
-        console.error("Error saving workout:", error);
-      }
-    },
-    cancelWorkout() {
-      this.$router.go(-1);
-    },
+    const workoutData = {
+      user_id: userId,
+      exercise_id: this.id,
+      session_id: null,
+      weight: parseFloat(this.weight),
+      sets: parseInt(this.sets),
+      reps: parseInt(this.reps),
+      duration: this.duration,
+    };
+    try {
+      const response = await axios.post(
+        "http://localhost:9000/workouts",
+        workoutData
+      );
+      const savedWorkout = response.data;
+      console.log("Saved workout data:", savedWorkout);
+
+      this.$router.push({
+        name: "WorkoutPage",
+      });
+    } catch (error) {
+      console.error("Error saving workout:", error);
+    }
+  },
+  cancelWorkout() {
+    this.$router.go(-1);
   },
 };
 </script>
