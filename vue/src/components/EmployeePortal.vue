@@ -23,24 +23,12 @@
             member.username
           }}</span>
         </p>
-        <div class="check-buttons">
-          <button
-            @click="checkIn(member)"
-            :class="{ 'checked-in': member.checkedIn }"
-          >
-            Check In
+        <div v-if="selectedMember === member" class="check-buttons">
+          <button  @click="check()" :class="checkObject.checkClass">
+            {{checkObject.checkText}}
           </button>
           <span v-if="member.checkedIn"
-            >Checked In at: {{ member.checkInTime }}</span
-          >
-          <button
-            @click="checkOut(member)"
-            :class="{ 'checked-out': !member.checkedIn }"
-          >
-            Check Out
-          </button>
-          <span v-if="!member.checkedIn"
-            >Checked Out at: {{ member.checkOutTime }}</span
+            >Checked In at: {{ selectedMember.checkInTime }}</span
           >
         </div>
       </div>
@@ -58,6 +46,12 @@
   </div>
 </template>
 
+
+
+
+
+
+
 <script>
 import MemberProfileModel from "@/components/GymMemberProfile.vue";
 import UserService from "../services/UserService";
@@ -66,6 +60,11 @@ export default {
   components: {
     MemberProfileModel,
   },
+  computed: {
+    isCurrentMemberCheckedIn() {
+      return this.selectedMember.checkedIn
+    }
+  },
   data() {
     return {
       gymMembers: [],
@@ -73,6 +72,11 @@ export default {
       searchQuery: "",
       filteredMembers: [],
       showProfileModel: false,
+      selectedMember: null,
+      checkObject: {
+      checkText: "Check In",
+      checkClass: "checked-in"
+      }
     };
   },
   created() {
@@ -89,26 +93,38 @@ export default {
         member.username.toLowerCase().includes(query)
       );
     },
-    checkIn(member) {
-      member.checkedIn = true;
-      member.checkInTime = new Date().toLocaleTimeString();
-    },
-    checkOut(member) {
-      member.checkedIn = false;
-      member.checkOutTime = new Date().toLocaleTimeString();
+    check() {
+      this.selectedMember.checkedIn = !this.selectedMember.checkedIn;
+      if(this.selectedMember.checkedIn){
+      this.checkObject.checkText = "Check Out"
+      this.checkObject.checkClass = "checked-out"
+      this.selectedMember.checkInTime = new Date().toLocaleTimeString();
+      } else {
+        this.checkObject.checkText = "Check In"
+        this.checkObject.checkClass = "checked-in"
+      }
     },
     showProfile(member) {
       this.selectedProfileMember = member;
       this.showProfileModel = true;
+      this.selectedMember = member;
     },
     hideProfile() {
       this.selectedProfileMember = null;
       this.showProfileModel = false;
+      this.selectedMember = null;
     },
     populateMembers() {
       UserService.getUsers().then((response) => {
         this.gymMembers = response.data;
+        this.gymMembers.forEach((member) => {
+          member.checkedIn = false;
+          member.checkInTime = null;
+        });
       });
+    },
+    log(m) {
+      console.log(m);
     },
   },
 };
