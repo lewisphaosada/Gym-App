@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h2>Average Session Time: {{averageSessionTime}}</h2>
     <ul class="session-list" v-if="sessions.length > 0">
       <li v-for="session in sessions" v-bind:key="session.sessionId">
         <router-link :to="{ name: 'session', params: {id: session.sessionId} }">{{ convertUnixToDate(session.date) }} {{session}}</router-link>
@@ -17,6 +18,7 @@ export default {
   data() {
     return {
       sessions: [],
+      averageSessionTime: 0
     };
   },
   methods: {
@@ -27,11 +29,21 @@ export default {
       const day = date.getDate();
       const formattedDate = `${month}-${day}-${year}`;
       return formattedDate;
-    },
+    }
+  },
+  computed: {
+    getAverageSessionTime() {
+      let totalTime = 0;
+      this.sessions.forEach(session => totalTime += session.duration)
+      const averageTime = totalTime / this.sessions.length
+      return averageTime
+    }
   },
   created() {
     SessionService.list(this.$store.state.user.id).then((response) => {
       this.sessions = response.data;
+      this.averageSessionTime = this.getAverageSessionTime;
+      console.log(this.sessions)
     });
   },
 };

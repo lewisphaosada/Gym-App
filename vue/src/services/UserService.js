@@ -8,5 +8,9 @@ import axios from 'axios';
 
     updateProfile(id, profile){
         return axios.put(`/profile/${id}/edit`, profile);
+    },
+
+    getUsers() {
+      return axios.get('/users');
     }
   }

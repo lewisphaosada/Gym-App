@@ -14,16 +14,13 @@
       <span class="divider" v-if="isAuthenticated">|</span>
       <router-link v-if="isAuthenticated" :to="{ name: 'goals', params: { id: $store.state.user.id } }" class="nav-link">Goals</router-link>
       <span class="divider" v-if="isAuthenticated">|</span>
-      <router-link v-if="isAuthenticated" v-bind:to="{ name: 'logout' }" class="nav-link">Logout</router-link>
-      <span class="divider" v-if="isAuthenticated">|</span>
       <router-link v-if="isAuthenticated" v-bind:to="{ name: 'logout' }" class="nav-link" @click="populateUserRole()">Logout</router-link>
       <span class="divider" v-if="isEmployee() && isAuthenticated">|</span>
       <router-link  v-if="isEmployee() && isAuthenticated" :to="{ name: 'employeeportal' }" class="nav-link">Employee Portal</router-link>
       <span class="divider" v-if="isEmployee() && isAuthenticated">|</span>
       <router-link to="/monthly-equipment-usage" class="nav-link" v-if="isEmployee() && isAuthenticated">Equipment Usage</router-link>
-
-      <!-- <router-link to="/employee-portal" class="nav-link">Employee Portal</router-link>
-      <span class="divider" v-if="isAuthenticated">|</span> -->
+      <span class="divider" v-if="isAdmin() && isAuthenticated">|</span>
+      <router-link to="/employee-register" class="nav-link" v-if="isAdmin() && isAuthenticated">Employee Register</router-link>
 
      
     </nav>
@@ -56,6 +53,13 @@ export default {
     },
     isEmployee() {
       if(this.userRole === 'ROLE_EMPLOYEE' || this.userRole === 'ROLE_ADMIN'){
+        return true
+      } else {
+        return false
+      }
+    },
+    isAdmin() {
+      if(this.userRole === 'ROLE_ADMIN'){
         return true
       } else {
         return false
