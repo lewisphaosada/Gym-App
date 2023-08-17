@@ -41,13 +41,10 @@
 </template>
 
 <script>
-import MemberUsageChart from './MemberUsageChart.vue'; // Adjust the path
+
 
 
 export default {
-  components: {
-    MemberUsageChart,
-  },
   data() {
     return {
       selectedMonth: new Date().getMonth() + 1,

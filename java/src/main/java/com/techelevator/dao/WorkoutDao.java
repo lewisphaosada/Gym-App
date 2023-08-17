@@ -9,4 +9,5 @@ public interface WorkoutDao {
     Workout saveWorkout(Workout workout);
     Workout updateWorkout(Workout workout);
     void deleteWorkout(Long workoutId);
+    List<Workout> getWorkoutsBySessionId(int sessionId);
 }
