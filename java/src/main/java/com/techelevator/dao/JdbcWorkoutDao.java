@@ -40,22 +40,10 @@ public class JdbcWorkoutDao implements WorkoutDao {
     }
 
 
-    private Workout mapRowToWorkout(SqlRowSet rowSet) {
-        Workout workout = new Workout();
-        workout.setWorkoutId(rowSet.getLong("workout_id"));
-        workout.setSessionId(rowSet.getLong("session_id"));
-        workout.setUserId(rowSet.getLong("user_id"));
-        workout.setExerciseId(rowSet.getLong("exercise_id"));
-        workout.setDuration(rowSet.getLong("duration"));
-        workout.setWeight(rowSet.getBigDecimal("weight"));
-        workout.setSets(rowSet.getInt("sets"));
-        workout.setReps(rowSet.getInt("reps"));
-        return workout;
-
     public List<Workout> getWorkoutsBySessionId(int sessionId) {
         List<Workout> workouts = new ArrayList<>();
         String sql = "SELECT * FROM workout WHERE session_id = ?";
-        try{
+        try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, sessionId);
             while (results.next()) {
                 Workout workout = mapRowToWorkout(results);
@@ -68,7 +56,7 @@ public class JdbcWorkoutDao implements WorkoutDao {
 
     }
 
-    public Workout saveWorkout( Workout workout) {
+    public Workout saveWorkout(Workout workout) {
         Workout newWorkout = null;
         String sql = "INSERT INTO workout (session_id, user_id, exercise_id, sets, reps, weight, duration) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING workout_id";
@@ -95,7 +83,7 @@ public class JdbcWorkoutDao implements WorkoutDao {
         String sql = "SELECT * FROM workout WHERE workout_id = ?";
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, workoutId);
-            if(results.next()) {
+            if (results.next()) {
                 workout = mapRowToWorkout(results);
             }
         } catch (CannotGetJdbcConnectionException e) {
@@ -103,7 +91,6 @@ public class JdbcWorkoutDao implements WorkoutDao {
         }
         return workout;
     }
-
 
 
     @Override
@@ -127,6 +114,7 @@ public class JdbcWorkoutDao implements WorkoutDao {
             throw new DaoException("Unable to connect to the server or database", e);
         }
     }
+
     @Override
     public void deleteWorkout(Long workoutId) {
         String sql = "DELETE FROM workout WHERE workout_id=?";

@@ -91,42 +91,14 @@ export default {
           });
       }
     },
-    methods: {
-      register() {
-        if (this.user.password != this.user.confirmPassword) {
-          this.registrationErrors = true;
-          this.registrationErrorMsg =
-            "Password & Confirm Password do not match.";
-        } else {
-          AuthService
-            .register(this.user)
-            .then((response) => {
-              if (response.status == 201) {
-                this.$router.push({
-                  path: "/login",
-                  query: { registration: "success" },
-                });
-              }
-            })
-            .catch((error) => {
-              const response = error.response;
-              this.registrationErrors = true;
-              if (response.status === 400) {
-                this.registrationErrorMsg = "Bad Request: Validation Errors";
-              }
-            });
-        }
-      },
-      clearErrors() {
-        this.registrationErrors = false;
-        this.registrationErrorMsg =
-          "There were problems registering this user.";
-      },
+
+    clearErrors() {
+      this.registrationErrors = false;
+      this.registrationErrorMsg = "There were problems registering this user.";
     },
   },
 };
 </script>
-  
 <style scoped>
 .login-container {
   display: flex;
@@ -135,7 +107,8 @@ export default {
   height: 100vh;
 }
 
-.login-form, .registration-form {
+.login-form,
+.registration-form {
   width: 300px;
   padding: 20px;
   border: 1px solid #ccc;
@@ -144,7 +117,8 @@ export default {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.login-heading, .registration-heading {
+.login-heading,
+.registration-heading {
   font-size: 24px;
   margin-bottom: 20px;
   text-align: center;
@@ -159,8 +133,36 @@ export default {
   margin-bottom: 15px;
 }
 
-label {
-  margin-right: 0.5rem;
+.input-label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.input-field {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.register-link {
+  text-align: center;
+  margin-top: 10px;
 }
 </style>
 

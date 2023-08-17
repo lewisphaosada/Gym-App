@@ -166,54 +166,37 @@ export default {
 <style scoped>
 .profile-container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  height: 100vh;
-}
-.edit-profile-form {
-  width: 300px;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  background-color: #F6F6F6;
+  background-color: #f6f6f6;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   text-align: center;
+  width: 300px;
+  margin: 0 auto;
 }
-.edit-profile-heading {
+.profile-heading {
   font-size: 24px;
   margin-bottom: 20px;
-  text-align: center;
 }
-.form-input-group {
-  margin-bottom: 15px;
-}
-.input-label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-.input-field {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  font-size: 14px;
-  box-sizing: border-box;
-}
+
 .error-message {
-  color: #D9534F;
+  color: #d9534f;
   margin-top: 5px;
   display: inline-block;
 }
 .submit-button {
   width: 100%;
   padding: 10px;
-  background-color: #007BFF;
+  background-color: #007bff;
   color: #fff;
   border: none;
   border-radius: 3px;
   font-size: 16px;
   cursor: pointer;
+  margin-top: 10px;
 }
 .cancel-button {
   width: 100%;
@@ -224,10 +207,12 @@ export default {
   border-radius: 3px;
   font-size: 16px;
   cursor: pointer;
+  margin-top: 10px;
 }
-.register-link {
-  text-align: center;
+router-link {
+  color: #007bff;
+  text-decoration: none;
+  font-size: 14px;
   margin-top: 10px;
 }
 </style>
-
