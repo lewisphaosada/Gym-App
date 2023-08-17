@@ -23,9 +23,6 @@ public class WorkoutController {
         return workoutDao.getWorkoutsByUserId(userId);
     }
 
-
-
-
     @RequestMapping(path = "/save", method = RequestMethod.POST)
     public Workout saveWorkout(@RequestBody Workout workout) {
         return workoutDao.saveWorkout(workout);

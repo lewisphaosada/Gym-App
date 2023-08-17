@@ -33,8 +33,6 @@ public class ExerciseController {
         }
     }
 
-
-
     private void insertInitialExercises() {
             List<Exercise> initialExercises = Arrays.asList(
                 new Exercise(0,"Chest Press Machine", "classpath:gym-equipment-images.gym-equipment-images/Chest Press Machine.webp", "Using the chest press machine is a straightforward process. Begin by ensuring the machine is upright and then follow these uncomplicated steps:\\n\\nAdjust the seat of the chest press to match your chest's height.\\n\\nAdd the required weights, preferably starting with a load that equals 25% of your body weight.\\n\\nActivate the foot pedal using your legs, which will move the handles to their initial position.\\n\\nPosition yourself against the padding of the chair, and extend the handles outward. Be cautious not to fully lock your elbows during this motion, and remember to exhale as you do.\\n\\nInhale and pull the handles back towards your chest.\\n\\nCongratulations, you've successfully completed one repetition. Repeat these actions to complete your set, aiding you in progressing toward your fitness goals.", " "),
