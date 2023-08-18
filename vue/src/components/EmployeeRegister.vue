@@ -108,10 +108,62 @@ export default {
 </script>
   
   <style scoped>
-.form-input-group {
-  margin-bottom: 1rem;
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px; 
+  border: 1px solid #007bff; 
+  border-radius: 5px;
+  background-color: #f6f6f6;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 350px; 
+  margin: 0 auto;
 }
-label {
-  margin-right: 0.5rem;
+
+.login-heading {
+  font-size: 20px; 
+  margin-bottom: 10px;
+  color: #007bff; 
+}
+
+.form-input-group {
+  margin-bottom: 8px; 
+}
+
+.input-label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 2px;
+}
+
+.input-field {
+  width: 100%;
+  padding: 6px; 
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 12px; 
+  box-sizing: border-box;
+}
+
+.error-message {
+  color: #d9534f;
+  margin-top: 2px; 
+  display: inline-block;
+  font-size: 10px;
+}
+
+.submit-button,
+.cancel-button {
+  width: 100%;
+  padding: 8px; 
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  font-size: 14px; 
+  cursor: pointer;
+  margin-top: 8px; 
 }
 </style>

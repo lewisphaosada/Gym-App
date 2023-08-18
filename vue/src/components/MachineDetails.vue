@@ -7,9 +7,11 @@
       <!-- <h3 class="form-subtitle">Description:</h3> -->
       <div class="description-dropdown">
         <p class="dropdown-trigger" @click="toggleDescription">
-          {{ showDescription ? 'Hide' : 'Show' }} Description
+          {{ showDescription ? "Hide" : "Show" }} Description
         </p>
-        <p v-if="showDescription && exercise.description">{{ exercise.description }}</p>
+        <p v-if="showDescription && exercise.description">
+          {{ exercise.description }}
+        </p>
       </div>
     </div>
 
@@ -42,18 +44,17 @@ import router from "@/router";
 import WorkoutService from "../services/WorkoutService.js";
 import Store from "../store/index.js";
 
-
 export default {
   props: ["exerciseId"],
   created() {
     Store.state.currentSessionId;
   },
-  data(){
-    return{
-    showDescription: false,
-    }
+  data() {
+    return {
+      showDescription: false,
+    };
   },
-  methods:{
+  methods: {
     toggleDescription() {
       this.showDescription = !this.showDescription;
     },
@@ -92,12 +93,12 @@ export default {
         duration: duration.value,
       };
       console.log(workoutData);
-      
-        await WorkoutService.create(workoutData);
-        router.push({
-          path: "/machines",
-         // props: { workoutData, exerciseName: exercise.value.name },
-        });
+
+      await WorkoutService.create(workoutData);
+      router.push({
+        path: "/machines",
+        // props: { workoutData, exerciseName: exercise.value.name },
+      });
     };
 
     const goToMachines = () => {
@@ -135,8 +136,8 @@ export default {
 .machine-photo {
   width: 100%;
   height: auto;
-  max-height: 400px; /* Adjust the max-height for better fit */
-  object-fit: contain; /* Use 'contain' to fit within the space */
+  max-height: 400px;
+  object-fit: contain; 
   border-radius: 5px;
   margin-bottom: 20px;
 }
@@ -155,9 +156,10 @@ export default {
   font-weight: bold;
   margin-bottom: 5px;
 }
+
 .form-input {
   width: 100%;
-  padding: 10px;
+  padding: 10px 0px; 
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 16px;
@@ -207,3 +209,6 @@ export default {
   display: block;
 }
 </style>
+
+
+
