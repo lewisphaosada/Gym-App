@@ -124,7 +124,7 @@ export default {
     }
   },
   mounted() {
-    this.createFallingStrings(); // Call the method to add falling strings on component mount
+    this.createFallingStrings();
   }
 };
 </script>
@@ -134,7 +134,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh; /* Ensure container takes at least viewport height */
+  min-height: 100vh;
 }
 
 
@@ -145,10 +145,10 @@ export default {
   display: grid;
   z-index: 1;
   overflow: hidden;
-  border-radius: 50%; /* Set border-radius to make it a circle */
-  width: 500px; /* Adjust the width to control the oval shape */
-  height: 600px; /* Adjust the height to control the oval shape */
-  transform: scaleX(2); /* Scale horizontally to achieve an oval shape */
+  border-radius: 50%;
+  width: 500px;
+  height: 600px; 
+  transform: scaleX(2); 
   margin-bottom: 250px;
 }
 
@@ -157,8 +157,8 @@ export default {
   flex-grow: 1;
   justify-content: center;
   align-content: center;
-  width: 100%; /* Ensure image covers the button */
-  height: 100%; /* Ensure image covers the button */
+  width: 100%;
+  height: 100%;
 
 }
 
@@ -178,7 +178,7 @@ export default {
   color: #000000;
   opacity: 1;
   animation: fall 10s linear infinite;
-  transform: translateY(-100vh); /* Move elements above the viewport initially */
+  transform: translateY(-100vh);
   z-index: 0;
 }
 
@@ -195,10 +195,12 @@ export default {
 
 .falling-text:nth-child(odd) {
   left: 10%;
+  animation-delay: calc(var(--animation-delay) * 2);
 }
 
 .falling-text:nth-child(even) {
   left: 80%;
+  animation-delay: var(--animation-delay);
 }
 
 </style>

@@ -68,6 +68,29 @@ export default {
 <style>
 .session-list {
   list-style: none;
-  cursor: pointer;
+  padding: 0;
+}
+
+.session-list li {
+  border: 1px solid #ccc;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #f5f5f5;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.session-list li:hover {
+  background-color: #e0e0e0;
+}
+
+.session-list li a {
+  text-decoration: none;
+  color: #333;
+}
+
+.session-list h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
 }
 </style>
