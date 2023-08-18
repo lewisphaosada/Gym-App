@@ -24,7 +24,7 @@
 
      
     </nav>
-    <router-view />
+    <router-view id="router"/>
   </div>
 </template>
 <script>
@@ -87,6 +87,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1;
 }
 .nav-link {
   margin: 0 10px;
@@ -96,5 +97,9 @@ export default {
 .divider {
   margin: 0 5px;
   color: #999;
+}
+
+#router {
+  z-index: 0;
 }
 </style>
