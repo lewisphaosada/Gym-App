@@ -46,7 +46,6 @@ export default {
         console.error("Error fetching exercises:", error);
       }
     },
-    
   },
   mounted() {
     this.fetchExercises();

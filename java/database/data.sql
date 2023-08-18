@@ -48,7 +48,7 @@ INSERT INTO exercise (name, photo, description) VALUES (
 
 INSERT INTO exercise (name, photo, description) VALUES (
 'Arm Curl Machine',
-'/gym-equipment-images/arm-curl-machine.jpg',
+'/gym-equipment-images/arm-curl.webp',
 'The arm curl machine bears a resemblance to the preacher curl machine, yet the primary contrast lies in the presence of an integrated bar designed for cables or weights. This apparatus delivers steady resistance to your forearms and biceps, isolating the biceps and facilitating a complete range of motion.'
 );
 
@@ -60,79 +60,79 @@ INSERT INTO exercise (name, photo, description) VALUES (
 
 INSERT INTO exercise (name, photo, description) VALUES (
 'Shoulder Press Machine',
-'/gym-equipment/shoulder-press.jpg',
+'/gym-equipment-images/shoulder-press.jpg',
 'Among the assortment of shoulder machines, the shoulder press stands out as the most widely used. This exercise entails sitting in an upright posture and employing your shoulder muscles to lift a weighted press. Typically, this involves lifting a level bar or handles. The machine offers controlled movement, allowing you to lift weights overhead without concerns of them falling, as might happen with dumbbells or barbells.'
 );
 
 INSERT INTO exercise (name, photo, description) VALUES (
 'Lateral Raise Machine',
-'/gym-equipment/lateralraise.jpg',
+'/gym-equipment-images/lateral-raise.png',
 'For an alternative to dumbbell lateral raises, the lateral raise machine offers a suitable option. This machine features attached weights that are cable-driven during use. The motion involves raising and moving the rotating shoulder pads upwards and outwards. The machine''s padded seat provides ample spinal support, reducing stress on various parts of your body as you work out.'
 );
 
 INSERT INTO exercise (name, photo, description) VALUES (
 'Cable Row Machine',
-'/gym-equipment/Cable-Seated-Row-Back.jpeg',
+'/gym-equipment-images/cable-row.jpg',
 'This machine facilitates compound exercises by allowing you to engage multiple muscle groups simultaneously. During your workout, you''ll be seated on a cushioned seat while gripping handles connected to a cable system. As you pull the handles, the cable in turn moves the weights. It''s essential to ensure that your arms are fully extended above you, while maintaining a neutral alignment of your head and spine throughout the exercise.'
 );
 
 INSERT INTO exercise (name, photo, description) VALUES (
 'Lat Pulldown',
-'/gym-equipment/lat-pulldown.jpg',
+'/gym-equipment-images/lat-pulldown.webp',
 'This machine permits you to engage in a compound exercise involving a pull-up/chin-up bar linked to a stack of weights, movable towards you while seated. It is particularly designed to target your lat muscles. However, it''s important to avoid pulling the bar towards your stomach, as this indicates insufficient weight and incorrect muscle focus. Maintain an even grip on both sides of the bar and ensure it''s not excessively wide for optimal results.'
 );
 
 INSERT INTO exercise (name, photo, description) VALUES (
 'Ab Crunch Machine',
-'/gym-equipment/abdominalcrunch-1.jpg',
+'/gym-equipment-images/ab-crunch.webp',
 'To introduce diversity to your regular crunches, consider incorporating the ab crunch machine. This machine enables you to concentrate and isolate your abdominal muscles. The remarkable feature of this equipment is the ability to target your abs while seated in a comfortable position. While performing this exercise, remember to maintain controlled breathing, inhaling and exhaling gradually. Also, ensure you bend your arms while using the ab crunch machine and that your back remains in contact with the cushioned seat.'
 );
 
 INSERT INTO exercise (name, photo, description) VALUES (
 'Rotary Torso Machine',
-'/gym-equipment/rotarytorso-.jpg',
+'/gym-equipment-images/rotary-torso.jpg',
 'This machine facilitates torso twisting to both sides, emphasizing the importance of utilizing your abdominal muscles for the twisting motion rather than relying on your hips or legs.'
 );
 
 INSERT INTO exercise (name, photo, description) VALUES (
 'Leg Press Machine',
-'/gym-equipment/linear-leg-press.jpg',
+'/gym-equipment-images/linear-leg-press.jpg',
 'Utilizing the leg press machine aids in enhancing leg definition without requiring a spotter''s assistance. This machine involves pressing your legs upward against a weight-loaded platform while your back is supported by a low, padded seat. It offers a valuable addition to your fitness routine, complementing exercises such as squats and lunges.'
 );
 
 INSERT INTO exercise (name, photo, description) VALUES (
 'Leg Extension Machine',
-'/gym-equipment/leg-extension-machine.jpg',
+'/gym-equipment-images/leg-extension-machine.jpg',
 'The leg extension machine involves you sitting on a padded seat and using a lever or cable attached to weights to extend your legs. Out of the many machines that exist, this is one of the oldest and most effective for strengthening and toning your legs. To use the leg extension machine effectively, follow these steps:\n\nSit on the leg extension machine and put your feet underneath the pad. After this, grab the levers with your hands so you’re ready to begin.\n\nExtend your legs outwards and exhale while doing so.\n\nPause for a second, then slowly inhale as you return to the starting position.\n\nRepeat this for as many reps as you wish.'
 );
 
 INSERT INTO exercise (name, photo, description) VALUES (
 'Leg Curl Machine',
-'/gym-equipment/legcurlp-.jpg',
+'/gym-equipment-images/leg-curl.jpg',
 'This machine permits you to either lie or sit on a cushioned bench while curling your legs. The leg curl machine targets and strengthens the leg muscles in isolation. When utilizing this machine, ensure your leg curls are executed smoothly. Jerky movements during the exercise might indicate that the weights you''re using are overly heavy.'
 );
 
 INSERT INTO exercise (name, photo, description) VALUES (
 'Leg Abduction Machine',
-'/gym-equipment/leg-abduction.jpg',
+'/gym-equipment-images/leg-abduction.webp',
 'The leg abduction and hip adduction machine provides resistance to your legs and hips while in a seated position. This exercise entails opening and closing your legs against weights. Notably, it targets and isolates your glutes and inner thigh muscles.'
 );
 
 INSERT INTO exercise (name, photo, description) VALUES (
 'Seated Calf Raise',
-'/gym-equipment/calf-raise-seated.jpg',
+'/gym-equipment-images/calf-raise-seated.jpg',
 'Utilizing the seated calf machine entails sitting on a seat, elevating your toes on a platform, and exerting pressure on the pads with your knees. This exercise effectively isolates and enhances the calf muscle, while also contributing to the strengthening of the ankle joint.'
 );
 
 INSERT INTO exercise (name, photo, description) VALUES (
 'Hack Squat',
-'classpath:gym-equipment-images.gym-equipment-images/hack-squat.jpg',
+'/gym-equipment-images/hack-squat.jpg',
 'For added support during regular squats, the hack squat machine, also referred to as a squat rack, can be beneficial. This equipment enables better balance during squats and provides the option to incorporate more weight onto the power rack, effectively targeting and isolating your quadriceps.'
 );
 
 INSERT INTO exercise (name, photo, description) VALUES (
 'Treadmill',
-'/gym-equipment/treadmill.jpg',
+'/gym-equipment-images/treadmill.jpg',
 'A cardio machine for running or walking.'
 );
 

@@ -1,14 +1,12 @@
 <template>
   <div id="app">
     <nav id="nav">
-      <router-link v-bind:to="{ name: 'home' }" class="nav-link">Home</router-link>
-      <span class="divider">|</span>
-      <router-link v-if="!isAuthenticated" v-bind:to="{ name: 'register' }" class="nav-link">Register</router-link>
+      <p v-if="!isAuthenticated" class="nav-link">Join Apex Fitness Today!</p>
+      <router-link v-if="isAuthenticated" v-bind:to="{ name: 'home' }" class="nav-link">Home</router-link>
+      <span class="divider" v-if="isAuthenticated">|</span>
       <router-link v-if="isAuthenticated" :to="{ name: 'profile', params: { id: $store.state.user.id } }" class="nav-link">Profile</router-link>
       <span class="divider" v-if="isAuthenticated">|</span>
       <router-link v-if="isAuthenticated" :to="{ name: 'sessions', params: { id: $store.state.user.id } }" class="nav-link">Your Sessions</router-link>
-      <span class="divider" v-if="isAuthenticated">|</span>
-      <router-link v-if="isAuthenticated" :to="{ name: 'schedule' }" class="nav-link">Schedule</router-link>
       <span class="divider" v-if="isAuthenticated">|</span>
       <router-link v-if="isAuthenticated" :to="{path: '/machines'}" class="nav-link">Workouts</router-link>
       <span class="divider" v-if="isAuthenticated">|</span>
@@ -25,7 +23,7 @@
      
      
     </nav>
-    <router-view />
+    <router-view id="router"/>
   </div>
 </template>
 <script>
@@ -88,6 +86,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1;
 }
 .nav-link {
   margin: 0 10px;
@@ -97,5 +96,9 @@ export default {
 .divider {
   margin: 0 5px;
   color: #999;
+}
+
+#router {
+  z-index: 0;
 }
 </style>
