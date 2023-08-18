@@ -66,13 +66,13 @@ INSERT INTO exercise (name, photo, description) VALUES (
 
 INSERT INTO exercise (name, photo, description) VALUES (
 'Lateral Raise Machine',
-'/gym-equipment/lateralraise.jpg',
+'/gym-equipment/lateral-raise.jpg',
 'For an alternative to dumbbell lateral raises, the lateral raise machine offers a suitable option. This machine features attached weights that are cable-driven during use. The motion involves raising and moving the rotating shoulder pads upwards and outwards. The machine''s padded seat provides ample spinal support, reducing stress on various parts of your body as you work out.'
 );
 
 INSERT INTO exercise (name, photo, description) VALUES (
 'Cable Row Machine',
-'/gym-equipment/Cable-Seated-Row-Back.jpeg',
+'/gym-equipment/cable-seated-row-back.jpg',
 'This machine facilitates compound exercises by allowing you to engage multiple muscle groups simultaneously. During your workout, you''ll be seated on a cushioned seat while gripping handles connected to a cable system. As you pull the handles, the cable in turn moves the weights. It''s essential to ensure that your arms are fully extended above you, while maintaining a neutral alignment of your head and spine throughout the exercise.'
 );
 
@@ -84,13 +84,13 @@ INSERT INTO exercise (name, photo, description) VALUES (
 
 INSERT INTO exercise (name, photo, description) VALUES (
 'Ab Crunch Machine',
-'/gym-equipment/abdominalcrunch-1.jpg',
+'/gym-equipment/ab-crunch.jpg',
 'To introduce diversity to your regular crunches, consider incorporating the ab crunch machine. This machine enables you to concentrate and isolate your abdominal muscles. The remarkable feature of this equipment is the ability to target your abs while seated in a comfortable position. While performing this exercise, remember to maintain controlled breathing, inhaling and exhaling gradually. Also, ensure you bend your arms while using the ab crunch machine and that your back remains in contact with the cushioned seat.'
 );
 
 INSERT INTO exercise (name, photo, description) VALUES (
 'Rotary Torso Machine',
-'/gym-equipment/rotarytorso-.jpg',
+'/gym-equipment/rotary-torso-.jpg',
 'This machine facilitates torso twisting to both sides, emphasizing the importance of utilizing your abdominal muscles for the twisting motion rather than relying on your hips or legs.'
 );
 
@@ -108,7 +108,7 @@ INSERT INTO exercise (name, photo, description) VALUES (
 
 INSERT INTO exercise (name, photo, description) VALUES (
 'Leg Curl Machine',
-'/gym-equipment/legcurlp-.jpg',
+'/gym-equipment/leg-curl.jpg',
 'This machine permits you to either lie or sit on a cushioned bench while curling your legs. The leg curl machine targets and strengthens the leg muscles in isolation. When utilizing this machine, ensure your leg curls are executed smoothly. Jerky movements during the exercise might indicate that the weights you''re using are overly heavy.'
 );
 
@@ -126,7 +126,7 @@ INSERT INTO exercise (name, photo, description) VALUES (
 
 INSERT INTO exercise (name, photo, description) VALUES (
 'Hack Squat',
-'classpath:gym-equipment-images.gym-equipment-images/hack-squat.jpg',
+'/gym-equipment/hack-squat.jpg',
 'For added support during regular squats, the hack squat machine, also referred to as a squat rack, can be beneficial. This equipment enables better balance during squats and provides the option to incorporate more weight onto the power rack, effectively targeting and isolating your quadriceps.'
 );
 
