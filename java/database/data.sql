@@ -72,19 +72,19 @@ INSERT INTO exercise (name, photo, description) VALUES (
 
 INSERT INTO exercise (name, photo, description) VALUES (
 'Cable Row Machine',
-'/gym-equipment-images/cable-seated-row-back.jpeg',
+'/gym-equipment-images/cable-row.jpg',
 'This machine facilitates compound exercises by allowing you to engage multiple muscle groups simultaneously. During your workout, you''ll be seated on a cushioned seat while gripping handles connected to a cable system. As you pull the handles, the cable in turn moves the weights. It''s essential to ensure that your arms are fully extended above you, while maintaining a neutral alignment of your head and spine throughout the exercise.'
 );
 
 INSERT INTO exercise (name, photo, description) VALUES (
 'Lat Pulldown',
-'/gym-equipment-images/lat-pulldown.jpg',
+'/gym-equipment-images/lat-pulldown.webp',
 'This machine permits you to engage in a compound exercise involving a pull-up/chin-up bar linked to a stack of weights, movable towards you while seated. It is particularly designed to target your lat muscles. However, it''s important to avoid pulling the bar towards your stomach, as this indicates insufficient weight and incorrect muscle focus. Maintain an even grip on both sides of the bar and ensure it''s not excessively wide for optimal results.'
 );
 
 INSERT INTO exercise (name, photo, description) VALUES (
 'Ab Crunch Machine',
-'/gym-equipment-images/ab-crunch.jpg',
+'/gym-equipment-images/ab-crunch.webp',
 'To introduce diversity to your regular crunches, consider incorporating the ab crunch machine. This machine enables you to concentrate and isolate your abdominal muscles. The remarkable feature of this equipment is the ability to target your abs while seated in a comfortable position. While performing this exercise, remember to maintain controlled breathing, inhaling and exhaling gradually. Also, ensure you bend your arms while using the ab crunch machine and that your back remains in contact with the cushioned seat.'
 );
 
