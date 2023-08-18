@@ -48,7 +48,7 @@ INSERT INTO exercise (name, photo, description) VALUES (
 
 INSERT INTO exercise (name, photo, description) VALUES (
 'Arm Curl Machine',
-'/gym-equipment-images/arm-curl-machine.jpg',
+'/gym-equipment-images/arm-curl.webp',
 'The arm curl machine bears a resemblance to the preacher curl machine, yet the primary contrast lies in the presence of an integrated bar designed for cables or weights. This apparatus delivers steady resistance to your forearms and biceps, isolating the biceps and facilitating a complete range of motion.'
 );
 
@@ -66,7 +66,7 @@ INSERT INTO exercise (name, photo, description) VALUES (
 
 INSERT INTO exercise (name, photo, description) VALUES (
 'Lateral Raise Machine',
-'/gym-equipment-images/lateral-raise.jpg',
+'/gym-equipment-images/lateral-raise.png',
 'For an alternative to dumbbell lateral raises, the lateral raise machine offers a suitable option. This machine features attached weights that are cable-driven during use. The motion involves raising and moving the rotating shoulder pads upwards and outwards. The machine''s padded seat provides ample spinal support, reducing stress on various parts of your body as you work out.'
 );
 
