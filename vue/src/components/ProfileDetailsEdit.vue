@@ -1,62 +1,64 @@
 <template>
-  <div>
-    <h2>Edit Profile</h2>
-    <form v-on:submit.prevent="submitForm" class="profile-container">
-      <div><label class="profile-heading">Photo URL:</label><input v-model="user.photo" /></div>
+  <div class="login-container">
+    <h1 class="login-heading">Edit Profile</h1>
+    <form @submit.prevent="submitForm" class="login-form">
+      <div class="form-input-group">
+        <label for="photo" class="input-label">Photo URL:</label>
+        <input v-model="user.photo" id="photo" class="input-field" />
+      </div>
 
-      <div><label>Name:</label><input v-model="user.name" /></div>
+      <div class="form-input-group">
+        <label for="name" class="input-label">Name:</label>
+        <input v-model="user.name" id="name" class="input-field" />
+      </div>
+      <div class="form-input-group">
+        <label for="email" class="input-label">Email:</label>
+        <input v-model="user.email" id="email" class="input-field" />
+      </div>
 
-      <div><label>Email:</label><input v-model="user.email" /></div>
+      <div class="form-input-group">
+        <label for="username" class="input-label">Username:</label>
+        <input v-model="user.username" id="username" class="input-field" />
+      </div>
 
-      <div><label>Username:</label><input v-model="user.username" /></div>
-
-      <!-- <div>
-        <label>Password:</label><input v-model="user.password"/>
-    </div> -->
-
-      <div>
-        <label>Sex:</label><input v-model="user.sex" />
+      <div class="form-input-group">
+        <label for="sex" class="input-label">Sex:</label>
+        <input v-model="user.sex" id="sex" class="input-field" />
         <span v-if="sexValidationError" class="error-message"
           >Sex must be one character: M, F or O</span
         >
       </div>
 
-      <div>
-        <label>Weight (pounds):</label><input v-model="user.weight" />
+      <div class="form-input-group">
+        <label for="weight" class="input-label">Weight (pounds):</label>
+        <input v-model="user.weight" id="weight" class="input-field" />
         <span v-if="weightValidationError" class="error-message"
           >Must input numbers</span
         >
       </div>
 
-      <div>
-        <label>Height (inches):</label><input v-model="user.height" />
+      <div class="form-input-group">
+        <label for="height" class="input-label">Height (inches):</label>
+        <input v-model="user.height" id="height" class="input-field" />
         <span v-if="heightValidationError" class="error-message"
           >Must input numbers</span
         >
       </div>
 
-      <div>
-        <label>BMI:</label><input v-model="calculatedBMI" />
+      <div class="form-input-group">
+        <label for="bmi" class="input-label">BMI:</label>
+        <input v-model="calculatedBMI" id="bmi" class="input-field" />
         <span v-if="bmiValidationError" class="error-message"
           >Must input numbers</span
         >
       </div>
 
-
-    
-      <!-- <div class="profile-details">
-        <label>Profile Picture:</label>
-        <img v-if="user.photo" :src="user.photo" alt="User Photo" />
-        <div v-else class="empty-profile-picture"></div>
-        <button class="upload-button" @click="openImageUpload">Upload Image</button>
-        <input type="file" accept="image/*" @change="handleFileUpload" ref="imageInput" style="display: none;" />
-      </div> -->
-
-      <button type="submit">Save</button>
-      <button v-on:click="cancelEdit">Cancel</button>
+      <button type="submit" class="submit-button">Save</button>
+      <button @click="cancelEdit" class="cancel-button">Cancel</button>
     </form>
   </div>
 </template>
+    
 
 <script>
 import UserService from "../services/UserService.js";
@@ -167,68 +169,63 @@ export default {
 
 
 <style scoped>
-.edit-profile-container {
+.login-container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  height: 100vh;
-}
-.edit-profile-form {
-  width: 300px;
-  padding: 20px;
-  border: 1px solid #ccc;
+  padding: 15px; 
+  border: 1px solid #007bff; 
   border-radius: 5px;
-  background-color: #F6F6F6;
+  background-color: #f6f6f6;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-.edit-profile-heading {
-  font-size: 24px;
-  margin-bottom: 20px;
   text-align: center;
+  max-width: 350px; 
+  margin: 0 auto;
 }
+
+.login-heading {
+  font-size: 20px; 
+  margin-bottom: 10px;
+  color: #007bff; 
+}
+
 .form-input-group {
-  margin-bottom: 15px;
+  margin-bottom: 8px; 
 }
+
 .input-label {
   display: block;
   font-weight: bold;
-  margin-bottom: 5px;
+  margin-bottom: 2px;
 }
+
 .input-field {
   width: 100%;
-  padding: 10px;
+  padding: 6px; 
   border: 1px solid #ccc;
   border-radius: 3px;
-  font-size: 14px;
+  font-size: 12px; 
   box-sizing: border-box;
 }
+
 .error-message {
-  color: #D9534F;
-  margin-top: 5px;
+  color: #d9534f;
+  margin-top: 2px; 
   display: inline-block;
+  font-size: 10px;
 }
-.submit-button {
-  width: 100%;
-  padding: 10px;
-  background-color: #007BFF;
-  color: #fff;
-  border: none;
-  border-radius: 3px;
-  font-size: 16px;
-  cursor: pointer;
-}
+
+.submit-button,
 .cancel-button {
   width: 100%;
-  padding: 10px;
-  background-color: #ccc;
+  padding: 8px; 
+  background-color: #007bff;
   color: #fff;
   border: none;
   border-radius: 3px;
-  font-size: 16px;
+  font-size: 14px; 
   cursor: pointer;
-}
-.register-link {
-  text-align: center;
-  margin-top: 10px;
+  margin-top: 8px; 
 }
 </style>
+
