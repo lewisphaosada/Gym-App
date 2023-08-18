@@ -5,8 +5,8 @@
       <li v-for="session in sessions" v-bind:key="session.sessionId">
         <router-link
           :to="{ name: 'session', params: { id: session.sessionId } }"
-          >{{ convertUnixToDate(session.date) }} (Duration:
-          {{  millisecondsToHHMMSS(session.duration) }})</router-link
+          >{{ convertUnixToDate(session.date) }} Duration:
+          {{  millisecondsToHHMMSS(session.duration) }}</router-link
         >
       </li>
     </ul>
