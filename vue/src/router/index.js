@@ -17,7 +17,7 @@ import Schedule from '../views/Schedule.vue'
 import GoalDetails from '../views/Goals.vue'
 import SingleSession from '../views/SingleSession.vue'
 import Workout from '../components/Workout.vue'
-// import MonthlyEquipmentUsage from '../components/MonthlyEquipmentUsage.vue'
+import MonthlyEquipmentUsage from '../components/MonthlyEquipmentUsage.vue'
 
 Vue.use(Router)
 /**
@@ -138,14 +138,14 @@ const router = new Router({
         requiresAuth: true,
       },
     },
-   // {
-    //  path: '/monthly-equipment-usage',
-    //  name: 'monthlyEquipmentUsage',
-    //  component: MonthlyEquipmentUsage,
-    //  meta: {
-    //    requiresAuth: true,
-   //   },
-   // },
+   {
+     path: '/monthly-equipment-usage',
+     name: 'monthlyEquipmentUsage',
+     component: MonthlyEquipmentUsage,
+     meta: {
+       requiresAuth: true,
+     },
+   },
     {
       path: '/exercises/:exerciseId',
       name: "MachineDetails",
