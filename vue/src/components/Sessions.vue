@@ -56,7 +56,7 @@ export default {
     },
   },
   created() {
-    SessionService.list(this.$store.state.user.id).then((response) => {
+    SessionService.list(this.$route.params.id).then((response) => {
       this.sessions = response.data;
       this.averageSessionTime = this.getAverageSessionTime;
       console.log(this.sessions);

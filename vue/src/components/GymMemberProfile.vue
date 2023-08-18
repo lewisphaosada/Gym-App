@@ -11,8 +11,8 @@
       <p>Height: {{ userProfile.height }}</p>
       <div>
         <router-link :to="{ name: 'sessions', params: { id: selectedMember.id } }"><h3>Workout Metrics</h3></router-link>
-        <p>Total Workouts: {{ userSesions.length }}</p>
-        <p>Average Workout Duration: {{ getAverageSessionTime }} minutes</p>
+        <p>Total Workouts: {{ userSessions.length }}</p>
+        <p>Average Workout Duration: {{ millisecondsToHHMMSS(getAverageSessionTime) }}</p>
       </div>
     </div>
   </div>
@@ -29,7 +29,7 @@ export default {
   data() {
     return {
       userProfile: {},
-      userSesions: [],
+      userSessions: [],
       showWorkoutMetrics: false,
     };
   },
@@ -40,8 +40,8 @@ export default {
   computed: {
     getAverageSessionTime() {
       let totalTime = 0;
-      this.userSesions.forEach(userSession => totalTime += userSession.duration)
-      const averageTime = totalTime / this.userSesions.length
+      this.userSessions.forEach(userSession => totalTime += userSession.duration)
+      const averageTime = totalTime / this.userSessions.length
       return averageTime
     }
   },
@@ -54,9 +54,21 @@ export default {
     },
     getUserSessions(userId) {
       SessionService.list(userId).then(response => {
-        this.userSesions = response.data
+        this.userSessions = response.data
       })
+    },
+    millisecondsToHHMMSS(milliseconds) {
+    try {
+        const seconds = Math.floor(milliseconds / 1000);
+        const hours = Math.floor(seconds / 3600);
+        const minutes = Math.floor((seconds % 3600) / 60);
+        const remainingSeconds = seconds % 60;
+
+        return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
+    } catch (error) {
+        return `Error: ${error.message}`;
     }
+}
   }
 };
 </script>
